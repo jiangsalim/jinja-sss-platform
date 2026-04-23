@@ -1,0 +1,237 @@
+/* ============================================
+   JINJA SSS PLATFORM – DARK MODE STYLES
+   ============================================ */
+
+/* ---------- DARK MODE THEME CLASS ---------- */
+
+.dark {
+  /* These variables are already defined in variables.css */
+  /* This file contains additional dark mode overrides */
+  
+  /* Smooth transition when switching themes */
+  transition: background-color var(--duration-standard) var(--ease-standard),
+              color var(--duration-standard) var(--ease-standard),
+              border-color var(--duration-standard) var(--ease-standard);
+}
+
+/* ---------- DARK MODE SPECIFIC OVERRIDES ---------- */
+
+/* Images – reduce brightness for dark mode */
+.dark img:not(.jss-keep-light) {
+  filter: brightness(0.85) contrast(1.1);
+}
+
+/* Avatar placeholders */
+.dark .jss-avatar--placeholder {
+  background: var(--primary-dark);
+}
+
+/* Cards get subtle border in dark mode for definition */
+.dark .jss-card {
+  border: 1px solid var(--border);
+}
+
+/* Tables */
+.dark .jss-table th {
+  background: var(--bg-secondary);
+}
+
+.dark .jss-table tr:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+/* Inputs */
+.dark .jss-input {
+  color-scheme: dark;
+}
+
+.dark .jss-input::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.6;
+}
+
+/* Dropdowns and Selects */
+.dark select,
+.dark .jss-select {
+  color-scheme: dark;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23b0b0b0' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+}
+
+/* Modals */
+.dark .jss-modal-overlay {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+/* Skeleton Loaders */
+.dark .jss-skeleton {
+  background: linear-gradient(90deg, #2a2a2a 25%, #3a3a3a 50%, #2a2a2a 75%);
+  background-size: 200% 100%;
+}
+
+/* Dividers */
+.dark .jss-divider {
+  background: var(--border);
+}
+
+/* Badges */
+.dark .jss-badge--success {
+  background: rgba(40, 167, 69, 0.2);
+  color: #4ade80;
+}
+
+.dark .jss-badge--error {
+  background: rgba(220, 53, 69, 0.2);
+  color: #f87171;
+}
+
+.dark .jss-badge--warning {
+  background: rgba(255, 193, 7, 0.2);
+  color: #fbbf24;
+}
+
+.dark .jss-badge--info {
+  background: rgba(23, 162, 184, 0.2);
+  color: #38bdf8;
+}
+
+/* Glassmorphism adjustments for dark mode */
+.dark .jss-glass {
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Acrylic effect (Microsoft Fluent) for dark mode */
+.dark .jss-acrylic {
+  background: rgba(30, 30, 30, 0.8);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Code blocks / Pre */
+.dark pre,
+.dark code {
+  background: var(--bg-secondary);
+  color: #e0e0e0;
+  border: 1px solid var(--border);
+}
+
+/* Blockquotes */
+.dark blockquote {
+  border-left-color: var(--primary-light);
+  background: var(--bg-secondary);
+}
+
+/* Horizontal Rule */
+.dark hr {
+  border-color: var(--border);
+}
+
+/* Checkbox and Radio */
+.dark input[type="checkbox"],
+.dark input[type="radio"] {
+  accent-color: var(--primary-blue);
+}
+
+/* Progress Bar */
+.dark .jss-progress {
+  background: var(--bg-secondary);
+}
+
+/* Tooltip */
+.dark .jss-tooltip__text {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+}
+
+/* Calendar */
+.dark .jss-calendar__day:hover {
+  background: var(--bg-secondary);
+}
+
+.dark .jss-calendar__day--selected {
+  background: var(--primary-blue);
+  color: white;
+}
+
+.dark .jss-calendar__day--disabled {
+  color: var(--disabled);
+}
+
+/* Toast Notifications in Dark Mode */
+.dark .jss-toast {
+  box-shadow: var(--shadow-lg);
+}
+
+/* Loading Spinner for Dark Mode */
+.dark .jss-spinner {
+  border-color: rgba(255, 255, 255, 0.1);
+  border-top-color: var(--primary-light);
+}
+
+/* ============================================ */
+/*           SYSTEM PREFERENCE AUTO              */
+/* ============================================ */
+
+/* Automatically apply dark mode if user prefers it */
+@media (prefers-color-scheme: dark) {
+  :root:not(.light-force) {
+    color-scheme: dark;
+  }
+}
+
+/* Force light mode (if user selects light specifically) */
+.light-force {
+  color-scheme: light;
+}
+
+/* Force dark mode (if user selects dark specifically) */
+.dark-force {
+  color-scheme: dark;
+}
+
+/* ============================================ */
+/*           THEME TOGGLE BUTTON                 */
+/* ============================================ */
+
+.jss-theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--touch-target-min);
+  height: var(--touch-target-min);
+  border-radius: var(--radius-full);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--text-primary);
+  transition: background-color var(--duration-micro) var(--ease-standard);
+}
+
+.jss-theme-toggle:hover {
+  background: var(--bg-secondary);
+}
+
+.jss-theme-toggle:focus-visible {
+  outline: 2px solid var(--primary-blue);
+  outline-offset: 2px;
+}
+
+.jss-theme-toggle .light-icon,
+.jss-theme-toggle .dark-icon {
+  font-size: 20px;
+}
+
+/* Show/hide icons based on theme */
+.jss-theme-toggle .dark-icon {
+  display: none;
+}
+
+.dark .jss-theme-toggle .light-icon {
+  display: none;
+}
+
+.dark .jss-theme-toggle .dark-icon {
+  display: block;
+}

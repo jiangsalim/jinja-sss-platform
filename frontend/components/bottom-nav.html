@@ -1,0 +1,73 @@
+<!-- ============================================
+     JINJA SSS PLATFORM - BOTTOM NAVIGATION
+     ============================================ -->
+
+<nav class="jss-bottom-nav">
+    <a href="#" class="jss-bottom-nav__item jss-bottom-nav__item--active">
+        <span class="jss-bottom-nav__icon">🏠</span>
+        <span class="jss-bottom-nav__label">Home</span>
+    </a>
+    <a href="#" class="jss-bottom-nav__item">
+        <span class="jss-bottom-nav__icon">📊</span>
+        <span class="jss-bottom-nav__label">Stats</span>
+    </a>
+    <a href="#" class="jss-bottom-nav__item">
+        <span class="jss-bottom-nav__icon">💬</span>
+        <span class="jss-bottom-nav__label">Chat</span>
+    </a>
+    <a href="#" class="jss-bottom-nav__item">
+        <span class="jss-bottom-nav__icon">🔔</span>
+        <span class="jss-bottom-nav__label">Alerts</span>
+    </a>
+    <a href="#" class="jss-bottom-nav__item">
+        <span class="jss-bottom-nav__icon">👤</span>
+        <span class="jss-bottom-nav__label">Profile</span>
+    </a>
+</nav>
+
+<style>
+.jss-bottom-nav {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--bg-primary);
+    border-top: 1px solid var(--border);
+    padding: var(--spacing-xs) var(--spacing-md);
+    justify-content: space-around;
+    z-index: var(--z-sticky);
+}
+
+@media (max-width: 767px) {
+    .jss-bottom-nav {
+        display: flex;
+    }
+}
+
+.jss-bottom-nav__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    text-decoration: none;
+    color: var(--text-secondary);
+    font-size: var(--font-size-xs);
+    padding: var(--spacing-xs);
+    min-width: 48px;
+    min-height: 48px;
+    justify-content: center;
+}
+
+.jss-bottom-nav__item--active {
+    color: var(--primary-blue);
+}
+
+.jss-bottom-nav__icon {
+    font-size: 20px;
+}
+
+.jss-bottom-nav__label {
+    font-size: 10px;
+}
+</style>

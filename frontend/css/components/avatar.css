@@ -1,0 +1,39 @@
+/* ============================================
+   JINJA SSS PLATFORM - AVATAR COMPONENT
+   ============================================ */
+
+.jss-avatar {
+  border-radius: var(--radius-full);
+  object-fit: cover;
+  background: var(--bg-secondary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  font-weight: var(--font-weight-semibold);
+  overflow: hidden;
+}
+
+.jss-avatar--xs { width: 24px; height: 24px; font-size: 10px; }
+.jss-avatar--sm { width: 32px; height: 32px; font-size: 12px; }
+.jss-avatar--md { width: 40px; height: 40px; font-size: 14px; }
+.jss-avatar--lg { width: 48px; height: 48px; font-size: 18px; }
+.jss-avatar--xl { width: 64px; height: 64px; font-size: 24px; }
+
+.jss-avatar--placeholder {
+  background: var(--primary-light);
+  color: white;
+}
+
+.jss-avatar-group {
+  display: flex;
+}
+
+.jss-avatar-group .jss-avatar {
+  margin-inline-start: -8px;
+  border: 2px solid var(--bg-primary);
+}
+
+.jss-avatar-group .jss-avatar:first-child {
+  margin-inline-start: 0;
+}

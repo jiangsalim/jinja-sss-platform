@@ -1,0 +1,243 @@
+/* ============================================
+   JINJA SSS PLATFORM – BASE STYLES
+   ============================================ */
+
+/* ---------- CSS RESET (Modern Normalize) ---------- */
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ---------- HTML & BODY ---------- */
+
+html {
+  font-size: 14px;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-family);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-loose);
+  color: var(--text-primary);
+  background-color: var(--bg-secondary);
+  min-height: 100vh;
+}
+
+/* ---------- TYPOGRAPHY ---------- */
+
+h1, .jss-h1 {
+  font-size: var(--font-size-5xl);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-lg);
+}
+
+h2, .jss-h2 {
+  font-size: var(--font-size-4xl);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-md);
+}
+
+h3, .jss-h3 {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-normal);
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-md);
+}
+
+h4, .jss-h4 {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-normal);
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-sm);
+}
+
+h5, .jss-h5 {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-normal);
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-sm);
+}
+
+h6, .jss-h6 {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-normal);
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-sm);
+}
+
+p, .jss-text {
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-md);
+}
+
+.jss-text-small {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+}
+
+.jss-text-large {
+  font-size: var(--font-size-lg);
+}
+
+.jss-text-muted {
+  color: var(--text-secondary);
+}
+
+/* ---------- LINKS ---------- */
+
+a, .jss-link {
+  color: var(--primary-blue);
+  text-decoration: none;
+  transition: color var(--duration-micro) var(--ease-standard);
+}
+
+a:hover, .jss-link:hover {
+  color: var(--primary-dark);
+  text-decoration: underline;
+}
+
+a:focus-visible, .jss-link:focus-visible {
+  outline: 2px solid var(--primary-blue);
+  outline-offset: 2px;
+  border-radius: var(--radius-xs);
+}
+
+/* ---------- LISTS ---------- */
+
+ul, ol {
+  padding-inline-start: var(--spacing-xl);
+  margin-bottom: var(--spacing-md);
+}
+
+li {
+  margin-bottom: var(--spacing-xs);
+}
+
+.jss-list-unstyled {
+  list-style: none;
+  padding-inline-start: 0;
+}
+
+/* ---------- IMAGES ---------- */
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ---------- FOCUS (Accessibility) ---------- */
+
+:focus {
+  outline: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--primary-blue);
+  outline-offset: 2px;
+  border-radius: var(--radius-xs);
+}
+
+/* ---------- SELECTION ---------- */
+
+::selection {
+  background-color: var(--primary-light);
+  color: white;
+}
+
+::-moz-selection {
+  background-color: var(--primary-light);
+  color: white;
+}
+
+/* ---------- SCROLLBAR (Webkit) ---------- */
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
+}
+
+/* ---------- CONTAINER ---------- */
+
+.jss-container {
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: var(--spacing-md);
+}
+
+@media (min-width: 768px) {
+  .jss-container {
+    padding-inline: var(--spacing-lg);
+  }
+}
+
+@media (min-width: 1280px) {
+  .jss-container {
+    max-width: 1400px;
+    padding-inline: var(--spacing-xl);
+  }
+}
+
+/* ---------- SKIP TO CONTENT (Accessibility) ---------- */
+
+.jss-skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--primary-blue);
+  color: white;
+  padding: var(--spacing-sm) var(--spacing-md);
+  text-decoration: none;
+  border-radius: var(--radius-md);
+  z-index: var(--z-tooltip);
+}
+
+.jss-skip-link:focus {
+  top: var(--spacing-sm);
+  left: var(--spacing-sm);
+}
+
+/* ---------- VISUALLY HIDDEN (Screen Reader Only) ---------- */
+
+.jss-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}

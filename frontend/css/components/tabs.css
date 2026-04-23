@@ -1,0 +1,43 @@
+/* ============================================
+   JINJA SSS PLATFORM - TABS
+   ============================================ */
+
+.jss-tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 2px solid var(--border);
+}
+
+.jss-tabs__tab {
+  padding: var(--spacing-sm) var(--spacing-lg);
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--duration-micro) var(--ease-standard);
+}
+
+.jss-tabs__tab:hover {
+  color: var(--primary-blue);
+}
+
+.jss-tabs__tab--active {
+  color: var(--primary-blue);
+  border-bottom-color: var(--primary-blue);
+}
+
+.jss-tabs__content {
+  padding: var(--spacing-lg) 0;
+}
+
+.jss-tabs__panel {
+  display: none;
+}
+
+.jss-tabs__panel--active {
+  display: block;
+}

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard - Jinja SSS</title>
+    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/dark-mode.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <link rel="stylesheet" href="../css/utilities/spacing.css">
+    <link rel="stylesheet" href="../css/utilities/typography.css">
+    <link rel="stylesheet" href="../css/utilities/colors.css">
+    <link rel="stylesheet" href="../css/components/buttons.css">
+    <link rel="stylesheet" href="../css/components/cards.css">
+    <link rel="stylesheet" href="../css/components/forms.css">
+    <link rel="stylesheet" href="../css/components/tables.css">
+    <link rel="stylesheet" href="../css/components/badge.css">
+    <link rel="stylesheet" href="../css/components/avatar.css">
+    <link rel="stylesheet" href="../css/components/stats-card.css">
+    <link rel="stylesheet" href="../css/components/progress.css">
+    <link rel="stylesheet" href="../css/components/skeleton.css">
+    <link rel="stylesheet" href="../css/components/tabs.css">
+    <script src="../js/utils.js" defer></script>
+    <script src="../js/api.js" defer></script>
+    <script src="../js/auth.js" defer></script>
+    <style>
+        body { background: var(--bg-secondary); }
+        .dashboard { display: flex; min-height: 100vh; }
+        .sidebar { width: 260px; background: linear-gradient(180deg, var(--primary-blue), #0f2442); color: white; position: fixed; top: 0; left: 0; bottom: 0; display: flex; flex-direction: column; z-index: 100; }
+        .sidebar__brand { padding: var(--spacing-lg); text-align: center; border-bottom: 1px solid rgba(255,255,255,0.1); font-weight: var(--font-weight-bold); font-size: var(--font-size-xl); }
+        .sidebar__nav { flex: 1; padding: var(--spacing-md) 0; overflow-y: auto; }
+        .sidebar__item { display: flex; align-items: center; gap: var(--spacing-md); padding: var(--spacing-md) var(--spacing-lg); color: rgba(255,255,255,0.7); text-decoration: none; transition: all 0.2s; }
+        .sidebar__item:hover, .sidebar__item--active { background: rgba(255,255,255,0.1); color: white; }
+        .main { margin-left: 260px; flex: 1; padding: var(--spacing-lg); padding-bottom: 80px; }
+        .topbar { background: var(--bg-primary); padding: var(--spacing-md) var(--spacing-lg); border-radius: var(--radius-lg); display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--spacing-lg); box-shadow: var(--shadow-sm); }
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: var(--spacing-md); margin-bottom: var(--spacing-lg); }
+        .content-grid { display: grid; grid-template-columns: 1fr; gap: var(--spacing-lg); }
+        @media (min-width: 1024px) { .content-grid { grid-template-columns: 2fr 1fr; } }
+        @media (max-width: 767px) { .sidebar { display: none; } .main { margin-left: 0; } }
+        .achievement-3d { width: 200px; height: 240px; position: relative; margin: var(--spacing-lg) auto; transform-style: preserve-3d; transform: perspective(800px); animation: achieve-rotate 20s linear infinite; }
+        .achievement-3d:hover { animation-play-state: paused; }
+        .achievement-3d__item { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: var(--radius-lg); display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 40px; box-shadow: var(--shadow-md); }
+        .achievement-3d__item--1 { background: linear-gradient(135deg, #ffd700, #ffaa00); transform: rotateY(0deg) translateZ(200px); }
+        .achievement-3d__item--2 { background: linear-gradient(135deg, #c0c0c0, #a0a0a0); transform: rotateY(72deg) translateZ(200px); }
+        .achievement-3d__item--3 { background: linear-gradient(135deg, #cd7f32, #a0522d); transform: rotateY(144deg) translateZ(200px); }
+        .achievement-3d__item--4 { background: linear-gradient(135deg, #667eea, #764ba2); transform: rotateY(216deg) translateZ(200px); }
+        .achievement-3d__item--5 { background: linear-gradient(135deg, #28a745, #20c997); transform: rotateY(288deg) translateZ(200px); }
+        .achievement-3d__label { color: white; font-size: var(--font-size-xs); font-weight: var(--font-weight-bold); margin-top: var(--spacing-sm); text-shadow: 0 1px 3px rgba(0,0,0,0.3); }
+        @keyframes achieve-rotate { from { transform: perspective(800px) rotateY(0deg); } to { transform: perspective(800px) rotateY(360deg); } }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar__brand">🎓 JSS Student</div>
+            <nav class="sidebar__nav">
+                <a href="#" class="sidebar__item sidebar__item--active">📊 Dashboard</a>
+                <a href="#" class="sidebar__item">📚 Academics</a>
+                <a href="#" class="sidebar__item">📝 Assignments</a>
+                <a href="#" class="sidebar__item">📊 Results</a>
+                <a href="#" class="sidebar__item">📅 Timetable</a>
+                <a href="#" class="sidebar__item">💬 Messages</a>
+                <a href="#" class="sidebar__item">🤖 AI Assistant</a>
+            </nav>
+            <div style="padding:var(--spacing-md);border-top:1px solid rgba(255,255,255,0.1);">
+                <a href="../pages/signin.html" class="sidebar__item" style="border-radius:var(--radius-md);">🚪 Logout</a>
+            </div>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="main">
+            <!-- Top Bar -->
+            <div class="topbar">
+                <div><strong style="font-size:var(--font-size-xl);">Welcome back, Salim! 👋</strong><br><span class="jss-text-small">S4A • JSSS-001</span></div>
+                <div style="display:flex;gap:var(--spacing-md);align-items:center;">
+                    <span>🔔</span>
+                    <div class="jss-avatar jss-avatar--md jss-avatar--placeholder">SK</div>
+                </div>
+            </div>
+            
+            <!-- Stats -->
+            <div class="stats-grid">
+                <div class="jss-stat-card"><div class="jss-stat-card__value">95%</div><div class="jss-stat-card__label">Attendance</div></div>
+                <div class="jss-stat-card jss-stat-card--success"><div class="jss-stat-card__value">78%</div><div class="jss-stat-card__label">Average Grade</div></div>
+                <div class="jss-stat-card jss-stat-card--warning"><div class="jss-stat-card__value">2</div><div class="jss-stat-card__label">Exams Soon</div></div>
+                <div class="jss-stat-card jss-stat-card--error"><div class="jss-stat-card__value">3</div><div class="jss-stat-card__label">Pending Work</div></div>
+            </div>
+            
+            <!-- Content Grid -->
+            <div class="content-grid">
+                <div>
+                    <!-- Timetable -->
+                    <div class="jss-card jss-mb-lg">
+                        <div class="jss-card__header"><h3 class="jss-card__header-title">📅 Today's Timetable</h3><a href="#" class="jss-card__header-action">View Full →</a></div>
+                        <div class="jss-card__body">
+                            <table class="jss-table jss-table--compact">
+                                <thead><tr><th>Time</th><th>Subject</th><th>Teacher</th><th>Room</th></tr></thead>
+                                <tbody>
+                                    <tr><td>08:00-09:00</td><td>Mathematics</td><td>Mr. Kato</td><td>Room 12</td></tr>
+                                    <tr><td>09:00-10:00</td><td>Physics</td><td>Ms. Lwanga</td><td>Lab 2</td></tr>
+                                    <tr><td>10:30-11:30</td><td>English</td><td>Mrs. Nambi</td><td>Room 10</td></tr>
+                                    <tr><td>11:30-12:30</td><td>Chemistry</td><td>Dr. Peter</td><td>Lab 1</td></tr>
+                                    <tr><td>13:30-14:30</td><td>Biology</td><td>Ms. Mary</td><td>Room 8</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <!-- Results -->
+                    <div class="jss-card jss-mb-lg">
+                        <div class="jss-card__header"><h3 class="jss-card__header-title">📊 My Results - Term 1</h3><a href="#" class="jss-card__header-action">View Full Report →</a></div>
+                        <div class="jss-card__body">
+                            <table class="jss-table jss-table--striped">
+                                <thead><tr><th>Subject</th><th>Score</th><th>Grade</th><th>Class Avg</th><th>Status</th></tr></thead>
+                                <tbody>
+                                    <tr><td>Mathematics</td><td>85%</td><td><span class="jss-badge jss-badge--success">A</span></td><td>68%</td><td>⬆ Above</td></tr>
+                                    <tr><td>Physics</td><td>72%</td><td><span class="jss-badge jss-badge--primary">B</span></td><td>65%</td><td>⬆ Above</td></tr>
+                                    <tr><td>English</td><td>78%</td><td><span class="jss-badge jss-badge--primary">B</span></td><td>70%</td><td>⬆ Above</td></tr>
+                                    <tr><td>Chemistry</td><td>65%</td><td><span class="jss-badge jss-badge--warning">C</span></td><td>62%</td><td>⬆ Above</td></tr>
+                                    <tr><td>Biology</td><td>70%</td><td><span class="jss-badge jss-badge--primary">B</span></td><td>68%</td><td>⬆ Above</td></tr>
+                                </tbody>
+                            </table>
+                            <div style="text-align:center;padding:var(--spacing-md);"><strong>Overall: 78% • Rank: 5/45</strong></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <!-- Pending Assignments -->
+                    <div class="jss-card jss-mb-lg">
+                        <div class="jss-card__header"><h3 class="jss-card__header-title">📝 Pending Assignments</h3></div>
+                        <div class="jss-card__body">
+                            <div class="jss-mb-md"><strong>Math Assignment</strong><br><span class="jss-text-small">Due: Apr 15, 2026</span><br><button class="jss-btn jss-btn--primary jss-btn--sm jss-mt-sm">Submit</button></div>
+                            <div class="jss-mb-md"><strong>Physics Lab Report</strong><br><span class="jss-text-small">Due: Apr 16, 2026</span><br><button class="jss-btn jss-btn--primary jss-btn--sm jss-mt-sm">Submit</button></div>
+                            <div><strong>English Essay</strong><br><span class="jss-text-small">Due: Apr 18, 2026</span><br><button class="jss-btn jss-btn--secondary jss-btn--sm jss-mt-sm">Start</button></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Messages -->
+                    <div class="jss-card jss-mb-lg">
+                        <div class="jss-card__header"><h3 class="jss-card__header-title">💬 Messages</h3></div>
+                        <div class="jss-card__body">
+                            <div class="jss-mb-sm"><strong>Mom:</strong> How was school today? <span class="jss-text-small">2 min ago</span></div>
+                            <div class="jss-mb-sm"><strong>Dad:</strong> Don't forget lunch! <span class="jss-text-small">1 hr ago</span></div>
+                            <div><strong>Mr. Kato:</strong> Grade posted for Math <span class="jss-text-small">3 hrs ago</span></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Achievements (3D Carousel) -->
+                    <div class="jss-card jss-mb-lg">
+                        <div class="jss-card__header"><h3 class="jss-card__header-title">🏆 Achievements</h3></div>
+                        <div class="jss-card__body">
+                            <div class="achievement-3d" aria-label="Achievement badges carousel">
+                                <div class="achievement-3d__item achievement-3d__item--1">🥇<span class="achievement-3d__label">Perfect Attendance</span></div>
+                                <div class="achievement-3d__item achievement-3d__item--2">🥈<span class="achievement-3d__label">Honor Roll</span></div>
+                                <div class="achievement-3d__item achievement-3d__item--3">🥉<span class="achievement-3d__label">Top 10</span></div>
+                                <div class="achievement-3d__item achievement-3d__item--4">⭐<span class="achievement-3d__label">Homework Streak</span></div>
+                                <div class="achievement-3d__item achievement-3d__item--5">💪<span class="achievement-3d__label">Most Improved</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- AI Assistant -->
+                    <div class="jss-card">
+                        <div class="jss-card__header"><h3 class="jss-card__header-title">🤖 AI Study Assistant</h3></div>
+                        <div class="jss-card__body">
+                            <div class="jss-form-group">
+                                <input type="text" class="jss-input" placeholder="Ask me anything about your studies...">
+                            </div>
+                            <div style="display:flex;gap:var(--spacing-sm);">
+                                <button class="jss-btn jss-btn--primary jss-btn--sm">Ask AI</button>
+                                <button class="jss-btn jss-btn--secondary jss-btn--sm">📷 Photo</button>
+                                <button class="jss-btn jss-btn--secondary jss-btn--sm">🎤 Voice</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <!-- Mobile Bottom Nav -->
+    <nav class="jss-bottom-nav" style="display:none;position:fixed;bottom:0;left:0;right:0;background:var(--bg-primary);border-top:1px solid var(--border);padding:var(--spacing-xs);justify-content:space-around;z-index:100;">
+        <a href="#" style="display:flex;flex-direction:column;align-items:center;text-decoration:none;color:var(--primary-blue);font-size:10px;"><span style="font-size:20px;">🏠</span>Home</a>
+        <a href="#" style="display:flex;flex-direction:column;align-items:center;text-decoration:none;color:var(--text-secondary);font-size:10px;"><span style="font-size:20px;">📚</span>Academics</a>
+        <a href="#" style="display:flex;flex-direction:column;align-items:center;text-decoration:none;color:var(--text-secondary);font-size:10px;"><span style="font-size:20px;">💬</span>Messages</a>
+        <a href="#" style="display:flex;flex-direction:column;align-items:center;text-decoration:none;color:var(--text-secondary);font-size:10px;"><span style="font-size:20px;">🤖</span>AI</a>
+        <a href="#" style="display:flex;flex-direction:column;align-items:center;text-decoration:none;color:var(--text-secondary);font-size:10px;"><span style="font-size:20px;">👤</span>Me</a>
+    </nav>
+    <style>@media(max-width:767px){.jss-bottom-nav{display:flex!important;}}</style>
+</body>
+</html>

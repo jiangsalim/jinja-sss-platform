@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Tour - Jinja SSS</title>
+    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/dark-mode.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <link rel="stylesheet" href="../css/utilities/spacing.css">
+    <link rel="stylesheet" href="../css/utilities/typography.css">
+    <link rel="stylesheet" href="../css/utilities/colors.css">
+    <link rel="stylesheet" href="../css/components/buttons.css">
+    <link rel="stylesheet" href="../css/components/cards.css">
+    <script src="../js/utils.js" defer></script>
+    <style>
+        body { background: var(--bg-secondary); min-height: 100vh; }
+        .page-header { background: linear-gradient(135deg, var(--primary-blue), var(--primary-dark)); color: white; padding: var(--spacing-2xl) 0; text-align: center; }
+        .tour-3d { width: 300px; height: 380px; position: relative; margin: var(--spacing-2xl) auto; transform-style: preserve-3d; transform: perspective(1200px); animation: tour-rotate 25s linear infinite; cursor: pointer; }
+        .tour-3d:hover { animation-play-state: paused; }
+        .tour-3d__item { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-lg); display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 56px; transition: transform 0.3s ease; cursor: pointer; }
+        .tour-3d__item:hover { transform: translateZ(380px) scale(1.1) !important; box-shadow: var(--shadow-xl); z-index: 10; }
+        .tour-3d__item--1 { background: linear-gradient(135deg, #667eea, #764ba2); transform: rotateY(0deg) translateZ(320px); }
+        .tour-3d__item--2 { background: linear-gradient(135deg, #28a745, #20c997); transform: rotateY(45deg) translateZ(320px); }
+        .tour-3d__item--3 { background: linear-gradient(135deg, #17a2b8, #0dcaf0); transform: rotateY(90deg) translateZ(320px); }
+        .tour-3d__item--4 { background: linear-gradient(135deg, #fd7e14, #ffc107); transform: rotateY(135deg) translateZ(320px); }
+        .tour-3d__item--5 { background: linear-gradient(135deg, #dc3545, #e83e8c); transform: rotateY(180deg) translateZ(320px); }
+        .tour-3d__item--6 { background: linear-gradient(135deg, #1e3c72, #2a5298); transform: rotateY(225deg) translateZ(320px); }
+        .tour-3d__item--7 { background: linear-gradient(135deg, #6f42c1, #a259ff); transform: rotateY(270deg) translateZ(320px); }
+        .tour-3d__item--8 { background: linear-gradient(135deg, #20c997, #28a745); transform: rotateY(315deg) translateZ(320px); }
+        .tour-3d__label { color: white; font-size: var(--font-size-lg); font-weight: var(--font-weight-bold); margin-top: var(--spacing-md); text-shadow: 0 2px 4px rgba(0,0,0,0.3); }
+        .tour-3d__hint { color: rgba(255,255,255,0.8); font-size: var(--font-size-sm); }
+        @keyframes tour-rotate { from { transform: perspective(1200px) rotateY(0deg); } to { transform: perspective(1200px) rotateY(360deg); } }
+        @media (max-width: 767px) { .tour-3d { width: 240px; height: 300px; } .tour-3d__item--1 { transform: rotateY(0deg) translateZ(250px); } .tour-3d__item--2 { transform: rotateY(45deg) translateZ(250px); } .tour-3d__item--3 { transform: rotateY(90deg) translateZ(250px); } .tour-3d__item--4 { transform: rotateY(135deg) translateZ(250px); } .tour-3d__item--5 { transform: rotateY(180deg) translateZ(250px); } .tour-3d__item--6 { transform: rotateY(225deg) translateZ(250px); } .tour-3d__item--7 { transform: rotateY(270deg) translateZ(250px); } .tour-3d__item--8 { transform: rotateY(315deg) translateZ(250px); } }
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="jss-skip-link">Skip to main content</a>
+    <header style="background:var(--bg-primary);border-bottom:1px solid var(--border);padding:var(--spacing-md) 0;">
+        <div class="jss-container" style="display:flex;align-items:center;justify-content:space-between;">
+            <a href="../index.html" style="display:flex;align-items:center;gap:var(--spacing-sm);text-decoration:none;color:inherit;"><span style="font-size:28px;">🏫</span><strong>Jinja SSS</strong></a>
+            <a href="../index.html" class="jss-btn jss-btn--text jss-btn--sm">← Back to Home</a>
+        </div>
+    </header>
+    <main id="main-content">
+        <section class="page-header"><h1>🎥 Virtual Tour</h1><p>Explore our campus in 360° — Click any location to enter</p></section>
+        <div class="jss-container" style="text-align:center;padding:var(--spacing-xl) 0;">
+            <p>Hover to pause rotation. Click a portal to enter that location's full tour.</p>
+            <div class="tour-3d" role="img" aria-label="Virtual tour location selector - 8 locations">
+                <div class="tour-3d__item tour-3d__item--1" onclick="alert('Main Hall tour coming soon!')"><span>🏫</span><span class="tour-3d__label">Main Hall</span><span class="tour-3d__hint">Click to enter</span></div>
+                <div class="tour-3d__item tour-3d__item--2" onclick="alert('Science Lab tour coming soon!')"><span>🔬</span><span class="tour-3d__label">Science Lab</span><span class="tour-3d__hint">Click to enter</span></div>
+                <div class="tour-3d__item tour-3d__item--3" onclick="alert('Computer Lab tour coming soon!')"><span>💻</span><span class="tour-3d__label">Computer Lab</span><span class="tour-3d__hint">Click to enter</span></div>
+                <div class="tour-3d__item tour-3d__item--4" onclick="alert('Library tour coming soon!')"><span>📚</span><span class="tour-3d__label">Library</span><span class="tour-3d__hint">Click to enter</span></div>
+                <div class="tour-3d__item tour-3d__item--5" onclick="alert('Sports Complex tour coming soon!')"><span>⚽</span><span class="tour-3d__label">Sports Complex</span><span class="tour-3d__hint">Click to enter</span></div>
+                <div class="tour-3d__item tour-3d__item--6" onclick="alert('Chapel tour coming soon!')"><span>⛪</span><span class="tour-3d__label">Chapel</span><span class="tour-3d__hint">Click to enter</span></div>
+                <div class="tour-3d__item tour-3d__item--7" onclick="alert('Dormitory tour coming soon!')"><span>🛏️</span><span class="tour-3d__label">Dormitory</span><span class="tour-3d__hint">Click to enter</span></div>
+                <div class="tour-3d__item tour-3d__item--8" onclick="alert('Dining Hall tour coming soon!')"><span>🍽️</span><span class="tour-3d__label">Dining Hall</span><span class="tour-3d__hint">Click to enter</span></div>
+            </div>
+        </div>
+    </main>
+    <footer style="text-align:center;padding:var(--spacing-lg);color:var(--text-secondary);font-size:var(--font-size-sm);">© 2026 Jinja Senior Secondary School</footer>
+</body>
+</html>

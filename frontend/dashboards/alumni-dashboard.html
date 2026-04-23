@@ -1,0 +1,45 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Alumni Dashboard - Jinja SSS</title><link rel="stylesheet" href="../css/variables.css"><link rel="stylesheet" href="../css/style.css"><link rel="stylesheet" href="../css/dark-mode.css"><link rel="stylesheet" href="../css/responsive.css"><link rel="stylesheet" href="../css/utilities/spacing.css"><link rel="stylesheet" href="../css/utilities/typography.css"><link rel="stylesheet" href="../css/utilities/colors.css"><link rel="stylesheet" href="../css/components/buttons.css"><link rel="stylesheet" href="../css/components/cards.css"><link rel="stylesheet" href="../css/components/tables.css"><link rel="stylesheet" href="../css/components/badge.css"><link rel="stylesheet" href="../css/components/stats-card.css"><link rel="stylesheet" href="../css/components/progress.css"><link rel="stylesheet" href="../css/components/forms.css"><link rel="stylesheet" href="../css/components/alert.css"><script src="../js/utils.js" defer></script><style>
+body{background:var(--bg-secondary);}.dashboard{display:flex;min-height:100vh;}.sidebar{width:260px;background:linear-gradient(180deg,var(--primary-blue),#0f2442);color:white;position:fixed;top:0;left:0;bottom:0;z-index:100;}.sidebar__brand{padding:var(--spacing-lg);text-align:center;border-bottom:1px solid rgba(255,255,255,0.1);font-weight:var(--font-weight-bold);font-size:var(--font-size-lg);}.sidebar__item{display:flex;align-items:center;gap:var(--spacing-md);padding:var(--spacing-md)var(--spacing-lg);color:rgba(255,255,255,0.7);text-decoration:none;}.sidebar__item:hover,.sidebar__item--active{background:rgba(255,255,255,0.1);color:white;}.main{margin-left:260px;flex:1;padding:var(--spacing-lg);}.topbar{background:linear-gradient(135deg,var(--primary-blue),var(--primary-dark));color:white;padding:var(--spacing-md)var(--spacing-lg);border-radius:var(--radius-lg);display:flex;justify-content:space-between;align-items:center;margin-bottom:var(--spacing-lg);box-shadow:var(--shadow-sm);}.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:var(--spacing-md);margin-bottom:var(--spacing-lg);}.grid-2{display:grid;grid-template-columns:1fr;gap:var(--spacing-lg);}@media(min-width:1024px){.grid-2{grid-template-columns:2fr 1fr;}}@media(max-width:767px){.sidebar{display:none;}.main{margin-left:0;}}
+</style></head><body>
+<div class="dashboard">
+    <aside class="sidebar"><div class="sidebar__brand">🎓 Alumni</div><nav style="flex:1;padding:var(--spacing-md)0;"><a href="#" class="sidebar__item sidebar__item--active">📊 Dashboard</a><a href="#" class="sidebar__item">👥 Network</a><a href="#" class="sidebar__item">👥 Mentorship</a><a href="#" class="sidebar__item">💼 Jobs</a><a href="#" class="sidebar__item">💰 Donate</a><a href="#" class="sidebar__item">📅 Events</a></nav><div style="padding:var(--spacing-md);border-top:1px solid rgba(255,255,255,0.1);"><a href="../pages/signin.html" class="sidebar__item">🚪 Logout</a></div></aside>
+    <main class="main">
+        <div class="topbar"><div><strong style="font-size:var(--font-size-xl);">Welcome back, John Mukasa! 🎓</strong><br><span>Class of 2020 • OB (Old Student)</span></div><div style="display:flex;gap:var(--spacing-md);"><span>🔔</span><span>👤</span></div></div>
+        <div class="stats-grid"><div class="jss-stat-card"><div class="jss-stat-card__value">1,234</div><div class="jss-stat-card__label">Alumni Network</div></div><div class="jss-stat-card jss-stat-card--success"><div class="jss-stat-card__value">3</div><div class="jss-stat-card__label">Upcoming Events</div></div><div class="jss-stat-card"><div class="jss-stat-card__value">456</div><div class="jss-stat-card__label">Total Donors</div></div><div class="jss-stat-card jss-stat-card--warning"><div class="jss-stat-card__value">2</div><div class="jss-stat-card__label">My Issues</div></div></div>
+        <div class="grid-2">
+            <div>
+                <div class="jss-card jss-mb-lg"><div class="jss-card__header"><h3 class="jss-card__header-title">👥 Alumni Network</h3></div><div class="jss-card__body">
+                    <div class="jss-form-group"><input type="text" class="jss-input jss-mb-md" placeholder="Search alumni by name, profession, or location..."></div>
+                    <table class="jss-table jss-table--striped"><thead><tr><th>Name</th><th>Grad Year</th><th>Profession</th><th>Location</th><th>Action</th></tr></thead><tbody><tr><td>Jane Smith</td><td>2019</td><td>Engineer</td><td>Kampala</td><td><button class="jss-btn jss-btn--text jss-btn--sm">Connect</button></td></tr><tr><td>Peter Okello</td><td>2021</td><td>Doctor</td><td>Jinja</td><td><button class="jss-btn jss-btn--text jss-btn--sm">Connect</button></td></tr><tr><td>Sarah Kato</td><td>2020</td><td>Lawyer</td><td>London, UK</td><td><button class="jss-btn jss-btn--text jss-btn--sm">Connect</button></td></tr><tr><td>James Nambi</td><td>2018</td><td>Entrepreneur</td><td>Nairobi</td><td><button class="jss-btn jss-btn--text jss-btn--sm">Connect</button></td></tr></tbody></table>
+                </div></div>
+                <div class="jss-card jss-mb-lg"><div class="jss-card__header"><h3 class="jss-card__header-title">💰 Support Our School</h3></div><div class="jss-card__body">
+                    <div class="jss-card jss-card--featured jss-mb-sm"><div class="jss-card__body"><strong>📚 Library Renovation</strong> - UGX 50M needed<div class="jss-progress jss-mt-sm"><div class="jss-progress__fill jss-progress__fill--success" style="width:30%"></div></div><p class="jss-text-small">30% funded</p><button class="jss-btn jss-btn--primary jss-btn--sm">Donate</button></div></div>
+                    <div class="jss-card jss-card--featured"><div class="jss-card__body"><strong>💻 ICT Lab Upgrade</strong> - UGX 30M needed<div class="jss-progress jss-mt-sm"><div class="jss-progress__fill jss-progress__fill--warning" style="width:15%"></div></div><p class="jss-text-small">15% funded</p><button class="jss-btn jss-btn--primary jss-btn--sm">Donate</button></div></div>
+                </div></div>
+            </div>
+            <div>
+                <div class="jss-card jss-mb-lg"><div class="jss-card__header"><h3 class="jss-card__header-title">👥 Mentorship Program</h3></div><div class="jss-card__body">
+                    <p><strong>Become a Mentor:</strong></p>
+                    <div class="jss-form-group"><select class="jss-input jss-input--select jss-mb-sm"><option>Software Engineering</option><option>Medicine</option><option>Law</option><option>Business</option><option>Education</option></select></div>
+                    <div class="jss-mb-sm"><label class="jss-checkbox"><input type="checkbox" checked> Virtual</label><label class="jss-checkbox jss-ms-md"><input type="checkbox"> In-person</label></div>
+                    <button class="jss-btn jss-btn--primary jss-btn--sm jss-mb-md">Submit</button>
+                    <p class="jss-text-small"><strong>Pending Requests (2):</strong></p>
+                    <div class="jss-mb-sm">James Okello (S6A) - Career guidance <button class="jss-btn jss-btn--text jss-btn--sm">Accept</button></div>
+                    <div>Mary Nambi (S5B) - University application <button class="jss-btn jss-btn--text jss-btn--sm">Accept</button></div>
+                </div></div>
+                <div class="jss-card jss-mb-lg"><div class="jss-card__header"><h3 class="jss-card__header-title">💼 Job Board</h3></div><div class="jss-card__body">
+                    <button class="jss-btn jss-btn--secondary jss-btn--sm jss-mb-md">Post a Job</button>
+                    <div class="jss-mb-sm"><strong>Senior Engineer</strong> - Tech Solutions, Kampala</div>
+                    <div class="jss-mb-sm"><strong>Marketing Mgr</strong> - Digital Agency, Jinja</div>
+                    <div><strong>Accountant</strong> - Finance Corp, Kampala</div>
+                </div></div>
+                <div class="jss-card"><div class="jss-card__header"><h3 class="jss-card__header-title">📅 Upcoming Events</h3></div><div class="jss-card__body">
+                    <div class="jss-mb-sm">Dec 20, 2026 - Alumni Reunion <button class="jss-btn jss-btn--text jss-btn--sm">Register</button></div>
+                    <div class="jss-mb-sm">Jan 15, 2027 - Career Fair <button class="jss-btn jss-btn--text jss-btn--sm">Register</button></div>
+                    <div>Mar 5, 2027 - Homecoming Weekend <button class="jss-btn jss-btn--text jss-btn--sm">Register</button></div>
+                </div></div>
+            </div>
+        </div>
+    </main>
+</div>
+</body></html>

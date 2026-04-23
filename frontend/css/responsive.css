@@ -1,0 +1,314 @@
+/* ============================================
+   JINJA SSS PLATFORM – RESPONSIVE UTILITIES
+   Mobile-First Approach (Apple/Google Standard)
+   ============================================ */
+
+/* ---------- BREAKPOINT REFERENCE ---------- */
+/* Mobile: < 768px (default, no media query needed) */
+/* Tablet: 768px - 1023px */
+/* Desktop: 1024px - 1279px */
+/* Wide: > 1280px */
+
+/* ---------- HIDE/SHOW UTILITIES ---------- */
+
+.jss-hide-mobile {
+  display: none;
+}
+
+.jss-show-mobile {
+  display: block;
+}
+
+@media (min-width: 768px) {
+  .jss-hide-mobile {
+    display: block;
+  }
+  
+  .jss-show-mobile {
+    display: none;
+  }
+  
+  .jss-hide-tablet {
+    display: none;
+  }
+  
+  .jss-show-tablet {
+    display: block;
+  }
+}
+
+@media (min-width: 1024px) {
+  .jss-hide-desktop {
+    display: none;
+  }
+  
+  .jss-show-desktop {
+    display: block;
+  }
+}
+
+/* ---------- FLEXBOX UTILITIES ---------- */
+
+.jss-flex {
+  display: flex;
+}
+
+.jss-flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.jss-flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.jss-flex-wrap {
+  flex-wrap: wrap;
+}
+
+.jss-flex-nowrap {
+  flex-wrap: nowrap;
+}
+
+.jss-justify-start {
+  justify-content: flex-start;
+}
+
+.jss-justify-center {
+  justify-content: center;
+}
+
+.jss-justify-end {
+  justify-content: flex-end;
+}
+
+.jss-justify-between {
+  justify-content: space-between;
+}
+
+.jss-justify-around {
+  justify-content: space-around;
+}
+
+.jss-align-start {
+  align-items: flex-start;
+}
+
+.jss-align-center {
+  align-items: center;
+}
+
+.jss-align-end {
+  align-items: flex-end;
+}
+
+.jss-align-stretch {
+  align-items: stretch;
+}
+
+.jss-gap-xs { gap: var(--spacing-xs); }
+.jss-gap-sm { gap: var(--spacing-sm); }
+.jss-gap-md { gap: var(--spacing-md); }
+.jss-gap-lg { gap: var(--spacing-lg); }
+.jss-gap-xl { gap: var(--spacing-xl); }
+
+/* ---------- GRID UTILITIES ---------- */
+
+.jss-grid {
+  display: grid;
+}
+
+.jss-grid-cols-1 { grid-template-columns: repeat(1, 1fr); }
+.jss-grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+.jss-grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+.jss-grid-cols-4 { grid-template-columns: repeat(4, 1fr); }
+
+@media (min-width: 768px) {
+  .jss-grid-cols-md-1 { grid-template-columns: repeat(1, 1fr); }
+  .jss-grid-cols-md-2 { grid-template-columns: repeat(2, 1fr); }
+  .jss-grid-cols-md-3 { grid-template-columns: repeat(3, 1fr); }
+  .jss-grid-cols-md-4 { grid-template-columns: repeat(4, 1fr); }
+}
+
+@media (min-width: 1024px) {
+  .jss-grid-cols-lg-1 { grid-template-columns: repeat(1, 1fr); }
+  .jss-grid-cols-lg-2 { grid-template-columns: repeat(2, 1fr); }
+  .jss-grid-cols-lg-3 { grid-template-columns: repeat(3, 1fr); }
+  .jss-grid-cols-lg-4 { grid-template-columns: repeat(4, 1fr); }
+  .jss-grid-cols-lg-5 { grid-template-columns: repeat(5, 1fr); }
+  .jss-grid-cols-lg-6 { grid-template-columns: repeat(6, 1fr); }
+}
+
+/* ---------- TEXT ALIGNMENT ---------- */
+
+.jss-text-left { text-align: left; }
+.jss-text-center { text-align: center; }
+.jss-text-right { text-align: right; }
+
+@media (min-width: 768px) {
+  .jss-text-md-left { text-align: left; }
+  .jss-text-md-center { text-align: center; }
+  .jss-text-md-right { text-align: right; }
+}
+
+/* ---------- WIDTH UTILITIES ---------- */
+
+.jss-w-full { width: 100%; }
+.jss-w-auto { width: auto; }
+.jss-w-screen { width: 100vw; }
+
+.jss-max-w-sm { max-width: 400px; }
+.jss-max-w-md { max-width: 600px; }
+.jss-max-w-lg { max-width: 800px; }
+.jss-max-w-xl { max-width: 1200px; }
+.jss-max-w-full { max-width: 100%; }
+
+/* ---------- POSITION UTILITIES ---------- */
+
+.jss-relative { position: relative; }
+.jss-absolute { position: absolute; }
+.jss-fixed { position: fixed; }
+.jss-sticky { position: sticky; }
+
+/* ---------- OVERFLOW UTILITIES ---------- */
+
+.jss-overflow-auto { overflow: auto; }
+.jss-overflow-hidden { overflow: hidden; }
+.jss-overflow-visible { overflow: visible; }
+.jss-overflow-scroll { overflow: scroll; }
+.jss-overflow-x-auto { overflow-x: auto; }
+.jss-overflow-y-auto { overflow-y: auto; }
+
+/* ---------- MOBILE TOUCH TARGETS ---------- */
+
+@media (max-width: 767px) {
+  .jss-btn,
+  .jss-link,
+  .jss-touch-target {
+    min-height: var(--touch-target-min);
+    min-width: var(--touch-target-min);
+  }
+}
+
+/* ---------- DASHBOARD LAYOUT ---------- */
+
+/* Mobile (default) */
+.jss-dashboard {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.jss-dashboard__sidebar {
+  display: none;
+}
+
+.jss-dashboard__main {
+  flex: 1;
+  padding: var(--spacing-md);
+  padding-bottom: calc(var(--spacing-3xl) + var(--touch-target-min));
+}
+
+.jss-dashboard__bottom-nav {
+  display: flex;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+/* Tablet */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .jss-dashboard {
+    flex-direction: row;
+  }
+  
+  .jss-dashboard__sidebar {
+    display: block;
+    width: 80px;
+  }
+  
+  .jss-dashboard__main {
+    padding-bottom: var(--spacing-md);
+  }
+  
+  .jss-dashboard__bottom-nav {
+    display: none;
+  }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+  .jss-dashboard {
+    flex-direction: row;
+  }
+  
+  .jss-dashboard__sidebar {
+    display: block;
+    width: 280px;
+  }
+  
+  .jss-dashboard__main {
+    padding: var(--spacing-lg);
+    padding-bottom: var(--spacing-lg);
+  }
+  
+  .jss-dashboard__bottom-nav {
+    display: none;
+  }
+}
+
+/* ---------- STATS CARDS GRID ---------- */
+
+.jss-stats-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-md);
+}
+
+@media (min-width: 480px) {
+  .jss-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 768px) {
+  .jss-stats-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* ---------- TWO-COLUMN LAYOUT ---------- */
+
+.jss-two-column {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-lg);
+}
+
+@media (min-width: 768px) {
+  .jss-two-column {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* ---------- THREE-COLUMN LAYOUT ---------- */
+
+.jss-three-column {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-lg);
+}
+
+@media (min-width: 768px) {
+  .jss-three-column {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .jss-three-column {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

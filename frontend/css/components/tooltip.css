@@ -1,0 +1,32 @@
+/* ============================================
+   JINJA SSS PLATFORM - TOOLTIP
+   ============================================ */
+
+.jss-tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.jss-tooltip__text {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--text-primary);
+  color: var(--bg-primary);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--radius-xs);
+  font-size: var(--font-size-xs);
+  white-space: nowrap;
+  margin-bottom: var(--spacing-xs);
+  pointer-events: none;
+  transition: opacity var(--duration-micro) var(--ease-standard);
+  z-index: var(--z-tooltip);
+}
+
+.jss-tooltip:hover .jss-tooltip__text {
+  visibility: visible;
+  opacity: 1;
+}

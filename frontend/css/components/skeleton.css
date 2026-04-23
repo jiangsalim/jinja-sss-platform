@@ -1,0 +1,51 @@
+/* ============================================
+   JINJA SSS PLATFORM - SKELETON LOADER
+   ============================================ */
+
+.jss-skeleton {
+  background: linear-gradient(90deg, #e0e0e0 25%, #f0f0f0 50%, #e0e0e0 75%);
+  background-size: 200% 100%;
+  animation: jss-skeleton-shimmer 1.5s infinite;
+  border-radius: var(--radius-xs);
+}
+
+.jss-skeleton--text {
+  height: 14px;
+  margin-bottom: var(--spacing-sm);
+}
+
+.jss-skeleton--text-sm { width: 60%; }
+.jss-skeleton--text-md { width: 80%; }
+.jss-skeleton--text-lg { width: 100%; }
+
+.jss-skeleton--title {
+  height: 20px;
+  width: 50%;
+  margin-bottom: var(--spacing-md);
+}
+
+.jss-skeleton--avatar {
+  border-radius: var(--radius-full);
+  width: 40px;
+  height: 40px;
+}
+
+.jss-skeleton--card {
+  height: 120px;
+  border-radius: var(--radius-lg);
+}
+
+.jss-skeleton--button {
+  height: 40px;
+  width: 100px;
+  border-radius: var(--radius-md);
+}
+
+.dark .jss-skeleton {
+  background: linear-gradient(90deg, #2a2a2a 25%, #3a3a3a 50%, #2a2a2a 75%);
+}
+
+@keyframes jss-skeleton-shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}

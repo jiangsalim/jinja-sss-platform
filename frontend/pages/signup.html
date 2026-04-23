@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Jinja SSS</title>
+    
+    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/dark-mode.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <link rel="stylesheet" href="../css/utilities/spacing.css">
+    <link rel="stylesheet" href="../css/utilities/typography.css">
+    <link rel="stylesheet" href="../css/utilities/colors.css">
+    <link rel="stylesheet" href="../css/components/buttons.css">
+    <link rel="stylesheet" href="../css/components/forms.css">
+    <link rel="stylesheet" href="../css/components/cards.css">
+    
+    <script src="../js/utils.js" defer></script>
+    <script src="../js/api.js" defer></script>
+    <script src="../js/validation.js" defer></script>
+    
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: var(--bg-secondary);
+        }
+        .auth-card {
+            width: 100%;
+            max-width: 500px;
+            padding: var(--spacing-2xl);
+        }
+        .auth-logo { text-align: center; font-size: 48px; margin-bottom: var(--spacing-md); }
+        .auth-title { text-align: center; margin-bottom: var(--spacing-sm); }
+        .auth-subtitle { text-align: center; color: var(--text-secondary); margin-bottom: var(--spacing-xl); }
+        .auth-link { text-align: center; margin-top: var(--spacing-lg); font-size: var(--font-size-sm); }
+        .step-title { font-size: var(--font-size-lg); font-weight: var(--font-weight-semibold); margin-bottom: var(--spacing-md); }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+    <div class="jss-card auth-card">
+        <div class="auth-logo">🏫</div>
+        <h2 class="auth-title">Create Your Account</h2>
+        <p class="auth-subtitle">For Parents & Alumni only</p>
+        
+        <form onsubmit="handleSignUp(event)">
+            <!-- Step 1: Account Type -->
+            <div id="step1">
+                <p class="step-title">Step 1: Select Account Type</p>
+                <div class="jss-radio-group jss-mb-lg">
+                    <label class="jss-radio"><input type="radio" name="accountType" value="parent" onchange="showStep2('parent')"> Parent</label>
+                    <label class="jss-radio"><input type="radio" name="accountType" value="alumni" onchange="showStep2('alumni')"> Alumni (OB/OG)</label>
+                </div>
+            </div>
+            
+            <!-- Step 2: Personal Info -->
+            <div id="step2" class="hidden">
+                <p class="step-title">Step 2: Personal Information</p>
+                <div class="jss-form-group">
+                    <label class="jss-label jss-label--required">Full Name</label>
+                    <input type="text" id="fullName" class="jss-input" required>
+                </div>
+                <div class="jss-form-group">
+                    <label class="jss-label">Email</label>
+                    <input type="email" id="email" class="jss-input">
+                </div>
+                <div class="jss-form-group">
+                    <label class="jss-label">Phone</label>
+                    <input type="tel" id="phone" class="jss-input">
+                </div>
+            </div>
+            
+            <!-- Step 3: Parent Verification -->
+            <div id="step3-parent" class="hidden">
+                <p class="step-title">Step 3: Child Verification</p>
+                <div class="jss-form-group">
+                    <label class="jss-label jss-label--required">Number of Children</label>
+                    <input type="number" id="numChildren" class="jss-input" min="1" value="1" onchange="generateChildFields()">
+                </div>
+                <div id="childFields"></div>
+            </div>
+            
+            <!-- Step 4: Security -->
+            <div id="step4" class="hidden">
+                <p class="step-title">Step 4: Security</p>
+                <div class="jss-form-group">
+                    <label class="jss-label jss-label--required">Username</label>
+                    <input type="text" id="username" class="jss-input" required>
+                </div>
+                <div class="jss-form-group">
+                    <label class="jss-label jss-label--required">Password</label>
+                    <input type="password" id="newPassword" class="jss-input" required minlength="6">
+                </div>
+                <div class="jss-form-group">
+                    <label class="jss-label jss-label--required">Confirm Password</label>
+                    <input type="password" id="confirmPassword" class="jss-input" required>
+                </div>
+                <div class="jss-form-group">
+                    <label class="jss-checkbox">
+                        <input type="checkbox" required>
+                        I agree to the Terms and Conditions
+                    </label>
+                </div>
+                <button type="submit" class="jss-btn jss-btn--primary jss-btn--lg jss-btn--full">Create Account</button>
+            </div>
+        </form>
+        
+        <div class="auth-link">
+            Already have an account? <a href="signin.html">Sign In</a>
+        </div>
+        <div class="auth-link">
+            <a href="../index.html">← Back to Home</a>
+        </div>
+    </div>
+    
+    <script>
+    let accountType = '';
+    
+    function showStep2(type) {
+        accountType = type;
+        document.getElementById('step2').classList.remove('hidden');
+        if (type === 'parent') {
+            document.getElementById('step3-parent').classList.remove('hidden');
+            generateChildFields();
+        } else {
+            document.getElementById('step3-parent').classList.add('hidden');
+        }
+        document.getElementById('step4').classList.remove('hidden');
+    }
+    
+    function generateChildFields() {
+        const num = parseInt(document.getElementById('numChildren').value) || 1;
+        let html = '';
+        for (let i = 1; i <= num; i++) {
+            html += `
+                <div class="jss-form-group">
+                    <label class="jss-label jss-label--required">Child ${i} Full Name</label>
+                    <input type="text" class="jss-input child-name" required>
+                </div>
+                <div class="jss-form-group">
+                    <label class="jss-label jss-label--required">Child ${i} Admission Number</label>
+                    <input type="text" class="jss-input child-admission" placeholder="JSSS-XXX" required>
+                </div>
+            `;
+        }
+        document.getElementById('childFields').innerHTML = html;
+    }
+    
+    async function handleSignUp(e) {
+        e.preventDefault();
+        const password = document.getElementById('newPassword').value;
+        const confirm = document.getElementById('confirmPassword').value;
+        
+        if (password !== confirm) {
+            alert('Passwords do not match!');
+            return;
+        }
+        
+        alert('Account creation will be connected to backend soon!');
+    }
+    </script>
+</body>
+</html>

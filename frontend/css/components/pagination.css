@@ -1,0 +1,42 @@
+/* ============================================
+   JINJA SSS PLATFORM - PAGINATION
+   ============================================ */
+
+.jss-pagination {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.jss-pagination__item {
+  min-width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+  text-decoration: none;
+  transition: all var(--duration-micro) var(--ease-standard);
+}
+
+.jss-pagination__item:hover {
+  border-color: var(--primary-blue);
+  color: var(--primary-blue);
+}
+
+.jss-pagination__item--active {
+  background: var(--primary-blue);
+  color: white;
+  border-color: var(--primary-blue);
+}
+
+.jss-pagination__item--disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
+}

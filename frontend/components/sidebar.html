@@ -1,0 +1,126 @@
+<!-- ============================================
+     JINJA SSS PLATFORM - SIDEBAR COMPONENT
+     ============================================ -->
+
+<aside class="jss-sidebar" id="jss-sidebar">
+    <div class="jss-sidebar__brand">
+        <h2 class="jss-sidebar__title">JSS</h2>
+    </div>
+    
+    <nav class="jss-sidebar__nav">
+        <a href="#" class="jss-sidebar__item jss-sidebar__item--active">
+            <span class="jss-sidebar__icon">📊</span>
+            <span class="jss-sidebar__text">Dashboard</span>
+        </a>
+        <a href="#" class="jss-sidebar__item">
+            <span class="jss-sidebar__icon">👥</span>
+            <span class="jss-sidebar__text">Users</span>
+        </a>
+        <a href="#" class="jss-sidebar__item">
+            <span class="jss-sidebar__icon">📚</span>
+            <span class="jss-sidebar__text">Academics</span>
+        </a>
+        <a href="#" class="jss-sidebar__item">
+            <span class="jss-sidebar__icon">💬</span>
+            <span class="jss-sidebar__text">Messages</span>
+        </a>
+        <a href="#" class="jss-sidebar__item">
+            <span class="jss-sidebar__icon">🔔</span>
+            <span class="jss-sidebar__text">Notifications</span>
+        </a>
+        <a href="#" class="jss-sidebar__item">
+            <span class="jss-sidebar__icon">⚙️</span>
+            <span class="jss-sidebar__text">Settings</span>
+        </a>
+    </nav>
+    
+    <div class="jss-sidebar__footer">
+        <a href="#" class="jss-sidebar__item" onclick="logout()">
+            <span class="jss-sidebar__icon">🚪</span>
+            <span class="jss-sidebar__text">Logout</span>
+        </a>
+    </div>
+</aside>
+
+<style>
+.jss-sidebar {
+    width: 280px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: linear-gradient(180deg, var(--primary-blue), #0f2442);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    z-index: var(--z-sticky);
+    transition: width var(--duration-standard) var(--ease-standard);
+}
+
+.jss-sidebar__brand {
+    padding: var(--spacing-lg);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.jss-sidebar__title {
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-bold);
+    text-align: center;
+    margin: 0;
+}
+
+.jss-sidebar__nav {
+    flex: 1;
+    padding: var(--spacing-md) 0;
+    overflow-y: auto;
+}
+
+.jss-sidebar__item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md) var(--spacing-lg);
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+    transition: all var(--duration-micro) var(--ease-standard);
+    font-size: var(--font-size-md);
+}
+
+.jss-sidebar__item:hover,
+.jss-sidebar__item--active {
+    background: rgba(255,255,255,0.1);
+    color: white;
+}
+
+.jss-sidebar__icon {
+    font-size: 20px;
+    width: 24px;
+    text-align: center;
+}
+
+.jss-sidebar__footer {
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+/* Tablet: collapsed */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .jss-sidebar {
+        width: 80px;
+    }
+    .jss-sidebar__text,
+    .jss-sidebar__title {
+        display: none;
+    }
+    .jss-sidebar__item {
+        justify-content: center;
+        padding: var(--spacing-md);
+    }
+}
+
+/* Mobile: hidden */
+@media (max-width: 767px) {
+    .jss-sidebar {
+        display: none;
+    }
+}
+</style>
