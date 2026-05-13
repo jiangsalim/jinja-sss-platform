@@ -66,3 +66,8 @@ def custom_openapi():
     return app.openapi_schema
 
 app.openapi = custom_openapi
+
+from app.routes.v1.hod import router as hod_router
+from app.routes.v1.hod import router as hod_router
+app.include_router(hod_router)
+app.include_router(hod_router)
