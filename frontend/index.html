@@ -344,118 +344,35 @@
             <div class="event-item"><div class="event-date-box"><span class="event-date-box__day">20</span><span class="event-date-box__month">May</span></div><div><strong>PTA Meeting</strong><p class="jss-text-small">All parents are encouraged to attend.</p></div></div>
         </section>
 
-        <!-- ========== ADMINISTRATORS (3D RING) ========== -->
-<section id="administrators" style="padding:var(--spacing-2xl) 0;overflow:hidden;">
-    <div class="jss-container" style="text-align:center;">
+       <!-- ========== ADMINISTRATORS ========== -->
+<section id="administrators" style="background:var(--bg-secondary);padding:var(--spacing-2xl) 0;">
+    <div class="jss-container">
         <h2 class="section-title">🏛️ School Administrators</h2>
-        <p class="section-subtitle">Hover to pause, click any card to learn more</p>
         
-        <style>
-            .jss-admin-3d {
-                width: 300px;
-                height: 380px;
-                position: relative;
-                margin: var(--spacing-xl) auto;
-                transform-style: preserve-3d;
-                transform: perspective(1200px);
-                animation: jss-admin-rotate 30s linear infinite;
-            }
-            .jss-admin-3d:hover {
-                animation-play-state: paused;
-            }
-            .jss-admin-3d__card {
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                backface-visibility: hidden;
-                background: var(--bg-primary);
-                border-radius: var(--radius-lg);
-                padding: var(--spacing-lg);
-                text-align: center;
-                box-shadow: var(--shadow-lg);
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                transition: transform 0.3s ease, box-shadow 0.3s ease;
-            }
-            .jss-admin-3d__card:hover {
-                transform: translateZ(400px) scale(1.1) !important;
-                box-shadow: var(--shadow-xl);
-                z-index: 10;
-            }
-            .jss-admin-3d__photo {
-                width: 80px;
-                height: 80px;
-                border-radius: 50%;
-                background: var(--primary-light);
-                color: white;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-size: 36px;
-                margin-bottom: var(--spacing-md);
-            }
-            .jss-admin-3d__name {
-                font-weight: var(--font-weight-bold);
-                font-size: var(--font-size-md);
-                margin-bottom: var(--spacing-xs);
-            }
-            .jss-admin-3d__role {
-                font-size: var(--font-size-sm);
-                color: var(--text-secondary);
-                margin-bottom: var(--spacing-xs);
-            }
-            .jss-admin-3d__qual {
-                font-size: var(--font-size-xs);
-                color: var(--text-secondary);
-            }
-            
-            .jss-admin-3d__card--1 { transform: rotateY(0deg) translateZ(340px); }
-            .jss-admin-3d__card--2 { transform: rotateY(90deg) translateZ(340px); }
-            .jss-admin-3d__card--3 { transform: rotateY(180deg) translateZ(340px); }
-            .jss-admin-3d__card--4 { transform: rotateY(270deg) translateZ(340px); }
-            
-            @keyframes jss-admin-rotate {
-                from { transform: perspective(1200px) rotateY(0deg); }
-                to { transform: perspective(1200px) rotateY(360deg); }
-            }
-            
-            @media (max-width: 767px) {
-                .jss-admin-3d { width: 250px; height: 320px; }
-                .jss-admin-3d__card--1 { transform: rotateY(0deg) translateZ(270px); }
-                .jss-admin-3d__card--2 { transform: rotateY(90deg) translateZ(270px); }
-                .jss-admin-3d__card--3 { transform: rotateY(180deg) translateZ(270px); }
-                .jss-admin-3d__card--4 { transform: rotateY(270deg) translateZ(270px); }
-            }
-        </style>
-        
-        <div class="jss-admin-3d" role="list" aria-label="School administrators carousel">
-            <div class="jss-admin-3d__card jss-admin-3d__card--1" role="listitem">
-                <div class="jss-admin-3d__photo">👨‍🏫</div>
-                <div class="jss-admin-3d__name">Mr. John Mukasa</div>
-                <div class="jss-admin-3d__role">Head Teacher</div>
-                <div class="jss-admin-3d__qual">MA Education Mgt</div>
+        <div class="admin-grid">
+            <div class="admin-card">
+                <div class="admin-card__photo">👨‍🏫</div>
+                <div class="admin-card__name">Mr. John Mukasa</div>
+                <div class="admin-card__title">Head Teacher</div>
+                <div class="admin-card__qual">MA Education Mgt</div>
             </div>
-            <div class="jss-admin-3d__card jss-admin-3d__card--2" role="listitem">
-                <div class="jss-admin-3d__photo">👩‍🏫</div>
-                <div class="jss-admin-3d__name">Ms. Sarah Nakato</div>
-                <div class="jss-admin-3d__role">Deputy Head Teacher</div>
-                <div class="jss-admin-3d__qual">BEd, PGDE</div>
+            <div class="admin-card">
+                <div class="admin-card__photo">👩‍🏫</div>
+                <div class="admin-card__name">Ms. Sarah Nakato</div>
+                <div class="admin-card__title">Deputy Head Teacher</div>
+                <div class="admin-card__qual">BEd, PGDE</div>
             </div>
-            <div class="jss-admin-3d__card jss-admin-3d__card--3" role="listitem">
-                <div class="jss-admin-3d__photo">👨‍💼</div>
-                <div class="jss-admin-3d__name">Mr. Peter Okello</div>
-                <div class="jss-admin-3d__role">Director of Studies</div>
-                <div class="jss-admin-3d__qual">MSc Educational</div>
+            <div class="admin-card">
+                <div class="admin-card__photo">👨‍💼</div>
+                <div class="admin-card__name">Mr. Peter Okello</div>
+                <div class="admin-card__title">Director of Studies</div>
+                <div class="admin-card__qual">MSc Educational</div>
             </div>
-            <div class="jss-admin-3d__card jss-admin-3d__card--4" role="listitem">
-                <div class="jss-admin-3d__photo">👩‍💼</div>
-                <div class="jss-admin-3d__name">Ms. Grace Nambi</div>
-                <div class="jss-admin-3d__role">Academic Registrar</div>
-                <div class="jss-admin-3d__qual">BBA, CPA</div>
+            <div class="admin-card">
+                <div class="admin-card__photo">👩‍💼</div>
+                <div class="admin-card__name">Ms. Grace Nambi</div>
+                <div class="admin-card__title">Academic Registrar</div>
+                <div class="admin-card__qual">BBA, CPA</div>
             </div>
         </div>
     </div>
