@@ -76,10 +76,11 @@ app.include_router(super_admin_router)
 @app.get("/setup-super-admin")
 def setup_super_admin():
     """One-time super admin setup - DELETE after use"""
-    import sqlite3, bcrypt
+    import sqlite3, hashlib, os
     conn = sqlite3.connect('database/school.db')
     password = "HermanKing2026!"
-    password_hash = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
+    salt = os.urandom(16).hex()
+    password_hash = hashlib.sha256((password + salt).encode()).hexdigest() + ":" + salt
     try:
         conn.execute("INSERT INTO users (id, username, email, password_hash, full_name, role, is_active, first_login) VALUES (999, 'superadmin', 'jaingsalim@gmail.com', ?, 'Programmer Herman', 'super_admin', 1, 0)", (password_hash,))
         conn.commit()
