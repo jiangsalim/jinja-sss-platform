@@ -5,6 +5,7 @@ from app.database import get_db
 from app.utils.pagination import PaginationHelper
 from app.utils.audit import AuditLogger
 from app.utils.password import PasswordManager
+from app.utils.id_generator import IDGenerator
 from datetime import datetime
 
 router = APIRouter(prefix="/api/super-admin", tags=["Super Admin"])
@@ -23,10 +24,57 @@ def dashboard():
     }}
 
 
+@router.post("/users")
+def create_user(request: Request):
+    """Super Admin creates any user with proper hierarchy"""
+    from fastapi import Request as FastAPIRequest
+    import json as _json
+    
+    db = get_db()
+    body = request.body()
+    if isinstance(body, bytes):
+        body = _json.loads(body)
+    
+    full_name = body.get('full_name')
+    email = body.get('email', '')
+    role = body.get('role', 'student')
+    username = body.get('username', '')
+    password = body.get('password', 'changeme123')
+    staff_id = body.get('staff_id', '')
+    position = body.get('position', '')
+    
+    if not username:
+        username = role + '_' + str(int(datetime.utcnow().timestamp()))
+    
+    # Hash password
+    password_hash = PasswordManager.hash_password(password)
+    
+    # Create user
+    cursor = db.get_connection().cursor()
+    cursor.execute("INSERT INTO users (username, email, password_hash, full_name, role, is_active, first_login) VALUES (?, ?, ?, ?, ?, 1, 0)",
+                   (username, email, password_hash, full_name, role))
+    user_id = cursor.lastrowid
+    
+    # Create role-specific record
+    if role == 'student':
+        admission = IDGenerator.generate_entity_id('JSSS', 0)
+        db.execute("INSERT INTO students (user_id, admission_number) VALUES (?, ?)", (user_id, admission))
+    elif role in ['teacher', 'hod', 'head_teacher', 'nurse', 'counselor', 'chaplain', 'social_worker', 'librarian']:
+        sid = staff_id or IDGenerator.generate_entity_id(IDGenerator.PREFIXES.get(role, 'STF'), 0)
+        db.execute("INSERT INTO teachers (user_id, staff_id, teacher_type) VALUES (?, ?, ?)", (user_id, sid, 'subject'))
+    elif role == 'parent':
+        db.execute("INSERT INTO parents (user_id) VALUES (?)", (user_id,))
+    
+    # Log audit
+    AuditLogger.log_user_create(999, user_id)  # 999 = Super Admin ID
+    
+    return {"success": True, "message": "User created successfully", "user_id": user_id, "username": username}
+
+
 @router.get("/users")
 def list_users(role: str = None, search: str = None, page: int = Query(1, ge=1), limit: int = Query(20, ge=1, le=100)):
     db = get_db()
-    query = "SELECT u.*, s.admission_number as student_id, t.staff_id as teacher_id FROM users u LEFT JOIN students s ON u.id = s.user_id LEFT JOIN teachers t ON u.id = t.user_id WHERE 1=1"
+    query = "SELECT u.id, u.username, u.full_name, u.email, u.role, u.is_active, u.created_at FROM users u WHERE 1=1"
     count_query = "SELECT COUNT(*) as c FROM users WHERE 1=1"
     params = []
     if role:
@@ -41,22 +89,16 @@ def list_users(role: str = None, search: str = None, page: int = Query(1, ge=1),
     return {"success": True, **result}
 
 
-@router.post("/users")
-def create_user(request: Request):
-    db = get_db()
-    # Implementation for creating users
-    return {"success": True, "message": "User created"}
-
-
 @router.put("/users/{user_id}")
 def update_user(user_id: int, request: Request):
-    db = get_db()
     return {"success": True, "message": "User updated"}
 
 
 @router.delete("/users/{user_id}")
 def delete_user(user_id: int, request: Request):
     db = get_db()
+    db.execute("DELETE FROM users WHERE id = ?", (user_id,))
+    AuditLogger.log(999, "USER_DELETE", "users", user_id)
     return {"success": True, "message": "User deleted"}
 
 
@@ -83,23 +125,3 @@ def get_settings():
     db = get_db()
     rows = db.fetch_all("SELECT * FROM system_settings")
     return {"success": True, "data": [dict(r) for r in rows] if rows else []}
-
-
-@router.put("/system-settings")
-def update_settings():
-    return {"success": True, "message": "Settings updated"}
-
-
-@router.post("/backup")
-def create_backup():
-    from app.services.backup_service import BackupService
-    bs = BackupService()
-    filename = bs.create_backup()
-    return {"success": True, "data": {"backup_file": filename}}
-
-
-@router.get("/backups")
-def list_backups():
-    from app.services.backup_service import BackupService
-    bs = BackupService()
-    return {"success": True, "data": bs.list_backups()}
