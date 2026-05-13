@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Super Admin - Jinja SSS</title>
+    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/dark-mode.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <link rel="stylesheet" href="../css/utilities/spacing.css">
+    <link rel="stylesheet" href="../css/utilities/typography.css">
+    <link rel="stylesheet" href="../css/utilities/colors.css">
+    <link rel="stylesheet" href="../css/components/buttons.css">
+    <link rel="stylesheet" href="../css/components/cards.css">
+    <link rel="stylesheet" href="../css/components/tables.css">
+    <link rel="stylesheet" href="../css/components/badge.css">
+    <link rel="stylesheet" href="../css/components/stats-card.css">
+    <link rel="stylesheet" href="../css/components/forms.css">
+    <link rel="stylesheet" href="../css/components/tabs.css">
+    <script src="../js/utils.js" defer></script>
+    <script src="../js/api.js" defer></script>
+    <script src="../js/auth.js" defer></script>
+    <style>
+        body{background:var(--bg-secondary);font-family:var(--font-family)}
+        .dashboard{display:flex;min-height:100vh}
+        .sidebar{width:260px;background:linear-gradient(180deg,#1a1a2e,#0f2442);color:#fff;position:fixed;top:0;left:0;bottom:0;z-index:100}
+        .sidebar__brand{padding:var(--spacing-lg);text-align:center;border-bottom:1px solid rgba(255,255,255,.1);font-weight:var(--font-weight-bold);font-size:var(--font-size-lg)}
+        .sidebar__item{display:flex;align-items:center;gap:var(--spacing-md);padding:var(--spacing-md)var(--spacing-lg);color:rgba(255,255,255,.7);text-decoration:none;transition:all .2s}
+        .sidebar__item:hover,.sidebar__item--active{background:rgba(255,255,255,.1);color:#fff}
+        .main{margin-left:260px;flex:1;padding:var(--spacing-lg)}
+        .topbar{background:linear-gradient(135deg,var(--primary-blue),var(--primary-dark));color:#fff;padding:var(--spacing-md)var(--spacing-lg);border-radius:var(--radius-lg);margin-bottom:var(--spacing-lg)}
+        .stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:var(--spacing-md);margin-bottom:var(--spacing-lg)}
+        .grid-2{display:grid;grid-template-columns:1fr;gap:var(--spacing-lg)}
+        @media(min-width:1024px){.grid-2{grid-template-columns:2fr 1fr}}
+        @media(max-width:767px){.sidebar{display:none}.main{margin-left:0}}
+        .btn-group{display:flex;flex-wrap:wrap;gap:var(--spacing-sm)}
+    </style>
+</head>
+<body>
+<div class="dashboard">
+    <aside class="sidebar">
+        <div class="sidebar__brand">👑 Super Admin</div>
+        <nav style="flex:1;padding:var(--spacing-md)0">
+            <a href="#" class="sidebar__item sidebar__item--active">📊 Dashboard</a>
+            <a href="#users" class="sidebar__item">👥 Users</a>
+            <a href="#audit" class="sidebar__item">📋 Audit Log</a>
+            <a href="#settings" class="sidebar__item">⚙️ Settings</a>
+            <a href="#backup" class="sidebar__item">💾 Backup</a>
+        </nav>
+        <div style="padding:var(--spacing-md);border-top:1px solid rgba(255,255,255,.1)">
+            <a href="../pages/signin.html" class="sidebar__item">🚪 Logout</a>
+        </div>
+    </aside>
+    <main class="main">
+        <div class="topbar">
+            <div><strong style="font-size:var(--font-size-xl)">👑 Welcome, Programmer Herman!</strong><br><span>System Administrator</span></div>
+            <div style="display:flex;gap:var(--spacing-md)"><span>🔔</span><span>👤</span></div>
+        </div>
+
+        <div class="stats-grid">
+            <div class="jss-stat-card"><div class="jss-stat-card__value" id="totalUsers">--</div><div class="jss-stat-card__label">Total Users</div></div>
+            <div class="jss-stat-card jss-stat-card--success"><div class="jss-stat-card__value" id="totalStudents">--</div><div class="jss-stat-card__label">Students</div></div>
+            <div class="jss-stat-card jss-stat-card--warning"><div class="jss-stat-card__value" id="totalTeachers">--</div><div class="jss-stat-card__label">Teachers</div></div>
+            <div class="jss-stat-card"><div class="jss-stat-card__value" id="totalParents">--</div><div class="jss-stat-card__label">Parents</div></div>
+        </div>
+
+        <div class="btn-group jss-mb-lg">
+            <button class="jss-btn jss-btn--primary jss-btn--md">➕ Add User</button>
+            <button class="jss-btn jss-btn--secondary jss-btn--md">📋 View Audit Log</button>
+            <button class="jss-btn jss-btn--secondary jss-btn--md">⚙️ System Settings</button>
+            <button class="jss-btn jss-btn--secondary jss-btn--md">💾 Create Backup</button>
+        </div>
+
+        <div class="grid-2">
+            <div>
+                <div class="jss-card jss-mb-lg" id="users">
+                    <div class="jss-card__header"><h3 class="jss-card__header-title">👥 User Management</h3></div>
+                    <div class="jss-card__body">
+                        <div class="jss-form-group"><input type="text" class="jss-input" placeholder="Search users..." id="userSearch"></div>
+                        <div class="jss-table-responsive">
+                            <table class="jss-table jss-table--striped">
+                                <thead><tr><th>Name</th><th>Role</th><th>Email</th><th>Status</th><th>Actions</th></tr></thead>
+                                <tbody id="userTable">
+                                    <tr><td colspan="5" style="text-align:center">Loading users...</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="jss-card jss-mb-lg">
+                    <div class="jss-card__header"><h3 class="jss-card__header-title">⚡ Quick Actions</h3></div>
+                    <div class="jss-card__body">
+                        <button class="jss-btn jss-btn--primary jss-btn--full jss-mb-sm">👤 Create Board Member</button>
+                        <button class="jss-btn jss-btn--primary jss-btn--full jss-mb-sm">👨‍🏫 Create Head Teacher</button>
+                        <button class="jss-btn jss-btn--secondary jss-btn--full jss-mb-sm">📊 View Any Dashboard</button>
+                        <button class="jss-btn jss-btn--secondary jss-btn--full jss-mb-sm">🗳️ Manage Elections</button>
+                        <button class="jss-btn jss-btn--secondary jss-btn--full jss-mb-sm">💾 Database Backup</button>
+                    </div>
+                </div>
+                <div class="jss-card jss-mb-lg" id="settings">
+                    <div class="jss-card__header"><h3 class="jss-card__header-title">⚙️ System Settings</h3></div>
+                    <div class="jss-card__body">
+                        <div class="jss-form-group"><label class="jss-label">School Name</label><input type="text" class="jss-input" value="Jinja Senior Secondary School"></div>
+                        <div class="jss-form-group"><label class="jss-label">School Motto</label><input type="text" class="jss-input" value="Education for Service"></div>
+                        <div class="jss-form-group"><label class="jss-label">Current Academic Year</label><input type="text" class="jss-input" value="2026"></div>
+                        <button class="jss-btn jss-btn--primary jss-btn--full">Save Settings</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+</body>
+</html>

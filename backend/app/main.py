@@ -69,6 +69,9 @@ from app.routes.v1.library_assistant import router as r37; app.include_router(r3
 from app.routes.v1.prefects import router as r38; app.include_router(r38)
 from app.routes.v1.alumni import router as r39; app.include_router(r39)
 
+from app.routes.v1.super_admin import router as super_admin_router
+app.include_router(super_admin_router)
+
 @app.get("/health", tags=["System"])
 def health():
     status = {"status": "healthy", "timestamp": datetime.utcnow().isoformat(), "version": settings.APP_VERSION}
