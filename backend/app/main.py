@@ -29,6 +29,12 @@ app.add_middleware(AuthMiddleware)
 
 register_error_handlers(app)
 
+# Import ALL routes
+from app.routes.v1.auth import router as auth_router
+from app.routes.v1.admin import router as admin_router
+app.include_router(auth_router)
+app.include_router(admin_router)
+
 @app.on_event("startup")
 async def startup():
     db_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "database")
@@ -42,28 +48,10 @@ async def startup():
                 conn.executescript(f.read())
             conn.commit()
         conn.close()
-        print(f"Database created at {db_path}")
     print(f"Jinja SSS Platform v{settings.APP_VERSION} started")
-
-@app.get("/setup-super-admin")
-def setup_super_admin():
-    db_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "database")
-    db_path = os.path.join(db_dir, "school.db")
-    conn = sqlite3.connect(db_path)
-    try:
-        conn.execute("INSERT INTO users (id, username, email, password_hash, full_name, role, is_active, first_login) VALUES (999, 'superadmin', 'jaingsalim@gmail.com', 'temp123', 'Programmer Herman', 'super_admin', 1, 0)")
-        conn.commit()
-        result = "Super Admin created!"
-    except:
-        conn.execute("UPDATE users SET password_hash = 'temp123' WHERE username = 'superadmin'")
-        conn.commit()
-        result = "Super Admin password updated!"
-    conn.close()
-    return {"success": True, "message": result, "username": "superadmin", "password": "temp123"}
 
 @app.get("/debug")
 def debug():
-    import glob as g
     files = []
     for root, dirs, filenames in os.walk("."):
         for f in filenames:
