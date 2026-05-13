@@ -206,6 +206,39 @@
 
         function logout() { localStorage.removeItem('authToken'); window.location.href = '../pages/signin.html'; }
         loadDashboard();
+async function viewAuditLog() {
+    const div = document.getElementById('auditLogResult');
+    div.style.display = 'block';
+    div.innerHTML = 'Loading audit log...';
+    try {
+        const r = await fetch(API + '/api/super-admin/audit-log?limit=10', { headers: { 'Authorization': 'Bearer ' + TOKEN } });
+        const d = await r.json();
+        if (d.success && d.data.length > 0) {
+            div.innerHTML = '<strong>Recent Audit Log:</strong><br>' + d.data.map(l => `• ${l.action} - ${l.full_name || 'User'} - ${l.created_at}`).join('<br>');
+        } else {
+            div.innerHTML = 'No audit log entries yet.';
+        }
+    } catch(e) { div.innerHTML = 'Error loading audit log.'; }
+}
+
+async function viewSettings() {
+    const div = document.getElementById('settingsResult');
+    div.style.display = 'block';
+    div.innerHTML = 'Loading settings...';
+    try {
+        const r = await fetch(API + '/api/super-admin/system-settings', { headers: { 'Authorization': 'Bearer ' + TOKEN } });
+        const d = await r.json();
+        if (d.success && d.data.length > 0) {
+            div.innerHTML = '<strong>System Settings:</strong><br>' + d.data.map(s => `• ${s.setting_key}: ${s.setting_value}`).join('<br>');
+        } else {
+            div.innerHTML = 'No settings found.';
+        }
+    } catch(e) { div.innerHTML = 'Error loading settings.'; }
+}
+
+async function viewElections() {
+    alert('Election management will be available when voting system is deployed.');
+}
     </script>
 </body>
 </html>
