@@ -3,7 +3,7 @@
  * Handles all communication with the backend
  */
 
-const API_BASE_URL = 'http://localhost:9000';
+const API_BASE_URL = 'https://jinja-sss-api.onrender.com';
 const API_TIMEOUT = 30000;
 
 function getToken() {
