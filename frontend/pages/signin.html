@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In - Jinja SSS</title>
+    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/dark-mode.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <link rel="stylesheet" href="../css/utilities/spacing.css">
+    <link rel="stylesheet" href="../css/utilities/typography.css">
+    <link rel="stylesheet" href="../css/utilities/colors.css">
+    <link rel="stylesheet" href="../css/components/buttons.css">
+    <link rel="stylesheet" href="../css/components/forms.css">
+    <link rel="stylesheet" href="../css/components/cards.css">
+    <script src="../js/utils.js" defer></script>
+    <script src="../js/api.js" defer></script>
+    <script src="../js/auth.js" defer></script>
+    <script src="../js/validation.js" defer></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-dark));
+            font-family: var(--font-family);
+            overflow: hidden;
+        }
+        .bg-pattern {
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background-image: radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px);
+            background-size: 30px 30px;
+            pointer-events: none;
+        }
+        .auth-container { width: 100%; max-width: 420px; padding: var(--spacing-md); position: relative; z-index: 1; }
+        .auth-card {
+            background: var(--bg-primary);
+            border-radius: var(--radius-xl);
+            padding: var(--spacing-2xl) var(--spacing-xl);
+            box-shadow: var(--shadow-2xl);
+            animation: slideUp 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        }
+        .auth-logo { text-align: center; font-size: 56px; margin-bottom: var(--spacing-sm); animation: bounce 0.6s ease; }
+        .auth-title { text-align: center; font-size: var(--font-size-3xl); font-weight: var(--font-weight-bold); color: var(--text-primary); margin-bottom: var(--spacing-xs); }
+        .auth-subtitle { text-align: center; color: var(--text-secondary); margin-bottom: var(--spacing-xl); font-size: var(--font-size-md); }
+        .float-group { position: relative; margin-bottom: var(--spacing-lg); }
+        .float-group input {
+            width: 100%; padding: 14px 16px; border: 1.5px solid var(--border);
+            border-radius: var(--radius-md); font-size: var(--font-size-lg);
+            background: var(--bg-primary); color: var(--text-primary);
+            transition: all 0.3s ease; outline: none;
+        }
+        .float-group label {
+            position: absolute; left: 16px; top: 50%; transform: translateY(-50%);
+            font-size: var(--font-size-md); color: var(--text-secondary);
+            pointer-events: none; transition: all 0.3s ease;
+            background: var(--bg-primary); padding: 0 4px;
+        }
+        .float-group input:focus, .float-group input:not(:placeholder-shown) { border-color: var(--primary-blue); box-shadow: 0 0 0 3px rgba(30,60,114,0.1); }
+        .float-group input:focus + label, .float-group input:not(:placeholder-shown) + label {
+            top: 0; font-size: var(--font-size-xs); color: var(--primary-blue); font-weight: var(--font-weight-medium);
+        }
+        .float-group input::placeholder { color: transparent; }
+        .shake { animation: shake 0.5s ease; }
+        .auth-link { text-align: center; margin-top: var(--spacing-lg); font-size: var(--font-size-sm); color: var(--text-secondary); }
+        .auth-link a { color: var(--primary-blue); text-decoration: none; font-weight: var(--font-weight-medium); }
+        .auth-link a:hover { text-decoration: underline; }
+        .remember-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--spacing-lg); font-size: var(--font-size-sm); }
+        @keyframes slideUp { from { transform: translateY(60px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        @keyframes bounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+        @keyframes shake { 0%,100% { transform: translateX(0); } 20% { transform: translateX(-8px); } 40% { transform: translateX(8px); } 60% { transform: translateX(-6px); } 80% { transform: translateX(6px); } }
+    </style>
+</head>
+<body>
+    <div class="bg-pattern"></div>
+    <div class="auth-container">
+        <div class="auth-card" id="authCard">
+            <div class="auth-logo">🏫</div>
+            <h2 class="auth-title">Welcome Back</h2>
+            <p class="auth-subtitle">Sign in to your account</p>
+            <form onsubmit="handleSignIn(event)" id="signinForm">
+                <div class="float-group">
+                    <input type="text" id="identifier" placeholder=" " required>
+                    <label for="identifier">ID / Email / Username</label>
+                </div>
+                <div class="float-group">
+                    <input type="password" id="password" placeholder=" " required>
+                    <label for="password">Password</label>
+                </div>
+                <div class="remember-row">
+                    <label class="jss-checkbox"><input type="checkbox"> Remember me</label>
+                    <a href="reset-password.html">Forgot Password?</a>
+                </div>
+                <button type="submit" class="jss-btn jss-btn--primary jss-btn--lg jss-btn--full" id="signinBtn">
+                    <span id="btnText">Sign In</span>
+                </button>
+            </form>
+            <div class="auth-link">Don't have an account? <a href="signup.html">Sign Up</a></div>
+            <div class="auth-link" style="margin-top:var(--spacing-md);"><a href="../index.html">← Back to Home</a></div>
+        </div>
+    </div>
+    <script>
+    async function handleSignIn(e) {
+        e.preventDefault();
+        const identifier = document.getElementById('identifier').value;
+        const password = document.getElementById('password').value;
+        const btn = document.getElementById('signinBtn');
+        const btnText = document.getElementById('btnText');
+        const card = document.getElementById('authCard');
+        btn.classList.add('jss-btn--loading');
+        btn.disabled = true;
+        btnText.textContent = 'Signing in...';
+        try {
+            const response = await signIn(identifier, password);
+            if (response.token) window.location.href = 'dashboard.html';
+        } catch (error) {
+            card.classList.add('shake');
+            btn.classList.remove('jss-btn--loading');
+            btn.disabled = false;
+            btnText.textContent = 'Sign In';
+            document.getElementById('password').value = '';
+            document.getElementById('password').focus();
+            setTimeout(() => card.classList.remove('shake'), 500);
+        }
+    }
+    </script>
+</body>
+</html>

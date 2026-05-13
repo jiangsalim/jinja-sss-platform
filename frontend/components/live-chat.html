@@ -1,0 +1,31 @@
+<!-- ============================================
+     JINJA SSS PLATFORM - LIVE CHAT WIDGET
+     ============================================ -->
+
+<div class="jss-live-chat" id="jss-live-chat">
+    <button class="jss-live-chat__toggle jss-btn jss-btn--primary jss-btn--icon jss-btn--lg" onclick="toggleLiveChat()" aria-label="Open live chat" style="width:56px;height:56px;border-radius:50%;box-shadow:var(--shadow-xl);font-size:24px;">
+        💬
+    </button>
+</div>
+
+<style>
+.jss-live-chat {
+    position: fixed;
+    bottom: var(--spacing-lg);
+    right: var(--spacing-lg);
+    z-index: var(--z-tooltip);
+}
+
+@media (max-width: 767px) {
+    .jss-live-chat {
+        bottom: 80px;
+        right: var(--spacing-md);
+    }
+}
+</style>
+
+<script>
+function toggleLiveChat() {
+    alert('Live chat will be available soon!');
+}
+</script>

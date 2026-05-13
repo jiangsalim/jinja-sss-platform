@@ -1,0 +1,118 @@
+<!-- ============================================
+     JINJA SSS PLATFORM - MODAL COMPONENT
+     Usage: Include this file, call openModal()
+     ============================================ -->
+
+<!-- Modal Overlay (hidden by default) -->
+<div class="jss-modal-overlay" id="jss-modal" style="display: none;">
+    <div class="jss-modal jss-modal--md" id="jss-modal-content">
+        <div class="jss-modal__header">
+            <h3 class="jss-modal__title" id="jss-modal-title">Modal Title</h3>
+            <button class="jss-modal__close" onclick="closeModal()" aria-label="Close modal">✕</button>
+        </div>
+        <div class="jss-modal__body" id="jss-modal-body">
+            <p>Modal content goes here.</p>
+        </div>
+        <div class="jss-modal__footer" id="jss-modal-footer">
+            <button class="jss-btn jss-btn--secondary jss-btn--md" onclick="closeModal()">Cancel</button>
+            <button class="jss-btn jss-btn--primary jss-btn--md" id="jss-modal-confirm">Confirm</button>
+        </div>
+    </div>
+</div>
+
+<script>
+/**
+ * Open the modal
+ * @param {object} options
+ * @param {string} options.title - Modal title
+ * @param {string} options.body - HTML content for modal body
+ * @param {string} options.confirmText - Text for confirm button (default: "Confirm")
+ * @param {Function} options.onConfirm - Callback when confirm is clicked
+ * @param {string} options.size - Modal size: sm, md, lg, xl
+ * @param {boolean} options.hideFooter - Hide the footer
+ */
+function openModal(options = {}) {
+    const {
+        title = 'Modal Title',
+        body = '<p>Modal content goes here.</p>',
+        confirmText = 'Confirm',
+        onConfirm = null,
+        size = 'md',
+        hideFooter = false
+    } = options;
+    
+    const overlay = document.getElementById('jss-modal');
+    const content = document.getElementById('jss-modal-content');
+    const titleEl = document.getElementById('jss-modal-title');
+    const bodyEl = document.getElementById('jss-modal-body');
+    const footerEl = document.getElementById('jss-modal-footer');
+    const confirmBtn = document.getElementById('jss-modal-confirm');
+    
+    // Set content
+    titleEl.textContent = title;
+    bodyEl.innerHTML = body;
+    confirmBtn.textContent = confirmText;
+    
+    // Set size
+    content.className = 'jss-modal jss-modal--' + size;
+    
+    // Show/hide footer
+    footerEl.style.display = hideFooter ? 'none' : 'flex';
+    
+    // Set confirm callback
+    confirmBtn.onclick = function() {
+        if (onConfirm) onConfirm();
+        closeModal();
+    };
+    
+    // Show modal
+    overlay.style.display = 'flex';
+    overlay.classList.remove('jss-modal-overlay--closing');
+    content.classList.remove('jss-modal--closing');
+    
+    // Trap focus inside modal
+    setTimeout(() => {
+        document.getElementById('jss-modal-close')?.focus();
+    }, 100);
+    
+    // Close on Escape key
+    document.addEventListener('keydown', handleModalEscape);
+    
+    // Close on overlay click (outside modal)
+    overlay.onclick = function(e) {
+        if (e.target === overlay) {
+            closeModal();
+        }
+    };
+}
+
+/**
+ * Close the modal
+ */
+function closeModal() {
+    const overlay = document.getElementById('jss-modal');
+    const content = document.getElementById('jss-modal-content');
+    
+    overlay.classList.add('jss-modal-overlay--closing');
+    content.classList.add('jss-modal--closing');
+    
+    setTimeout(() => {
+        overlay.style.display = 'none';
+        overlay.classList.remove('jss-modal-overlay--closing');
+        content.classList.remove('jss-modal--closing');
+    }, 200);
+    
+    document.removeEventListener('keydown', handleModalEscape);
+}
+
+/**
+ * Handle Escape key to close modal
+ */
+function handleModalEscape(e) {
+    if (e.key === 'Escape') {
+        closeModal();
+    }
+}
+
+console.log('Jinja SSS Platform - Modal component loaded');
+</script>

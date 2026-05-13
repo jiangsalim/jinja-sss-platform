@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Jinja SSS</title>
+    
+    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/dark-mode.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <link rel="stylesheet" href="../css/utilities/spacing.css">
+    <link rel="stylesheet" href="../css/utilities/typography.css">
+    <link rel="stylesheet" href="../css/utilities/colors.css">
+    
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: var(--bg-secondary);
+            text-align: center;
+        }
+        .spinner {
+            width: 48px;
+            height: 48px;
+            border: 3px solid var(--border);
+            border-top-color: var(--primary-blue);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto var(--spacing-lg);
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+    <div>
+        <div class="spinner"></div>
+        <h3>Loading your dashboard...</h3>
+        <p class="jss-text-secondary">Role detected: <span id="role-display">Checking...</span></p>
+        <p class="jss-text-small">If not redirected in 5 seconds, <a href="signin.html">click here</a>.</p>
+    </div>
+    
+    <script src="../js/utils.js" defer></script>
+    <script src="../js/auth.js" defer></script>
+    <script>
+    setTimeout(function() {
+        const user = getCurrentUser();
+        if (user) {
+            document.getElementById('role-display').textContent = user.role || 'Unknown';
+            // Redirect to appropriate dashboard based on role
+            // This will be implemented when we build the actual dashboards
+        } else {
+            window.location.href = 'signin.html';
+        }
+    }, 1500);
+    </script>
+</body>
+</html>

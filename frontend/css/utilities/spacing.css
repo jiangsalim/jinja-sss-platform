@@ -1,0 +1,137 @@
+/* ============================================
+   JINJA SSS PLATFORM – SPACING UTILITIES
+   8px Grid System (Apple/Google Standard)
+   ============================================ */
+
+/* ---------- MARGIN ---------- */
+
+.jss-m-0 { margin: 0; }
+.jss-m-xs { margin: var(--spacing-xs); }
+.jss-m-sm { margin: var(--spacing-sm); }
+.jss-m-md { margin: var(--spacing-md); }
+.jss-m-lg { margin: var(--spacing-lg); }
+.jss-m-xl { margin: var(--spacing-xl); }
+.jss-m-2xl { margin: var(--spacing-2xl); }
+.jss-m-3xl { margin: var(--spacing-3xl); }
+.jss-m-auto { margin: auto; }
+
+/* Margin Top */
+.jss-mt-0 { margin-top: 0; }
+.jss-mt-xs { margin-top: var(--spacing-xs); }
+.jss-mt-sm { margin-top: var(--spacing-sm); }
+.jss-mt-md { margin-top: var(--spacing-md); }
+.jss-mt-lg { margin-top: var(--spacing-lg); }
+.jss-mt-xl { margin-top: var(--spacing-xl); }
+.jss-mt-2xl { margin-top: var(--spacing-2xl); }
+.jss-mt-3xl { margin-top: var(--spacing-3xl); }
+.jss-mt-auto { margin-top: auto; }
+
+/* Margin Bottom */
+.jss-mb-0 { margin-bottom: 0; }
+.jss-mb-xs { margin-bottom: var(--spacing-xs); }
+.jss-mb-sm { margin-bottom: var(--spacing-sm); }
+.jss-mb-md { margin-bottom: var(--spacing-md); }
+.jss-mb-lg { margin-bottom: var(--spacing-lg); }
+.jss-mb-xl { margin-bottom: var(--spacing-xl); }
+.jss-mb-2xl { margin-bottom: var(--spacing-2xl); }
+.jss-mb-3xl { margin-bottom: var(--spacing-3xl); }
+.jss-mb-auto { margin-bottom: auto; }
+
+/* Margin Left (Logical - RTL friendly) */
+.jss-ms-0 { margin-inline-start: 0; }
+.jss-ms-xs { margin-inline-start: var(--spacing-xs); }
+.jss-ms-sm { margin-inline-start: var(--spacing-sm); }
+.jss-ms-md { margin-inline-start: var(--spacing-md); }
+.jss-ms-lg { margin-inline-start: var(--spacing-lg); }
+.jss-ms-xl { margin-inline-start: var(--spacing-xl); }
+.jss-ms-auto { margin-inline-start: auto; }
+
+/* Margin Right (Logical - RTL friendly) */
+.jss-me-0 { margin-inline-end: 0; }
+.jss-me-xs { margin-inline-end: var(--spacing-xs); }
+.jss-me-sm { margin-inline-end: var(--spacing-sm); }
+.jss-me-md { margin-inline-end: var(--spacing-md); }
+.jss-me-lg { margin-inline-end: var(--spacing-lg); }
+.jss-me-xl { margin-inline-end: var(--spacing-xl); }
+.jss-me-auto { margin-inline-end: auto; }
+
+/* Margin X (Horizontal - RTL friendly) */
+.jss-mx-0 { margin-inline: 0; }
+.jss-mx-xs { margin-inline: var(--spacing-xs); }
+.jss-mx-sm { margin-inline: var(--spacing-sm); }
+.jss-mx-md { margin-inline: var(--spacing-md); }
+.jss-mx-lg { margin-inline: var(--spacing-lg); }
+.jss-mx-xl { margin-inline: var(--spacing-xl); }
+.jss-mx-auto { margin-inline: auto; }
+
+/* Margin Y (Vertical) */
+.jss-my-0 { margin-block: 0; }
+.jss-my-xs { margin-block: var(--spacing-xs); }
+.jss-my-sm { margin-block: var(--spacing-sm); }
+.jss-my-md { margin-block: var(--spacing-md); }
+.jss-my-lg { margin-block: var(--spacing-lg); }
+.jss-my-xl { margin-block: var(--spacing-xl); }
+.jss-my-auto { margin-block: auto; }
+
+/* ---------- PADDING ---------- */
+
+.jss-p-0 { padding: 0; }
+.jss-p-xs { padding: var(--spacing-xs); }
+.jss-p-sm { padding: var(--spacing-sm); }
+.jss-p-md { padding: var(--spacing-md); }
+.jss-p-lg { padding: var(--spacing-lg); }
+.jss-p-xl { padding: var(--spacing-xl); }
+.jss-p-2xl { padding: var(--spacing-2xl); }
+.jss-p-3xl { padding: var(--spacing-3xl); }
+
+/* Padding Top */
+.jss-pt-0 { padding-top: 0; }
+.jss-pt-xs { padding-top: var(--spacing-xs); }
+.jss-pt-sm { padding-top: var(--spacing-sm); }
+.jss-pt-md { padding-top: var(--spacing-md); }
+.jss-pt-lg { padding-top: var(--spacing-lg); }
+.jss-pt-xl { padding-top: var(--spacing-xl); }
+.jss-pt-2xl { padding-top: var(--spacing-2xl); }
+.jss-pt-3xl { padding-top: var(--spacing-3xl); }
+
+/* Padding Bottom */
+.jss-pb-0 { padding-bottom: 0; }
+.jss-pb-xs { padding-bottom: var(--spacing-xs); }
+.jss-pb-sm { padding-bottom: var(--spacing-sm); }
+.jss-pb-md { padding-bottom: var(--spacing-md); }
+.jss-pb-lg { padding-bottom: var(--spacing-lg); }
+.jss-pb-xl { padding-bottom: var(--spacing-xl); }
+.jss-pb-2xl { padding-bottom: var(--spacing-2xl); }
+.jss-pb-3xl { padding-bottom: var(--spacing-3xl); }
+
+/* Padding Left (Logical - RTL friendly) */
+.jss-ps-0 { padding-inline-start: 0; }
+.jss-ps-xs { padding-inline-start: var(--spacing-xs); }
+.jss-ps-sm { padding-inline-start: var(--spacing-sm); }
+.jss-ps-md { padding-inline-start: var(--spacing-md); }
+.jss-ps-lg { padding-inline-start: var(--spacing-lg); }
+.jss-ps-xl { padding-inline-start: var(--spacing-xl); }
+
+/* Padding Right (Logical - RTL friendly) */
+.jss-pe-0 { padding-inline-end: 0; }
+.jss-pe-xs { padding-inline-end: var(--spacing-xs); }
+.jss-pe-sm { padding-inline-end: var(--spacing-sm); }
+.jss-pe-md { padding-inline-end: var(--spacing-md); }
+.jss-pe-lg { padding-inline-end: var(--spacing-lg); }
+.jss-pe-xl { padding-inline-end: var(--spacing-xl); }
+
+/* Padding X (Horizontal - RTL friendly) */
+.jss-px-0 { padding-inline: 0; }
+.jss-px-xs { padding-inline: var(--spacing-xs); }
+.jss-px-sm { padding-inline: var(--spacing-sm); }
+.jss-px-md { padding-inline: var(--spacing-md); }
+.jss-px-lg { padding-inline: var(--spacing-lg); }
+.jss-px-xl { padding-inline: var(--spacing-xl); }
+
+/* Padding Y (Vertical) */
+.jss-py-0 { padding-block: 0; }
+.jss-py-xs { padding-block: var(--spacing-xs); }
+.jss-py-sm { padding-block: var(--spacing-sm); }
+.jss-py-md { padding-block: var(--spacing-md); }
+.jss-py-lg { padding-block: var(--spacing-lg); }
+.jss-py-xl { padding-block: var(--spacing-xl); }

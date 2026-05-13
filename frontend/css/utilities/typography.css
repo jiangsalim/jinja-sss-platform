@@ -1,0 +1,89 @@
+/* ============================================
+   JINJA SSS PLATFORM - TYPOGRAPHY UTILITIES
+   ============================================ */
+
+/* Font Sizes */
+.jss-text-xs { font-size: var(--font-size-xs); }
+.jss-text-sm { font-size: var(--font-size-sm); }
+.jss-text-md { font-size: var(--font-size-md); }
+.jss-text-lg { font-size: var(--font-size-lg); }
+.jss-text-xl { font-size: var(--font-size-xl); }
+.jss-text-2xl { font-size: var(--font-size-2xl); }
+.jss-text-3xl { font-size: var(--font-size-3xl); }
+.jss-text-4xl { font-size: var(--font-size-4xl); }
+.jss-text-5xl { font-size: var(--font-size-5xl); }
+
+/* Font Weights */
+.jss-font-light { font-weight: var(--font-weight-light); }
+.jss-font-regular { font-weight: var(--font-weight-regular); }
+.jss-font-medium { font-weight: var(--font-weight-medium); }
+.jss-font-semibold { font-weight: var(--font-weight-semibold); }
+.jss-font-bold { font-weight: var(--font-weight-bold); }
+
+/* Line Heights */
+.jss-leading-tight { line-height: var(--line-height-tight); }
+.jss-leading-normal { line-height: var(--line-height-normal); }
+.jss-leading-loose { line-height: var(--line-height-loose); }
+
+/* Text Transforms */
+.jss-uppercase { text-transform: uppercase; }
+.jss-lowercase { text-transform: lowercase; }
+.jss-capitalize { text-transform: capitalize; }
+.jss-normal-case { text-transform: none; }
+
+/* Text Decoration */
+.jss-underline { text-decoration: underline; }
+.jss-line-through { text-decoration: line-through; }
+.jss-no-underline { text-decoration: none; }
+
+/* Text Overflow - Truncate */
+.jss-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.jss-truncate-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.jss-truncate-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Letter Spacing */
+.jss-tracking-tight { letter-spacing: -0.025em; }
+.jss-tracking-normal { letter-spacing: 0; }
+.jss-tracking-wide { letter-spacing: 0.025em; }
+
+/* Font Style */
+.jss-italic { font-style: italic; }
+.jss-not-italic { font-style: normal; }
+
+/* Text Colors */
+.jss-text-primary { color: var(--text-primary); }
+.jss-text-secondary { color: var(--text-secondary); }
+.jss-text-success { color: var(--success); }
+.jss-text-error { color: var(--error); }
+.jss-text-warning { color: var(--warning); }
+.jss-text-info { color: var(--info); }
+.jss-text-white { color: white; }
+
+/* Whitespace */
+.jss-whitespace-normal { white-space: normal; }
+.jss-whitespace-nowrap { white-space: nowrap; }
+.jss-whitespace-pre { white-space: pre; }
+.jss-whitespace-pre-line { white-space: pre-line; }
+
+/* Word Break */
+.jss-break-normal { word-break: normal; overflow-wrap: normal; }
+.jss-break-words { overflow-wrap: break-word; }
+.jss-break-all { word-break: break-all; }

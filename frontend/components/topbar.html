@@ -1,0 +1,61 @@
+<!-- ============================================
+     JINJA SSS PLATFORM - TOP BAR COMPONENT
+     ============================================ -->
+
+<header class="jss-topbar">
+    <div class="jss-topbar__left">
+        <button class="jss-btn jss-btn--icon jss-btn--sm jss-topbar__menu-btn" onclick="toggleSidebar()" aria-label="Toggle menu">
+            ☰
+        </button>
+        <h2 class="jss-topbar__title">Dashboard</h2>
+    </div>
+    
+    <div class="jss-topbar__right">
+        <button class="jss-btn jss-btn--icon jss-btn--sm jss-topbar__icon-btn" aria-label="Notifications">
+            🔔
+        </button>
+        <button class="jss-btn jss-btn--icon jss-btn--sm jss-topbar__icon-btn" aria-label="Profile">
+            👤
+        </button>
+        <button class="jss-btn jss-btn--text jss-btn--sm" onclick="logout()">Logout</button>
+    </div>
+</header>
+
+<style>
+.jss-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--spacing-md) var(--spacing-lg);
+    background: var(--bg-primary);
+    border-bottom: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+    position: sticky;
+    top: 0;
+    z-index: var(--z-sticky);
+    min-height: 64px;
+}
+
+.jss-topbar__left,
+.jss-topbar__right {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.jss-topbar__title {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semibold);
+    margin: 0;
+}
+
+.jss-topbar__menu-btn {
+    display: none;
+}
+
+@media (max-width: 767px) {
+    .jss-topbar__menu-btn {
+        display: flex;
+    }
+}
+</style>

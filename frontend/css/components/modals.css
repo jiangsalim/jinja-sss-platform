@@ -1,0 +1,175 @@
+/* ============================================
+   JINJA SSS PLATFORM - MODAL COMPONENT
+   ============================================ */
+
+/* ---------- MODAL OVERLAY ---------- */
+
+.jss-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: var(--z-modal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: jss-modal-fade-in var(--duration-standard) var(--ease-decelerate);
+  padding: var(--spacing-md);
+}
+
+.jss-modal-overlay--closing {
+  animation: jss-modal-fade-out var(--duration-standard) var(--ease-accelerate);
+}
+
+/* ---------- MODAL CONTAINER ---------- */
+
+.jss-modal {
+  background: var(--bg-primary);
+  border-radius: var(--radius-xl);
+  width: 500px;
+  max-width: 100%;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: var(--shadow-xl);
+  animation: jss-modal-slide-up var(--duration-modal) var(--ease-emphasized);
+}
+
+.jss-modal--closing {
+  animation: jss-modal-slide-down var(--duration-standard) var(--ease-accelerate);
+}
+
+/* ---------- MODAL SIZES ---------- */
+
+.jss-modal--sm { width: 350px; }
+.jss-modal--md { width: 500px; }
+.jss-modal--lg { width: 650px; }
+.jss-modal--xl { width: 850px; }
+
+/* ---------- MODAL HEADER ---------- */
+
+.jss-modal__header {
+  padding: var(--spacing-lg);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.jss-modal__title {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.jss-modal__close {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-full);
+  transition: background var(--duration-micro) var(--ease-standard);
+}
+
+.jss-modal__close:hover {
+  background: var(--bg-secondary);
+}
+
+/* ---------- MODAL BODY ---------- */
+
+.jss-modal__body {
+  padding: var(--spacing-lg);
+  overflow-y: auto;
+  flex: 1;
+}
+
+/* ---------- MODAL FOOTER ---------- */
+
+.jss-modal__footer {
+  padding: var(--spacing-lg);
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--spacing-sm);
+  flex-shrink: 0;
+}
+
+/* ---------- ANIMATIONS ---------- */
+
+@keyframes jss-modal-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes jss-modal-fade-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes jss-modal-slide-up {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes jss-modal-slide-down {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+}
+
+/* ---------- DARK MODE ---------- */
+
+.dark .jss-modal-overlay {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.dark .jss-modal {
+  border: 1px solid var(--border);
+}
+
+/* ---------- MOBILE FULLSCREEN ---------- */
+
+@media (max-width: 767px) {
+  .jss-modal-overlay {
+    padding: 0;
+    align-items: flex-end;
+  }
+  
+  .jss-modal {
+    width: 100%;
+    max-height: 90vh;
+    border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+    animation: jss-modal-slide-up-mobile var(--duration-modal) var(--ease-emphasized);
+  }
+  
+  @keyframes jss-modal-slide-up-mobile {
+    from {
+      transform: translateY(100%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+}

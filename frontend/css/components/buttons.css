@@ -1,0 +1,240 @@
+/* ============================================
+   JINJA SSS PLATFORM - BUTTON COMPONENT
+   Variants: primary, secondary, text, danger
+   Sizes: sm, md, lg
+   States: default, hover, active, focus, disabled, loading
+   ============================================ */
+
+/* ---------- BASE BUTTON ---------- */
+
+.jss-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-semibold);
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  text-decoration: none;
+  transition: all var(--duration-standard) var(--ease-standard);
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ---------- SIZES ---------- */
+
+.jss-btn--sm {
+  height: 32px;
+  padding-inline: var(--spacing-md);
+  font-size: var(--font-size-sm);
+  gap: var(--spacing-xs);
+}
+
+.jss-btn--md {
+  height: 40px;
+  padding-inline: var(--spacing-lg);
+  font-size: var(--font-size-md);
+}
+
+.jss-btn--lg {
+  height: 48px;
+  padding-inline: var(--spacing-xl);
+  font-size: var(--font-size-lg);
+}
+
+/* ---------- PRIMARY BUTTON ---------- */
+
+.jss-btn--primary {
+  background: var(--primary-blue);
+  color: white;
+}
+
+.jss-btn--primary:hover {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.jss-btn--primary:active {
+  background: var(--primary-blue);
+  transform: translateY(0);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ---------- SECONDARY BUTTON ---------- */
+
+.jss-btn--secondary {
+  background: transparent;
+  color: var(--primary-blue);
+  border: 1.5px solid var(--primary-blue);
+}
+
+.jss-btn--secondary:hover {
+  background: rgba(30, 60, 114, 0.08);
+  transform: translateY(-2px);
+}
+
+.jss-btn--secondary:active {
+  background: rgba(30, 60, 114, 0.12);
+  transform: translateY(0);
+}
+
+/* ---------- TEXT BUTTON ---------- */
+
+.jss-btn--text {
+  background: transparent;
+  color: var(--primary-blue);
+}
+
+.jss-btn--text:hover {
+  background: rgba(30, 60, 114, 0.08);
+  text-decoration: underline;
+}
+
+.jss-btn--text:active {
+  background: rgba(30, 60, 114, 0.12);
+}
+
+/* ---------- DANGER BUTTON ---------- */
+
+.jss-btn--danger {
+  background: var(--error);
+  color: white;
+}
+
+.jss-btn--danger:hover {
+  background: #c82333;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.jss-btn--danger:active {
+  background: var(--error);
+  transform: translateY(0);
+}
+
+/* ---------- DISABLED STATE ---------- */
+
+.jss-btn:disabled,
+.jss-btn--disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ---------- LOADING STATE ---------- */
+
+.jss-btn--loading {
+  color: transparent !important;
+  pointer-events: none;
+  position: relative;
+}
+
+.jss-btn--loading::after {
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border: 2px solid transparent;
+  border-radius: 50%;
+  animation: jss-btn-spin var(--duration-standard) linear infinite;
+}
+
+.jss-btn--primary.jss-btn--loading::after {
+  border-top-color: white;
+  border-right-color: white;
+}
+
+.jss-btn--secondary.jss-btn--loading::after {
+  border-top-color: var(--primary-blue);
+  border-right-color: var(--primary-blue);
+}
+
+.jss-btn--danger.jss-btn--loading::after {
+  border-top-color: white;
+  border-right-color: white;
+}
+
+.jss-btn--text.jss-btn--loading::after {
+  border-top-color: var(--primary-blue);
+  border-right-color: var(--primary-blue);
+}
+
+/* ---------- FOCUS STATE (ACCESSIBILITY) ---------- */
+
+.jss-btn:focus-visible {
+  outline: 2px solid var(--primary-blue);
+  outline-offset: 2px;
+}
+
+.jss-btn--danger:focus-visible {
+  outline-color: var(--error);
+}
+
+/* ---------- FULL WIDTH ---------- */
+
+.jss-btn--full {
+  width: 100%;
+}
+
+/* ---------- ICON BUTTON ---------- */
+
+.jss-btn--icon {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border-radius: var(--radius-full);
+}
+
+.jss-btn--icon.jss-btn--sm {
+  width: 32px;
+  height: 32px;
+}
+
+.jss-btn--icon.jss-btn--lg {
+  width: 48px;
+  height: 48px;
+}
+
+/* ---------- BUTTON GROUP ---------- */
+
+.jss-btn-group {
+  display: inline-flex;
+  gap: var(--spacing-sm);
+  flex-wrap: wrap;
+}
+
+.jss-btn-group .jss-btn:first-child:not(:last-child) {
+  border-start-end-radius: 0;
+  border-end-end-radius: 0;
+}
+
+.jss-btn-group .jss-btn:last-child:not(:first-child) {
+  border-start-start-radius: 0;
+  border-end-start-radius: 0;
+}
+
+.jss-btn-group .jss-btn:not(:first-child):not(:last-child) {
+  border-radius: 0;
+}
+
+/* ---------- MOBILE TOUCH TARGET ---------- */
+
+@media (max-width: 767px) {
+  .jss-btn {
+    min-height: var(--touch-target-min);
+  }
+}
+
+/* ---------- ANIMATIONS ---------- */
+
+@keyframes jss-btn-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

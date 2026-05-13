@@ -1,0 +1,89 @@
+/* ============================================
+   JINJA SSS PLATFORM – COLOR UTILITIES
+   ============================================ */
+
+/* ---------- BACKGROUND COLORS ---------- */
+
+.jss-bg-primary { background-color: var(--primary-blue); }
+.jss-bg-primary-dark { background-color: var(--primary-dark); }
+.jss-bg-primary-light { background-color: var(--primary-light); }
+.jss-bg-primary-purple { background-color: var(--primary-purple); }
+
+.jss-bg-success { background-color: var(--success); }
+.jss-bg-error { background-color: var(--error); }
+.jss-bg-warning { background-color: var(--warning); }
+.jss-bg-info { background-color: var(--info); }
+
+.jss-bg-white { background-color: var(--bg-primary); }
+.jss-bg-gray { background-color: var(--bg-secondary); }
+.jss-bg-transparent { background-color: transparent; }
+
+/* ---------- TEXT COLORS ---------- */
+
+.jss-text-primary-blue { color: var(--primary-blue); }
+.jss-text-primary-dark { color: var(--primary-dark); }
+.jss-text-primary-light { color: var(--primary-light); }
+
+/* ---------- BORDER COLORS ---------- */
+
+.jss-border { border: 1px solid var(--border); }
+.jss-border-0 { border: 0; }
+
+.jss-border-t { border-top: 1px solid var(--border); }
+.jss-border-b { border-bottom: 1px solid var(--border); }
+.jss-border-l { border-inline-start: 1px solid var(--border); }
+.jss-border-r { border-inline-end: 1px solid var(--border); }
+
+/* ---------- GRADIENTS ---------- */
+
+.jss-gradient-primary {
+  background: linear-gradient(135deg, var(--primary-blue), var(--primary-dark));
+}
+
+.jss-gradient-accent {
+  background: linear-gradient(135deg, var(--primary-light), var(--primary-purple));
+}
+
+.jss-gradient-success {
+  background: linear-gradient(135deg, var(--success), #20c997);
+}
+
+.jss-gradient-dark {
+  background: linear-gradient(135deg, #1a1a2e, #16213e);
+}
+
+/* ---------- GLASSMORPHISM ---------- */
+
+.jss-glass {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.dark .jss-glass {
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ---------- ACRYLIC (Microsoft Fluent) ---------- */
+
+.jss-acrylic {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.dark .jss-acrylic {
+  background: rgba(30, 30, 30, 0.8);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* ---------- OPACITY ---------- */
+
+.jss-opacity-0 { opacity: 0; }
+.jss-opacity-25 { opacity: 0.25; }
+.jss-opacity-50 { opacity: 0.5; }
+.jss-opacity-75 { opacity: 0.75; }
+.jss-opacity-100 { opacity: 1; }

@@ -1,0 +1,534 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSS - Component Test</title>
+    
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dark-mode.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/utilities/spacing.css">
+    <link rel="stylesheet" href="css/utilities/typography.css">
+    <link rel="stylesheet" href="css/utilities/colors.css">
+    <link rel="stylesheet" href="css/components/buttons.css">
+    <link rel="stylesheet" href="css/components/cards.css">
+    <link rel="stylesheet" href="css/components/forms.css">
+    <link rel="stylesheet" href="css/components/modals.css">
+    <link rel="stylesheet" href="css/components/toast.css">
+    <link rel="stylesheet" href="css/components/tables.css">
+    <link rel="stylesheet" href="css/components/dropdown.css">
+    <link rel="stylesheet" href="css/components/badge.css">
+    <link rel="stylesheet" href="css/components/avatar.css">
+    <link rel="stylesheet" href="css/components/skeleton.css">
+    <link rel="stylesheet" href="css/components/progress.css">
+    <link rel="stylesheet" href="css/components/tooltip.css">
+    <link rel="stylesheet" href="css/components/breadcrumb.css">
+    <link rel="stylesheet" href="css/components/pagination.css">
+    <link rel="stylesheet" href="css/components/tabs.css">
+    <link rel="stylesheet" href="css/components/alert.css">
+    <link rel="stylesheet" href="css/components/stats-card.css">
+</head>
+<body style="padding: 40px;">
+    
+    <h1>Button Component Test</h1>
+    
+    <h2>Variants</h2>
+    
+    <h3>Primary Buttons</h3>
+    <div class="jss-btn-group jss-mb-lg">
+        <button class="jss-btn jss-btn--primary jss-btn--sm">Small</button>
+        <button class="jss-btn jss-btn--primary jss-btn--md">Medium</button>
+        <button class="jss-btn jss-btn--primary jss-btn--lg">Large</button>
+        <button class="jss-btn jss-btn--primary jss-btn--md jss-btn--disabled">Disabled</button>
+        <button class="jss-btn jss-btn--primary jss-btn--md jss-btn--loading">Loading</button>
+    </div>
+    
+    <h3>Secondary Buttons</h3>
+    <div class="jss-btn-group jss-mb-lg">
+        <button class="jss-btn jss-btn--secondary jss-btn--sm">Small</button>
+        <button class="jss-btn jss-btn--secondary jss-btn--md">Medium</button>
+        <button class="jss-btn jss-btn--secondary jss-btn--lg">Large</button>
+        <button class="jss-btn jss-btn--secondary jss-btn--md jss-btn--disabled">Disabled</button>
+        <button class="jss-btn jss-btn--secondary jss-btn--md jss-btn--loading">Loading</button>
+    </div>
+    
+    <h3>Text Buttons</h3>
+    <div class="jss-btn-group jss-mb-lg">
+        <button class="jss-btn jss-btn--text jss-btn--sm">Small</button>
+        <button class="jss-btn jss-btn--text jss-btn--md">Medium</button>
+        <button class="jss-btn jss-btn--text jss-btn--lg">Large</button>
+    </div>
+    
+    <h3>Danger Buttons</h3>
+    <div class="jss-btn-group jss-mb-lg">
+        <button class="jss-btn jss-btn--danger jss-btn--sm">Small</button>
+        <button class="jss-btn jss-btn--danger jss-btn--md">Medium</button>
+        <button class="jss-btn jss-btn--danger jss-btn--lg">Large</button>
+    </div>
+    
+    <h3>Icon Buttons</h3>
+    <div class="jss-btn-group jss-mb-lg">
+        <button class="jss-btn jss-btn--primary jss-btn--icon jss-btn--sm">+</button>
+        <button class="jss-btn jss-btn--primary jss-btn--icon jss-btn--md">+</button>
+        <button class="jss-btn jss-btn--secondary jss-btn--icon jss-btn--md">✏</button>
+        <button class="jss-btn jss-btn--danger jss-btn--icon jss-btn--md">✕</button>
+    </div>
+    
+    <h3>Full Width</h3>
+    <button class="jss-btn jss-btn--primary jss-btn--lg jss-btn--full jss-mb-md">Full Width Primary Button</button>
+
+    <!-- ============================================ -->
+    <!-- CARD COMPONENT TEST                         -->
+    <!-- ============================================ -->
+    
+    <hr style="margin: 40px 0; border-color: var(--border);">
+    
+    <h2>Card Component Test</h2>
+    
+    <div class="jss-card-grid jss-mb-lg">
+        <!-- Basic Card -->
+        <div class="jss-card">
+            <div class="jss-card__header">
+                <h3 class="jss-card__header-title">Basic Card</h3>
+            </div>
+            <div class="jss-card__body">
+                <p>This is a basic card with header and body.</p>
+            </div>
+        </div>
+        
+        <!-- Featured Card -->
+        <div class="jss-card jss-card--featured">
+            <div class="jss-card__header">
+                <h3 class="jss-card__header-title">Featured Card</h3>
+            </div>
+            <div class="jss-card__body">
+                <p>This card has a colored left border.</p>
+            </div>
+        </div>
+        
+        <!-- Compact Card -->
+        <div class="jss-card jss-card--compact">
+            <div class="jss-card__header">
+                <h3 class="jss-card__header-title">Compact Card</h3>
+            </div>
+            <div class="jss-card__body">
+                <p>Less padding for dense layouts.</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="jss-card-grid jss-mb-lg">
+        <!-- Elevated Card -->
+        <div class="jss-card jss-card--elevated jss-card--hover">
+            <div class="jss-card__header">
+                <h3 class="jss-card__header-title">Elevated Card</h3>
+                <a href="#" class="jss-card__header-action">View All →</a>
+            </div>
+            <div class="jss-card__body">
+                <p>This card lifts on hover. Try hovering over it!</p>
+            </div>
+            <div class="jss-card__footer">
+                <button class="jss-btn jss-btn--text jss-btn--sm">Cancel</button>
+                <button class="jss-btn jss-btn--primary jss-btn--sm">Save</button>
+            </div>
+        </div>
+        
+        <!-- Card with Success feature -->
+        <div class="jss-card jss-card--featured-success jss-card--hover">
+            <div class="jss-card__header">
+                <h3 class="jss-card__header-title">Success Card</h3>
+            </div>
+            <div class="jss-card__body">
+                <p>Green left border for success states.</p>
+            </div>
+        </div>
+        
+        <!-- Card with Warning feature -->
+        <div class="jss-card jss-card--featured-warning jss-card--hover">
+            <div class="jss-card__header">
+                <h3 class="jss-card__header-title">Warning Card</h3>
+            </div>
+            <div class="jss-card__body">
+                <p>Yellow left border for warning states.</p>
+            </div>
+        </div>
+    </div>
+    <hr style="margin: 40px 0; border-color: var(--border);">
+
+<h2>Form Inputs Test</h2>
+
+<div class="jss-form-row jss-form-row--2 jss-mb-lg">
+    <div class="jss-form-group">
+        <label class="jss-label jss-label--required">Full Name</label>
+        <input type="text" class="jss-input" placeholder="Enter your full name">
+    </div>
+    <div class="jss-form-group">
+        <label class="jss-label jss-label--required">Email</label>
+        <input type="email" class="jss-input" placeholder="Enter your email">
+    </div>
+</div>
+
+<div class="jss-form-group jss-mb-lg">
+    <label class="jss-label">Message</label>
+    <textarea class="jss-input jss-input--textarea" placeholder="Write your message here..."></textarea>
+    <span class="jss-help-text">Maximum 500 characters</span>
+</div>
+
+<div class="jss-form-row jss-form-row--3 jss-mb-lg">
+    <div class="jss-form-group">
+        <label class="jss-label">Country</label>
+        <select class="jss-input jss-input--select">
+            <option>Uganda</option>
+            <option>Kenya</option>
+            <option>Tanzania</option>
+        </select>
+    </div>
+    <div class="jss-form-group">
+        <label class="jss-label">Error State</label>
+        <input type="text" class="jss-input jss-input--error" value="Wrong input">
+        <span class="jss-error-message">Please correct this field.</span>
+    </div>
+    <div class="jss-form-group">
+        <label class="jss-label">Success State</label>
+        <input type="text" class="jss-input jss-input--success" value="Correct input">
+    </div>
+</div>
+
+<div class="jss-form-group jss-mb-lg">
+    <label class="jss-label">Disabled Input</label>
+    <input type="text" class="jss-input" value="Cannot edit this" disabled>
+</div>
+
+<div class="jss-form-group jss-mb-lg">
+    <label class="jss-checkbox">
+        <input type="checkbox" checked>
+        I agree to the terms and conditions
+    </label>
+</div>
+
+<div class="jss-form-group jss-mb-lg">
+    <label class="jss-label">Preferred Contact</label>
+    <div class="jss-radio-group jss-radio-group--inline">
+        <label class="jss-radio">
+            <input type="radio" name="contact" checked>
+            Email
+        </label>
+        <label class="jss-radio">
+            <input type="radio" name="contact">
+            Phone
+        </label>
+        <label class="jss-radio">
+            <input type="radio" name="contact">
+            SMS
+        </label>
+    </div>
+</div>
+
+<div class="jss-form-group jss-mb-lg">
+    <label class="jss-toggle">
+        <input type="checkbox" class="jss-toggle__input" checked>
+        <span class="jss-toggle__slider"></span>
+        Enable notifications
+    </label>
+</div>
+    <hr style="margin: 40px 0; border-color: var(--border);">
+
+<h2>Toast Notifications Test</h2>
+
+<div class="jss-btn-group jss-mb-lg">
+    <button class="jss-btn jss-btn--primary jss-btn--md" onclick="showToast('success', 'Operation completed successfully!')">Success Toast</button>
+    <button class="jss-btn jss-btn--danger jss-btn--md" onclick="showToast('error', 'Something went wrong!')">Error Toast</button>
+    <button class="jss-btn jss-btn--secondary jss-btn--md" onclick="showToast('warning', 'Please check your input.')">Warning Toast</button>
+    <button class="jss-btn jss-btn--text jss-btn--md" onclick="showToast('info', 'New updates are available.')">Info Toast</button>
+</div>
+
+<!-- Toast Container -->
+<div class="jss-toast-container" id="jss-toast-container"></div>
+
+<script>
+function showToast(type, message, duration = 4000) {
+    const container = document.getElementById('jss-toast-container');
+    
+    const toast = document.createElement('div');
+    toast.className = 'jss-toast jss-toast--' + type;
+    toast.innerHTML = message + '<button class="jss-toast__close">&times;</button>';
+    
+    toast.onclick = function() { removeToast(toast); };
+    
+    container.appendChild(toast);
+    
+    setTimeout(() => removeToast(toast), duration);
+}
+
+function removeToast(toast) {
+    toast.classList.add('jss-toast--removing');
+    setTimeout(() => toast.remove(), 300);
+}
+</script>
+<!-- ============================================ -->
+    <!-- MODAL TEST                                  -->
+    <!-- ============================================ -->
+    
+    <hr style="margin: 40px 0; border-color: var(--border);">
+    
+    <h2>Modal Test</h2>
+    
+    <button class="jss-btn jss-btn--primary jss-btn--md" onclick="testModal()">
+        Open Test Modal
+    </button>
+
+    <!-- ============================================ -->
+    <!-- MODAL HTML (hidden by default)              -->
+    <!-- ============================================ -->
+    
+    <div class="jss-modal-overlay" id="jss-modal" style="display: none;">
+        <div class="jss-modal jss-modal--md" id="jss-modal-content">
+            <div class="jss-modal__header">
+                <h3 class="jss-modal__title" id="jss-modal-title">Modal Title</h3>
+                <button class="jss-modal__close" onclick="closeModal()" aria-label="Close modal">✕</button>
+            </div>
+            <div class="jss-modal__body" id="jss-modal-body">
+                <p>Modal content goes here.</p>
+            </div>
+            <div class="jss-modal__footer" id="jss-modal-footer">
+                <button class="jss-btn jss-btn--secondary jss-btn--md" onclick="closeModal()">Cancel</button>
+                <button class="jss-btn jss-btn--primary jss-btn--md" id="jss-modal-confirm">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- MODAL JAVASCRIPT                            -->
+    <!-- ============================================ -->
+    
+    <script>
+    function testModal() {
+        openModal({
+            title: 'Confirm Action',
+            body: '<p>Are you sure you want to proceed with this action?</p><p>This cannot be undone.</p>',
+            confirmText: 'Yes, Proceed',
+            onConfirm: function() {
+                alert('Action confirmed!');
+            }
+        });
+    }
+
+    function openModal(options = {}) {
+        const { title = 'Modal Title', body = '<p>Content</p>', confirmText = 'Confirm', onConfirm = null, size = 'md', hideFooter = false } = options;
+        
+        document.getElementById('jss-modal-title').textContent = title;
+        document.getElementById('jss-modal-body').innerHTML = body;
+        document.getElementById('jss-modal-confirm').textContent = confirmText;
+        document.getElementById('jss-modal-footer').style.display = hideFooter ? 'none' : 'flex';
+        document.getElementById('jss-modal-content').className = 'jss-modal jss-modal--' + size;
+        
+        document.getElementById('jss-modal-confirm').onclick = function() {
+            if (onConfirm) onConfirm();
+            closeModal();
+        };
+        
+        const overlay = document.getElementById('jss-modal');
+        const content = document.getElementById('jss-modal-content');
+        
+        overlay.style.display = 'flex';
+        
+        overlay.onclick = function(e) {
+            if (e.target === overlay) closeModal();
+        };
+    }
+
+    function closeModal() {
+        document.getElementById('jss-modal').style.display = 'none';
+    }
+    </script>
+<hr style="margin: 40px 0; border-color: var(--border);">
+
+<h2>Table Test</h2>
+
+<div class="jss-table-responsive">
+    <table class="jss-table jss-table--striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Class</th>
+                <th>Subject</th>
+                <th>Score</th>
+                <th>Grade</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>Salim King</td><td>S4A</td><td>Mathematics</td><td>85%</td><td>A</td></tr>
+            <tr><td>John Doe</td><td>S4B</td><td>Physics</td><td>72%</td><td>B</td></tr>
+            <tr><td>Jane Smith</td><td>S3A</td><td>English</td><td>78%</td><td>B</td></tr>
+            <tr><td>Mary Nambi</td><td>S2B</td><td>Chemistry</td><td>65%</td><td>C</td></tr>
+            <tr><td>Peter Kato</td><td>S3A</td><td>Biology</td><td>70%</td><td>B</td></tr>
+        </tbody>
+    </table>
+</div>
+<hr style="margin: 40px 0; border-color: var(--border);">
+
+<h2>Dropdown Test</h2>
+
+<div class="jss-dropdown" id="demo-dropdown" style="margin-bottom: 200px;">
+    <button class="jss-dropdown__trigger" onclick="toggleDropdown('demo-dropdown')">
+        Select Action
+    </button>
+    <div class="jss-dropdown__menu">
+        <button class="jss-dropdown__item" onclick="alert('View clicked')">👁 View</button>
+        <button class="jss-dropdown__item" onclick="alert('Edit clicked')">✏ Edit</button>
+        <button class="jss-dropdown__item" onclick="alert('Share clicked')">📤 Share</button>
+        <div class="jss-dropdown__divider"></div>
+        <button class="jss-dropdown__item jss-dropdown__item--danger" onclick="alert('Delete clicked')">🗑 Delete</button>
+    </div>
+</div>
+
+<script>
+function toggleDropdown(id) {
+    const dropdown = document.getElementById(id);
+    dropdown.classList.toggle('jss-dropdown--open');
+    
+    // Close when clicking outside
+    document.addEventListener('click', function closeDropdown(e) {
+        if (!dropdown.contains(e.target)) {
+            dropdown.classList.remove('jss-dropdown--open');
+            document.removeEventListener('click', closeDropdown);
+        }
+    });
+}
+</script>
+<hr style="margin: 40px 0; border-color: var(--border);">
+
+<h2>Badge Test</h2>
+<div class="jss-btn-group jss-mb-lg">
+    <span class="jss-badge jss-badge--primary">Primary</span>
+    <span class="jss-badge jss-badge--success">Success</span>
+    <span class="jss-badge jss-badge--error">Error</span>
+    <span class="jss-badge jss-badge--warning">Warning</span>
+    <span class="jss-badge jss-badge--info">Info</span>
+</div>
+
+<hr style="margin: 40px 0; border-color: var(--border);">
+
+<h2>Avatar Test</h2>
+<div class="jss-btn-group jss-mb-lg" style="align-items: center;">
+    <div class="jss-avatar jss-avatar--xs jss-avatar--placeholder">S</div>
+    <div class="jss-avatar jss-avatar--sm jss-avatar--placeholder">S</div>
+    <div class="jss-avatar jss-avatar--md jss-avatar--placeholder">SK</div>
+    <div class="jss-avatar jss-avatar--lg jss-avatar--placeholder">SK</div>
+    <div class="jss-avatar jss-avatar--xl jss-avatar--placeholder">SK</div>
+</div>
+
+<h3>Avatar Group</h3>
+<div class="jss-avatar-group jss-mb-lg">
+    <div class="jss-avatar jss-avatar--md jss-avatar--placeholder">A</div>
+    <div class="jss-avatar jss-avatar--md jss-avatar--placeholder">B</div>
+    <div class="jss-avatar jss-avatar--md jss-avatar--placeholder">C</div>
+    <div class="jss-avatar jss-avatar--md" style="background:#e9ecef; font-size:12px;">+5</div>
+</div>
+<hr style="margin: 40px 0; border-color: var(--border);">
+
+<h2>Skeleton Loader Test</h2>
+<div class="jss-card jss-mb-lg" style="padding: 20px;">
+    <div class="jss-skeleton jss-skeleton--title"></div>
+    <div class="jss-skeleton jss-skeleton--text jss-skeleton--text-lg"></div>
+    <div class="jss-skeleton jss-skeleton--text jss-skeleton--text-md"></div>
+    <div class="jss-skeleton jss-skeleton--text jss-skeleton--text-sm"></div>
+</div>
+
+<hr style="margin: 40px 0; border-color: var(--border);">
+
+<h2>Progress Bar Test</h2>
+<p>75% Complete</p>
+<div class="jss-progress jss-mb-md">
+    <div class="jss-progress__fill jss-progress__fill--success" style="width: 75%;"></div>
+</div>
+<p>Indeterminate</p>
+<div class="jss-progress jss-progress--indeterminate jss-mb-md">
+    <div class="jss-progress__fill jss-progress__fill--primary"></div>
+</div>
+
+<hr style="margin: 40px 0; border-color: var(--border);">
+
+<h2>Tooltip Test</h2>
+<span class="jss-tooltip jss-btn jss-btn--primary jss-btn--sm" style="margin-bottom: 50px;">
+    Hover me
+    <span class="jss-tooltip__text">This is a tooltip!</span>
+</span>
+  <hr style="margin: 40px 0; border-color: var(--border);">
+
+<h2>Breadcrumb Test</h2>
+<nav class="jss-breadcrumb jss-mb-lg">
+    <a href="#" class="jss-breadcrumb__item">Home</a>
+    <span class="jss-breadcrumb__separator">/</span>
+    <a href="#" class="jss-breadcrumb__item">Academics</a>
+    <span class="jss-breadcrumb__separator">/</span>
+    <span class="jss-breadcrumb__item jss-breadcrumb__item--active">Grades</span>
+</nav>
+
+<hr style="margin: 40px 0; border-color: var(--border);">
+
+<h2>Pagination Test</h2>
+<div class="jss-pagination jss-mb-lg">
+    <button class="jss-pagination__item jss-pagination__item--disabled">←</button>
+    <button class="jss-pagination__item jss-pagination__item--active">1</button>
+    <button class="jss-pagination__item">2</button>
+    <button class="jss-pagination__item">3</button>
+    <button class="jss-pagination__item">→</button>
+</div>
+
+<hr style="margin: 40px 0; border-color: var(--border);">
+
+<h2>Tabs Test</h2>
+<div class="jss-tabs jss-mb-lg">
+    <button class="jss-tabs__tab jss-tabs__tab--active" onclick="switchTab(event, 'tab1')">Grades</button>
+    <button class="jss-tabs__tab" onclick="switchTab(event, 'tab2')">Attendance</button>
+    <button class="jss-tabs__tab" onclick="switchTab(event, 'tab3')">Timetable</button>
+</div>
+<div class="jss-tabs__content">
+    <div class="jss-tabs__panel jss-tabs__panel--active" id="tab1">Grades content here</div>
+    <div class="jss-tabs__panel" id="tab2">Attendance content here</div>
+    <div class="jss-tabs__panel" id="tab3">Timetable content here</div>
+</div>
+
+<script>
+function switchTab(e, panelId) {
+    document.querySelectorAll('.jss-tabs__tab').forEach(t => t.classList.remove('jss-tabs__tab--active'));
+    document.querySelectorAll('.jss-tabs__panel').forEach(p => p.classList.remove('jss-tabs__panel--active'));
+    e.target.classList.add('jss-tabs__tab--active');
+    document.getElementById(panelId).classList.add('jss-tabs__panel--active');
+}
+</script>
+
+<hr style="margin: 40px 0; border-color: var(--border);">
+
+<h2>Alert Test</h2>
+<div class="jss-alert jss-alert--success jss-mb-md"><span>✅ Operation successful!</span><button class="jss-alert__close">✕</button></div>
+<div class="jss-alert jss-alert--error jss-mb-md"><span>❌ Something went wrong!</span><button class="jss-alert__close">✕</button></div>
+<div class="jss-alert jss-alert--warning jss-mb-md"><span>⚠️ Please check your input.</span><button class="jss-alert__close">✕</button></div>
+<div class="jss-alert jss-alert--info jss-mb-md"><span>ℹ️ New updates available.</span><button class="jss-alert__close">✕</button></div>
+
+<hr style="margin: 40px 0; border-color: var(--border);">
+
+<h2>Stats Card Test</h2>
+<div class="jss-stats-grid jss-mb-lg">
+    <div class="jss-stat-card">
+        <div class="jss-stat-card__value">95%</div>
+        <div class="jss-stat-card__label">Attendance</div>
+    </div>
+    <div class="jss-stat-card jss-stat-card--success">
+        <div class="jss-stat-card__value">78%</div>
+        <div class="jss-stat-card__label">Average Grade</div>
+    </div>
+    <div class="jss-stat-card jss-stat-card--warning">
+        <div class="jss-stat-card__value">2</div>
+        <div class="jss-stat-card__label">Exams Soon</div>
+    </div>
+    <div class="jss-stat-card jss-stat-card--error">
+        <div class="jss-stat-card__value">3</div>
+        <div class="jss-stat-card__label">Pending Work</div>
+    </div>
+</div>
+</body>
+</html>

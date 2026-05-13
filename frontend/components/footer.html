@@ -1,0 +1,133 @@
+<!-- ============================================
+     JINJA SSS PLATFORM - FOOTER COMPONENT
+     ============================================ -->
+
+<footer class="jss-footer">
+    <div class="jss-container">
+        <div class="jss-footer__grid">
+            <!-- Contact -->
+            <div class="jss-footer__col">
+                <h4 class="jss-footer__title">Contact</h4>
+                <p>📍 Jinja, Uganda</p>
+                <p>📞 +256 XXX XXX XXX</p>
+                <p>✉️ info@jinjasss.sc.ug</p>
+            </div>
+            
+            <!-- Quick Links -->
+            <div class="jss-footer__col">
+                <h4 class="jss-footer__title">Quick Links</h4>
+                <ul class="jss-list-unstyled">
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Administrators</a></li>
+                    <li><a href="#">Gallery</a></li>
+                    <li><a href="#">News/Blog</a></li>
+                    <li><a href="#">Virtual Tour</a></li>
+                </ul>
+            </div>
+            
+            <!-- Downloads -->
+            <div class="jss-footer__col">
+                <h4 class="jss-footer__title">Downloads</h4>
+                <ul class="jss-list-unstyled">
+                    <li><a href="#">Admission Form</a></li>
+                    <li><a href="#">Fees Structure</a></li>
+                    <li><a href="#">Academic Calendar</a></li>
+                </ul>
+            </div>
+            
+            <!-- Social -->
+            <div class="jss-footer__col">
+                <h4 class="jss-footer__title">Social</h4>
+                <div class="jss-btn-group">
+                    <a href="#" class="jss-btn jss-btn--secondary jss-btn--icon jss-btn--sm" aria-label="Facebook">📘</a>
+                    <a href="#" class="jss-btn jss-btn--secondary jss-btn--icon jss-btn--sm" aria-label="Twitter">🐦</a>
+                    <a href="#" class="jss-btn jss-btn--secondary jss-btn--icon jss-btn--sm" aria-label="Instagram">📷</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Auth Buttons (ONLY in footer) -->
+        <div class="jss-footer__auth">
+            <a href="/pages/signin.html" class="jss-btn jss-btn--primary jss-btn--md">Sign In</a>
+            <a href="/pages/signup.html" class="jss-btn jss-btn--secondary jss-btn--md">Sign Up</a>
+        </div>
+        
+        <!-- Copyright -->
+        <div class="jss-footer__bottom">
+            <p>© 2026 Jinja Senior Secondary School. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
+<style>
+.jss-footer {
+    background: var(--primary-blue);
+    color: white;
+    padding: var(--spacing-2xl) 0 var(--spacing-lg);
+    margin-top: var(--spacing-2xl);
+}
+
+.jss-footer__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-xl);
+    margin-bottom: var(--spacing-xl);
+}
+
+@media (min-width: 480px) {
+    .jss-footer__grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 768px) {
+    .jss-footer__grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+.jss-footer__title {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--spacing-md);
+}
+
+.jss-footer__col p,
+.jss-footer__col li {
+    font-size: var(--font-size-sm);
+    opacity: 0.85;
+    margin-bottom: var(--spacing-xs);
+}
+
+.jss-footer a {
+    color: white;
+    opacity: 0.85;
+    text-decoration: none;
+}
+
+.jss-footer a:hover {
+    opacity: 1;
+    text-decoration: underline;
+}
+
+.jss-footer__auth {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-md);
+    padding: var(--spacing-lg) 0;
+    border-top: 1px solid rgba(255,255,255,0.2);
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+    margin-bottom: var(--spacing-lg);
+}
+
+.jss-footer__bottom {
+    text-align: center;
+    font-size: var(--font-size-sm);
+    opacity: 0.7;
+}
+
+.jss-footer__bottom p {
+    color: white;
+    margin: 0;
+}
+</style>

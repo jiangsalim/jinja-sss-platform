@@ -1,0 +1,42 @@
+/* ============================================
+   JINJA SSS PLATFORM - STATS CARD
+   ============================================ */
+
+.jss-stats-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-md);
+}
+
+@media (min-width: 480px) { .jss-stats-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 768px) { .jss-stats-grid { grid-template-columns: repeat(4, 1fr); } }
+
+.jss-stat-card {
+  background: var(--bg-primary);
+  padding: var(--spacing-lg);
+  border-radius: var(--radius-lg);
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--duration-micro) var(--ease-standard);
+}
+
+.jss-stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.jss-stat-card__value {
+  font-size: var(--font-size-4xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--primary-blue);
+}
+
+.jss-stat-card__label {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  margin-top: var(--spacing-xs);
+}
+
+.jss-stat-card--success .jss-stat-card__value { color: var(--success); }
+.jss-stat-card--error .jss-stat-card__value { color: var(--error); }
+.jss-stat-card--warning .jss-stat-card__value { color: var(--warning); }

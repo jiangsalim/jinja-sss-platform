@@ -1,0 +1,161 @@
+/* ============================================
+   JINJA SSS PLATFORM - CARD COMPONENT
+   Variants: default, featured, compact, elevated
+   ============================================ */
+
+/* ---------- BASE CARD ---------- */
+
+.jss-card {
+  background: var(--bg-primary);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: transform var(--duration-standard) var(--ease-standard),
+              box-shadow var(--duration-standard) var(--ease-standard);
+}
+
+/* Default shadow */
+.jss-card {
+  box-shadow: var(--shadow-sm);
+}
+
+/* ---------- CARD SECTIONS ---------- */
+
+.jss-card__header {
+  padding: var(--spacing-lg);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.jss-card__header-title {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.jss-card__header-action {
+  color: var(--primary-blue);
+  font-size: var(--font-size-sm);
+  text-decoration: none;
+  font-weight: var(--font-weight-medium);
+}
+
+.jss-card__header-action:hover {
+  text-decoration: underline;
+}
+
+.jss-card__body {
+  padding: var(--spacing-lg);
+}
+
+.jss-card__footer {
+  padding: var(--spacing-lg);
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--spacing-sm);
+}
+
+/* ---------- CARD VARIANTS ---------- */
+
+/* Featured Card - with colored left border */
+.jss-card--featured {
+  border-inline-start: 4px solid var(--primary-blue);
+}
+
+.jss-card--featured-success {
+  border-inline-start-color: var(--success);
+}
+
+.jss-card--featured-warning {
+  border-inline-start-color: var(--warning);
+}
+
+.jss-card--featured-error {
+  border-inline-start-color: var(--error);
+}
+
+/* Compact Card - less padding */
+.jss-card--compact .jss-card__header {
+  padding: var(--spacing-md);
+}
+
+.jss-card--compact .jss-card__body {
+  padding: var(--spacing-md);
+}
+
+.jss-card--compact .jss-card__footer {
+  padding: var(--spacing-md);
+}
+
+/* Elevated Card - more shadow and hover lift */
+.jss-card--elevated {
+  box-shadow: var(--shadow-md);
+}
+
+.jss-card--elevated:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* ---------- HOVER EFFECTS ---------- */
+
+.jss-card--hover:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  cursor: pointer;
+}
+
+/* ---------- CARD GRID ---------- */
+
+.jss-card-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-lg);
+}
+
+@media (min-width: 480px) {
+  .jss-card-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 768px) {
+  .jss-card-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .jss-card-grid--4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* ---------- CARD WITH IMAGE ---------- */
+
+.jss-card__image {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.jss-card__image--top {
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+/* ---------- DARK MODE ---------- */
+
+.dark .jss-card {
+  border: 1px solid var(--border);
+}
+
+.dark .jss-card__header {
+  border-bottom-color: var(--border);
+}
+
+.dark .jss-card__footer {
+  border-top-color: var(--border);
+}

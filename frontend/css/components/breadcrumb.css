@@ -1,0 +1,31 @@
+/* ============================================
+   JINJA SSS PLATFORM - BREADCRUMB
+   ============================================ */
+
+.jss-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  font-size: var(--font-size-sm);
+  flex-wrap: wrap;
+}
+
+.jss-breadcrumb__item {
+  color: var(--text-secondary);
+  text-decoration: none;
+}
+
+.jss-breadcrumb__item:hover {
+  color: var(--primary-blue);
+  text-decoration: underline;
+}
+
+.jss-breadcrumb__item--active {
+  color: var(--text-primary);
+  font-weight: var(--font-weight-medium);
+}
+
+.jss-breadcrumb__separator {
+  color: var(--text-secondary);
+  user-select: none;
+}

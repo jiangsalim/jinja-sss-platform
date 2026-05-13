@@ -1,0 +1,94 @@
+<!-- ============================================
+     JINJA SSS PLATFORM - HEADER COMPONENT
+     ============================================ -->
+
+<header class="jss-header">
+    <div class="jss-container">
+        <div class="jss-header__inner">
+            <!-- Logo + School Name -->
+            <a href="/index.html" class="jss-header__brand">
+                <img src="images/logo.png" alt="Jinja SSS Logo" class="jss-header__logo" onerror="this.style.display='none'">
+                <div class="jss-header__titles">
+                    <h1 class="jss-header__school-name">Jinja Senior Secondary School</h1>
+                    <p class="jss-header__motto">"Education for Service"</p>
+                </div>
+            </a>
+            
+            <!-- Search Bar -->
+            <div class="jss-header__search">
+                <input type="search" class="jss-input" placeholder="Search..." aria-label="Search">
+                <button class="jss-btn jss-btn--primary jss-btn--sm">🔍</button>
+            </div>
+        </div>
+    </div>
+</header>
+
+<style>
+.jss-header {
+    background: var(--bg-primary);
+    border-bottom: 1px solid var(--border);
+    padding: var(--spacing-md) 0;
+    position: sticky;
+    top: 0;
+    z-index: var(--z-sticky);
+}
+
+.jss-header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacing-lg);
+    flex-wrap: wrap;
+}
+
+.jss-header__brand {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    text-decoration: none;
+    color: inherit;
+}
+
+.jss-header__logo {
+    width: 50px;
+    height: 50px;
+    border-radius: var(--radius-md);
+    object-fit: cover;
+}
+
+.jss-header__school-name {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--primary-blue);
+    margin: 0;
+    line-height: 1.2;
+}
+
+.jss-header__motto {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    margin: 0;
+    font-style: italic;
+}
+
+.jss-header__search {
+    display: flex;
+    gap: var(--spacing-sm);
+}
+
+.jss-header__search .jss-input {
+    width: 250px;
+}
+
+@media (max-width: 767px) {
+    .jss-header__search {
+        width: 100%;
+    }
+    .jss-header__search .jss-input {
+        width: 100%;
+    }
+    .jss-header__titles {
+        display: none;
+    }
+}
+</style>
