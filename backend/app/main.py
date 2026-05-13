@@ -73,6 +73,19 @@ from app.routes.v1.super_admin import router as super_admin_router
 app.include_router(super_admin_router)
 
 
+
+@app.get("/debug")
+def debug():
+    import os, glob
+    files = []
+    for root, dirs, filenames in os.walk("."):
+        for f in filenames:
+            if f.endswith('.db'):
+                files.append(os.path.join(root, f))
+    cwd = os.getcwd()
+    return {"cwd": cwd, "db_files": files, "files_in_cwd": os.listdir(".")}
+
+
 @app.get("/setup-super-admin")
 def setup_super_admin():
     """One-time super admin setup"""
