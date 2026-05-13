@@ -112,13 +112,51 @@
 
         <!-- System Management -->
 <div class="section">
-    <h3>⚙️ System Management</h3>
+    <h3>⚙️ System Settings</h3>
+    <div id="settingsForm">
+        <label style="font-size:12px;font-weight:600">School Name</label>
+        <input type="text" id="schoolName" class="jss-input" value="Jinja Senior Secondary School" style="margin-bottom:8px">
+        
+        <label style="font-size:12px;font-weight:600">School Motto</label>
+        <input type="text" id="schoolMotto" class="jss-input" value="Education for Service" style="margin-bottom:8px">
+        
+        <label style="font-size:12px;font-weight:600">Current Academic Year</label>
+        <input type="number" id="currentYear" class="jss-input" value="2026" style="margin-bottom:8px">
+        
+        <label style="font-size:12px;font-weight:600">Current Term (1-3)</label>
+        <select id="currentTerm" class="jss-input" style="margin-bottom:8px">
+            <option value="1">Term 1</option>
+            <option value="2" selected>Term 2</option>
+            <option value="3">Term 3</option>
+        </select>
+        
+        <label style="font-size:12px;font-weight:600">Max Students Per Class</label>
+        <input type="number" id="maxStudents" class="jss-input" value="45" style="margin-bottom:8px">
+        
+        <label style="font-size:12px;font-weight:600">Voting Enabled</label>
+        <select id="votingEnabled" class="jss-input" style="margin-bottom:8px">
+            <option value="true" selected>Yes</option>
+            <option value="false">No</option>
+        </select>
+        
+        <label style="font-size:12px;font-weight:600">AI Assistant Enabled</label>
+        <select id="aiEnabled" class="jss-input" style="margin-bottom:12px">
+            <option value="true" selected>Yes</option>
+            <option value="false">No</option>
+        </select>
+        
+        <button class="btn btn-success" onclick="saveSettings()">💾 Save Settings</button>
+        <p id="settingsMsg" style="font-size:12px;margin-top:5px;color:var(--success)"></p>
+    </div>
+</div>
+
+<!-- Other Management -->
+<div class="section">
+    <h3>📋 System Tools</h3>
     <button class="btn btn-secondary" onclick="viewAuditLog()">📋 View Audit Log</button>
-    <button class="btn btn-secondary" onclick="viewSettings()">⚙️ System Settings</button>
-    <button class="btn btn-warning" onclick="createBackup()">💾 Create Database Backup</button>
-    <button class="btn btn-secondary" onclick="viewElections()">🗳️ Manage Elections</button>
     <div id="auditLogResult" style="font-size:12px;margin-top:8px;max-height:200px;overflow-y:auto;display:none;background:var(--bg-secondary);padding:10px;border-radius:8px"></div>
-    <div id="settingsResult" style="font-size:12px;margin-top:8px;display:none;background:var(--bg-secondary);padding:10px;border-radius:8px"></div>
+    <button class="btn btn-warning" onclick="createBackup()" style="margin-top:8px">💾 Create Database Backup</button>
+    <button class="btn btn-secondary" onclick="viewElections()" style="margin-top:8px">🗳️ Manage Elections</button>
 </div>
 
         <!-- Quick Links -->
@@ -288,6 +326,31 @@
     }
     
     loadDashboard();
+async function saveSettings() {
+    const btn = document.querySelector('#settingsForm .btn-success');
+    btn.textContent = 'Saving...'; btn.disabled = true;
+    try {
+        const settings = {
+            school_name: document.getElementById('schoolName').value,
+            school_motto: document.getElementById('schoolMotto').value,
+            current_year: document.getElementById('currentYear').value,
+            current_term: document.getElementById('currentTerm').value,
+            max_students_per_class: document.getElementById('maxStudents').value,
+            voting_enabled: document.getElementById('votingEnabled').value,
+            ai_assistant_enabled: document.getElementById('aiEnabled').value
+        };
+        const r = await fetch(API + '/api/super-admin/system-settings', {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + TOKEN },
+            body: JSON.stringify({ settings: settings })
+        });
+        const d = await r.json();
+        document.getElementById('settingsMsg').textContent = d.success ? '✅ Settings saved! Changes are live.' : '❌ Failed to save.';
+    } catch(e) {
+        document.getElementById('settingsMsg').textContent = '❌ Connection error';
+    }
+    btn.textContent = '💾 Save Settings'; btn.disabled = false;
+}
 </script>
 </body>
 </html>
