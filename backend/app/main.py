@@ -18,7 +18,7 @@ from app.middleware.audit import AuditMiddleware
 
 app = FastAPI(title=settings.APP_NAME, version=settings.APP_VERSION, docs_url="/api/docs", redoc_url="/api/redoc")
 
-app.add_middleware(CORSMiddleware, allow_origins=settings.CORS_ORIGINS, allow_credentials=True, allow_methods=["*"], allow_headers=["*"])
+app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_credentials=True, allow_methods=["*"], allow_headers=["*"])
 app.add_middleware(SecurityHeadersMiddleware)
 app.add_middleware(SanitizerMiddleware)
 app.add_middleware(AuditMiddleware)
