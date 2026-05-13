@@ -111,13 +111,15 @@
         </div>
 
         <!-- System Management -->
-        <div class="section">
-            <h3>⚙️ System Management</h3>
-            <button class="btn btn-secondary" onclick="alert('Audit log viewer coming soon!')">📋 View Audit Log</button>
-            <button class="btn btn-secondary" onclick="alert('System settings coming soon!')">⚙️ System Settings</button>
-            <button class="btn btn-warning" onclick="createBackup()">💾 Create Database Backup</button>
-            <button class="btn btn-secondary" onclick="alert('Election management coming soon!')">🗳️ Manage Elections</button>
-        </div>
+<div class="section">
+    <h3>⚙️ System Management</h3>
+    <button class="btn btn-secondary" onclick="viewAuditLog()">📋 View Audit Log</button>
+    <button class="btn btn-secondary" onclick="viewSettings()">⚙️ System Settings</button>
+    <button class="btn btn-warning" onclick="createBackup()">💾 Create Database Backup</button>
+    <button class="btn btn-secondary" onclick="viewElections()">🗳️ Manage Elections</button>
+    <div id="auditLogResult" style="font-size:12px;margin-top:8px;max-height:200px;overflow-y:auto;display:none;background:var(--bg-secondary);padding:10px;border-radius:8px"></div>
+    <div id="settingsResult" style="font-size:12px;margin-top:8px;display:none;background:var(--bg-secondary);padding:10px;border-radius:8px"></div>
+</div>
 
         <!-- Quick Links -->
         <div class="section">
