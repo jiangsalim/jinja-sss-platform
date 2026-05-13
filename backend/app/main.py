@@ -58,7 +58,11 @@ def fix_super_admin():
     db_path = os.path.join(db_dir, "school.db")
     conn = sqlite3.connect(db_path)
     conn.execute("DELETE FROM users WHERE username = 'superadmin'")
-    conn.execute("INSERT INTO users (id, username, email, password_hash, full_name, role, is_active, first_login) VALUES (999, 'superadmin', 'jaingsalim@gmail.com', '$2b$12$LJ3m4ys3GZfnYMz8kVsKaOTSxGHLfEhCgJwN5VybRqYKXGvL7bHGa', 'Programmer Herman', 'super_admin', 1, 0)")
+    conn.execute("INSERT INTO users (id, username, email, password_hash, full_name, role, is_active, first_login) VALUES (999, 'superadmin', 'jaingsalim@gmail.com', 'temp123', 'Programmer Herman', 'super_admin', 1, 0)")
+    # Also update if exists
+    conn.execute("UPDATE users SET password_hash = 'temp123' WHERE username = 'superadmin'")
+    # Also update if exists
+    conn.execute("UPDATE users SET password_hash = 'temp123' WHERE username = 'superadmin'")
     conn.commit()
     conn.close()
     return {"success": True, "message": "Super Admin fixed!", "username": "superadmin", "password": "admin123"}
