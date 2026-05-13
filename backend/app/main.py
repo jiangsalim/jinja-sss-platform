@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.openapi.utils import get_openapi
 from datetime import datetime
+import os, sqlite3
 
 from app.config import settings
 from app.utils.error_handler import register_error_handlers
@@ -28,76 +29,47 @@ app.add_middleware(AuthMiddleware)
 
 register_error_handlers(app)
 
-# Import ALL routes
-from app.routes.v1.admin import router as r1; app.include_router(r1)
-from app.routes.v1.auth import router as r2; app.include_router(r2)
-from app.routes.v1.students import router as r3; app.include_router(r3)
-from app.routes.v1.parents import router as r4; app.include_router(r4)
-from app.routes.v1.teachers import router as r5; app.include_router(r5)
-from app.routes.v1.hod import router as r6; app.include_router(r6)
-from app.routes.v1.head_teacher import router as r7; app.include_router(r7)
-from app.routes.v1.deputy_academics import router as r8; app.include_router(r8)
-from app.routes.v1.deputy_welfare import router as r9; app.include_router(r9)
-from app.routes.v1.registrar import router as r10; app.include_router(r10)
-from app.routes.v1.director_studies import router as r11; app.include_router(r11)
-from app.routes.v1.finance import router as r12; app.include_router(r12)
-from app.routes.v1.hr import router as r13; app.include_router(r13)
-from app.routes.v1.nurse import router as r14; app.include_router(r14)
-from app.routes.v1.counselor import router as r15; app.include_router(r15)
-from app.routes.v1.chaplain import router as r16; app.include_router(r16)
-from app.routes.v1.social_worker import router as r17; app.include_router(r17)
-from app.routes.v1.lab_science import router as r18; app.include_router(r18)
-from app.routes.v1.lab_computer import router as r19; app.include_router(r19)
-from app.routes.v1.workshop import router as r20; app.include_router(r20)
-from app.routes.v1.receptionist import router as r21; app.include_router(r21)
-from app.routes.v1.records_clerk import router as r22; app.include_router(r22)
-from app.routes.v1.procurement import router as r23; app.include_router(r23)
-from app.routes.v1.store_keeper import router as r24; app.include_router(r24)
-from app.routes.v1.head_security import router as r25; app.include_router(r25)
-from app.routes.v1.security_guard import router as r26; app.include_router(r26)
-from app.routes.v1.maintenance import router as r27; app.include_router(r27)
-from app.routes.v1.groundskeeper import router as r28; app.include_router(r28)
-from app.routes.v1.cleaner import router as r29; app.include_router(r29)
-from app.routes.v1.chef import router as r30; app.include_router(r30)
-from app.routes.v1.kitchen_staff import router as r31; app.include_router(r31)
-from app.routes.v1.transport_manager import router as r32; app.include_router(r32)
-from app.routes.v1.bus_driver import router as r33; app.include_router(r33)
-from app.routes.v1.ict_manager import router as r34; app.include_router(r34)
-from app.routes.v1.ict_technician import router as r35; app.include_router(r35)
-from app.routes.v1.librarian import router as r36; app.include_router(r36)
-from app.routes.v1.library_assistant import router as r37; app.include_router(r37)
-from app.routes.v1.prefects import router as r38; app.include_router(r38)
-from app.routes.v1.alumni import router as r39; app.include_router(r39)
+@app.on_event("startup")
+async def startup():
+    db_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "database")
+    os.makedirs(db_dir, exist_ok=True)
+    db_path = os.path.join(db_dir, "school.db")
+    if not os.path.exists(db_path):
+        conn = sqlite3.connect(db_path)
+        schema_path = os.path.join(db_dir, "schema.sql")
+        if os.path.exists(schema_path):
+            with open(schema_path, "r") as f:
+                conn.executescript(f.read())
+            conn.commit()
+        conn.close()
+        print(f"Database created at {db_path}")
+    print(f"Jinja SSS Platform v{settings.APP_VERSION} started")
 
-from app.routes.v1.super_admin import router as super_admin_router
-app.include_router(super_admin_router)
-
-
+@app.get("/setup-super-admin")
+def setup_super_admin():
+    db_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "database")
+    db_path = os.path.join(db_dir, "school.db")
+    conn = sqlite3.connect(db_path)
+    try:
+        conn.execute("INSERT INTO users (id, username, email, password_hash, full_name, role, is_active, first_login) VALUES (999, 'superadmin', 'jaingsalim@gmail.com', 'temp123', 'Programmer Herman', 'super_admin', 1, 0)")
+        conn.commit()
+        result = "Super Admin created!"
+    except:
+        conn.execute("UPDATE users SET password_hash = 'temp123' WHERE username = 'superadmin'")
+        conn.commit()
+        result = "Super Admin password updated!"
+    conn.close()
+    return {"success": True, "message": result, "username": "superadmin", "password": "temp123"}
 
 @app.get("/debug")
 def debug():
-    import os, glob
+    import glob as g
     files = []
     for root, dirs, filenames in os.walk("."):
         for f in filenames:
             if f.endswith('.db'):
                 files.append(os.path.join(root, f))
-    cwd = os.getcwd()
-    return {"cwd": cwd, "db_files": files, "files_in_cwd": os.listdir(".")}
-
-
-@app.get("/setup-super-admin")
-def setup_super_admin():
-    """One-time super admin setup"""
-    import sqlite3
-    import os
-    db_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "database/school.db")
-    conn = sqlite3.connect(db_path)
-    conn.execute("DELETE FROM users WHERE username='superadmin'")
-    conn.execute("INSERT INTO users (id, username, email, password_hash, full_name, role, is_active, first_login) VALUES (999, 'superadmin', 'jaingsalim@gmail.com', 'temp123', 'Programmer Herman', 'super_admin', 1, 0)")
-    conn.commit()
-    conn.close()
-    return {"success": True, "message": "Super Admin created!", "username": "superadmin", "password": "temp123"}
+    return {"cwd": os.getcwd(), "db_files": files}
 
 @app.get("/health", tags=["System"])
 def health():
@@ -113,10 +85,6 @@ def health():
 @app.get("/", tags=["System"])
 def root():
     return success_response(data={"app": settings.APP_NAME, "version": settings.APP_VERSION}, message="Jinja SSS Platform API is running")
-
-@app.on_event("startup")
-async def startup():
-    print(f"Jinja SSS Platform v{settings.APP_VERSION} started with 39 route modules")
 
 def custom_openapi():
     if app.openapi_schema: return app.openapi_schema
