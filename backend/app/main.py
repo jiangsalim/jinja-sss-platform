@@ -30,8 +30,10 @@ register_error_handlers(app)
 
 from app.routes.v1.admin import router as admin_router
 from app.routes.v1.auth import router as auth_router
+from app.routes.v1.students import router as student_router
 app.include_router(admin_router)
 app.include_router(auth_router)
+app.include_router(student_router)
 
 @app.get("/health", tags=["System"])
 def health():
@@ -50,7 +52,7 @@ def root():
 
 @app.on_event("startup")
 async def startup():
-    print(f"🚀 {settings.APP_NAME} v{settings.APP_VERSION} started with full security")
+    print(f"Jinja SSS Platform v{settings.APP_VERSION} started")
 
 def custom_openapi():
     if app.openapi_schema: return app.openapi_schema
