@@ -85,3 +85,32 @@ class PasswordManager:
     def generate_temp_password() -> str:
         alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         return ''.join(secrets.choice(alphabet) for _ in range(12))
+
+    # Account Lockout Methods
+    MAX_FAILED_ATTEMPTS = 10
+    LOCKOUT_MINUTES = 30
+
+    @staticmethod
+    def record_failed_attempt(user_id: int):
+        db = get_db()
+        db.execute("UPDATE users SET failed_attempts = failed_attempts + 1 WHERE id = ?", (user_id,))
+        user = db.fetch_one("SELECT failed_attempts FROM users WHERE id = ?", (user_id,))
+        if user and user['failed_attempts'] >= PasswordManager.MAX_FAILED_ATTEMPTS:
+            lock_until = datetime.utcnow() + timedelta(minutes=PasswordManager.LOCKOUT_MINUTES)
+            db.execute("UPDATE users SET locked_until = ? WHERE id = ?", (lock_until.isoformat(), user_id))
+
+    @staticmethod
+    def reset_failed_attempts(user_id: int):
+        db = get_db()
+        db.execute("UPDATE users SET failed_attempts = 0, locked_until = NULL WHERE id = ?", (user_id,))
+
+    @staticmethod
+    def is_account_locked(user_id: int) -> bool:
+        db = get_db()
+        user = db.fetch_one("SELECT locked_until FROM users WHERE id = ?", (user_id,))
+        if user and user['locked_until']:
+            lock_time = datetime.fromisoformat(user['locked_until'])
+            if datetime.utcnow() < lock_time:
+                return True
+            PasswordManager.reset_failed_attempts(user_id)
+        return False

@@ -9,3 +9,12 @@ def error_response(code, message, details=None, status_code=400):
 
 def paginated_response(data, pagination, filters=None):
     return {"success": True, "data": data, "pagination": pagination, "active_filters": filters or {}, "timestamp": datetime.utcnow().isoformat()}
+
+def rate_limit_response(data, limit, remaining, reset_time):
+    """Create response with rate limit headers"""
+    from fastapi.responses import JSONResponse
+    response = JSONResponse(content={"success": True, "data": data})
+    response.headers['X-RateLimit-Limit'] = str(limit)
+    response.headers['X-RateLimit-Remaining'] = str(remaining)
+    response.headers['X-RateLimit-Reset'] = str(reset_time)
+    return response
