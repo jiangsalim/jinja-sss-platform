@@ -68,6 +68,82 @@ def fix_super_admin():
     return {"success": True, "message": "Super Admin fixed!", "username": "superadmin", "password": "admin123"}
 
 
+
+@app.get("/seed-settings")
+def seed_settings():
+    import sqlite3, os
+    db_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "database")
+    db_path = os.path.join(db_dir, "school.db")
+    conn = sqlite3.connect(db_path)
+    settings = [
+        ("school_name", "Jinja Senior Secondary School"),
+        ("school_motto", "Education for Service"),
+        ("current_year", "2026"),
+        ("current_term", "2"),
+        ("voting_enabled", "true"),
+        ("ai_assistant_enabled", "true"),
+        ("max_students_per_class", "45"),
+    ]
+    for key, value in settings:
+        conn.execute("INSERT OR REPLACE INTO system_settings (setting_key, setting_value) VALUES (?, ?)", (key, value))
+    conn.commit()
+    conn.close()
+    return {"success": True, "message": "System settings seeded!"}
+
+
+
+@app.get("/simple-backup")
+def simple_backup():
+    import sqlite3, os, shutil
+    from datetime import datetime
+    db_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "database")
+    db_path = os.path.join(db_dir, "school.db")
+    backup_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "backups")
+    os.makedirs(backup_dir, exist_ok=True)
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    backup_file = os.path.join(backup_dir, f"backup_{timestamp}.db")
+    shutil.copy2(db_path, backup_file)
+    return {"success": True, "backup_file": f"backup_{timestamp}.db", "size": os.path.getsize(backup_file)}
+
+
+
+@app.get("/seed-settings")
+def seed_settings():
+    import sqlite3, os
+    db_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "database")
+    db_path = os.path.join(db_dir, "school.db")
+    conn = sqlite3.connect(db_path)
+    settings = [
+        ("school_name", "Jinja Senior Secondary School"),
+        ("school_motto", "Education for Service"),
+        ("current_year", "2026"),
+        ("current_term", "2"),
+        ("voting_enabled", "true"),
+        ("ai_assistant_enabled", "true"),
+        ("max_students_per_class", "45"),
+    ]
+    for key, value in settings:
+        conn.execute("INSERT OR REPLACE INTO system_settings (setting_key, setting_value) VALUES (?, ?)", (key, value))
+    conn.commit()
+    conn.close()
+    return {"success": True, "message": "System settings seeded!"}
+
+
+
+@app.get("/simple-backup")
+def simple_backup():
+    import sqlite3, os, shutil
+    from datetime import datetime
+    db_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "database")
+    db_path = os.path.join(db_dir, "school.db")
+    backup_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "backups")
+    os.makedirs(backup_dir, exist_ok=True)
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    backup_file = os.path.join(backup_dir, f"backup_{timestamp}.db")
+    shutil.copy2(db_path, backup_file)
+    return {"success": True, "backup_file": f"backup_{timestamp}.db", "size": os.path.getsize(backup_file)}
+
+
 @app.get("/debug")
 def debug():
     files = []
