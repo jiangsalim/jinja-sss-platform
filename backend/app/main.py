@@ -31,9 +31,13 @@ register_error_handlers(app)
 from app.routes.v1.admin import router as admin_router
 from app.routes.v1.auth import router as auth_router
 from app.routes.v1.students import router as student_router
+from app.routes.v1.parents import router as parent_router
+from app.routes.v1.teachers import router as teacher_router
 app.include_router(admin_router)
 app.include_router(auth_router)
 app.include_router(student_router)
+app.include_router(parent_router)
+app.include_router(teacher_router)
 
 @app.get("/health", tags=["System"])
 def health():
