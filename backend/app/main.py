@@ -75,23 +75,14 @@ app.include_router(super_admin_router)
 
 @app.get("/setup-super-admin")
 def setup_super_admin():
-    """One-time super admin setup - DELETE after use"""
-    import sqlite3, hashlib, os
-    conn = sqlite3.connect('database/school.db')
-    password = "HermanKing2026!"
-    salt = os.urandom(16).hex()
-    password_hash = hashlib.sha256((password + salt).encode()).hexdigest() + ":" + salt
-    try:
-        conn.execute("INSERT INTO users (id, username, email, password_hash, full_name, role, is_active, first_login) VALUES (999, 'superadmin', 'jaingsalim@gmail.com', ?, 'Programmer Herman', 'super_admin', 1, 0)", (password_hash,))
-        conn.commit()
-        result = "Super Admin created!"
-    except:
-        conn.execute("UPDATE users SET password_hash = ? WHERE username = 'superadmin'", (password_hash,))
-        conn.commit()
-        result = "Super Admin password updated!"
+    """One-time super admin setup"""
+    import sqlite3
+    conn = sqlite3.connect("database/school.db")
+    conn.execute("DELETE FROM users WHERE username='superadmin'")
+    conn.execute("INSERT INTO users (id, username, email, password_hash, full_name, role, is_active, first_login) VALUES (999, 'superadmin', 'jaingsalim@gmail.com', 'temp123', 'Programmer Herman', 'super_admin', 1, 0)")
+    conn.commit()
     conn.close()
-    return {"success": True, "message": result, "username": "superadmin", "password": "HermanKing2026!"}
-
+    return {"success": True, "message": "Super Admin created!", "username": "superadmin", "password": "temp123"}
 
 @app.get("/health", tags=["System"])
 def health():
