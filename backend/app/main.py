@@ -14,6 +14,7 @@ from app.middleware.security import SecurityHeadersMiddleware
 from app.middleware.logging import LoggingMiddleware
 from app.middleware.school import SchoolContextMiddleware
 from app.middleware.sanitizer import SanitizerMiddleware
+from app.middleware.audit import AuditMiddleware
 
 app = FastAPI(
     title=settings.APP_NAME,
@@ -25,6 +26,7 @@ app = FastAPI(
 app.add_middleware(CORSMiddleware, allow_origins=settings.CORS_ORIGINS, allow_credentials=True, allow_methods=["*"], allow_headers=["*"])
 app.add_middleware(SecurityHeadersMiddleware)
 app.add_middleware(SanitizerMiddleware)
+app.add_middleware(AuditMiddleware)
 app.add_middleware(LoggingMiddleware)
 app.add_middleware(SchoolContextMiddleware)
 app.add_middleware(RateLimitMiddleware)
@@ -59,3 +61,6 @@ def custom_openapi():
     return app.openapi_schema
 
 app.openapi = custom_openapi
+
+from app.routes.v1.admin import router as admin_router
+app.include_router(admin_router)
