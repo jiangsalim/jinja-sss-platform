@@ -127,5 +127,45 @@
         </div>
     </main>
 </div>
+<script>
+// Load dashboard stats
+async function loadDashboard() {
+    const token = localStorage.getItem('authToken');
+    if (!token) {
+        window.location.href = '../pages/signin.html';
+        return;
+    }
+    
+    try {
+        const response = await fetch('https://jinja-sss-api.onrender.com/api/super-admin/dashboard', {
+            headers: { 'Authorization': `Bearer ${token}` }
+        });
+        const data = await response.json();
+        if (data.success) {
+            document.getElementById('totalUsers').textContent = data.data.total_users || '--';
+            document.getElementById('totalStudents').textContent = data.data.total_students || '--';
+            document.getElementById('totalTeachers').textContent = data.data.total_teachers || '--';
+            document.getElementById('totalParents').textContent = data.data.total_parents || '--';
+        }
+    } catch (e) {
+        console.log('Dashboard load failed:', e);
+    }
+}
+
+// Logout function
+function logout() {
+    localStorage.removeItem('authToken');
+    window.location.href = '../pages/signin.html';
+}
+
+// Load on page start
+loadDashboard();
+
+// Add logout to the logout link
+document.querySelector('a[href="../pages/signin.html"]').addEventListener('click', function(e) {
+    e.preventDefault();
+    logout();
+});
+</script>
 </body>
 </html>
