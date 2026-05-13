@@ -33,11 +33,28 @@ from app.routes.v1.auth import router as auth_router
 from app.routes.v1.students import router as student_router
 from app.routes.v1.parents import router as parent_router
 from app.routes.v1.teachers import router as teacher_router
+from app.routes.v1.hod import router as hod_router
+from app.routes.v1.head_teacher import router as ht_router
+from app.routes.v1.deputy_academics import router as da_router
+from app.routes.v1.deputy_welfare import router as dw_router
+from app.routes.v1.registrar import router as reg_router
+from app.routes.v1.director_studies import router as dos_router
+from app.routes.v1.finance import router as fin_router
+from app.routes.v1.hr import router as hr_router
+
 app.include_router(admin_router)
 app.include_router(auth_router)
 app.include_router(student_router)
 app.include_router(parent_router)
 app.include_router(teacher_router)
+app.include_router(hod_router)
+app.include_router(ht_router)
+app.include_router(da_router)
+app.include_router(dw_router)
+app.include_router(reg_router)
+app.include_router(dos_router)
+app.include_router(fin_router)
+app.include_router(hr_router)
 
 @app.get("/health", tags=["System"])
 def health():
@@ -66,8 +83,3 @@ def custom_openapi():
     return app.openapi_schema
 
 app.openapi = custom_openapi
-
-from app.routes.v1.hod import router as hod_router
-from app.routes.v1.hod import router as hod_router
-app.include_router(hod_router)
-app.include_router(hod_router)
