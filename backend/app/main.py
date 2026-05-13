@@ -31,7 +31,7 @@ register_error_handlers(app)
 
 @app.on_event("startup")
 async def startup():
-    db_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "database")
+    db_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "database")
     os.makedirs(db_dir, exist_ok=True)
     db_path = os.path.join(db_dir, "school.db")
     if not os.path.exists(db_path):
@@ -47,7 +47,7 @@ async def startup():
 
 @app.get("/setup-super-admin")
 def setup_super_admin():
-    db_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "database")
+    db_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "database")
     db_path = os.path.join(db_dir, "school.db")
     conn = sqlite3.connect(db_path)
     try:
