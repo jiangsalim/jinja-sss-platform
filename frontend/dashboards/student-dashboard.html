@@ -190,5 +190,32 @@
         <a href="#" style="display:flex;flex-direction:column;align-items:center;text-decoration:none;color:var(--text-secondary);font-size:10px;"><span style="font-size:20px;">👤</span>Me</a>
     </nav>
     <style>@media(max-width:767px){.jss-bottom-nav{display:flex!important;}}</style>
+    <!-- Floating Grid Menu -->
+    <style>
+    .jss-float-menu{position:fixed;bottom:var(--spacing-xl);right:var(--spacing-xl);z-index:999;display:grid;grid-template-columns:0rem 3.5rem 0rem;grid-template-rows:0rem 3.5rem 0rem;gap:0;overflow:hidden;transition:gap .4s ease 0s,grid-template-columns .4s ease .6s,grid-template-rows .4s ease .6s;place-items:center}
+    .jss-float-menu:hover,.jss-float-menu--open{grid-template-columns:3.5rem 3.5rem 3.5rem;grid-template-rows:3.5rem 3.5rem 3.5rem;gap:.6rem;overflow:visible;transition:grid-template-columns .4s ease 0s,grid-template-rows .4s ease .5s,gap .4s ease 0s}
+    .jss-float-menu__item{width:3.5rem;height:3.5rem;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.4rem;cursor:pointer;border:none;color:#fff;box-shadow:var(--shadow-lg);transition:transform .2s ease;text-decoration:none}
+    .jss-float-menu__item:hover{transform:scale(1.1)}
+    .jss-float-menu__item--center{background:var(--primary-blue);font-size:1.6rem;font-weight:700;z-index:2}
+    .jss-float-menu__item--success{background:var(--success)}
+    .jss-float-menu__item--info{background:var(--info)}
+    .jss-float-menu__item--accent{background:var(--primary-purple)}
+    .jss-float-menu__item--warning{background:var(--warning);color:#333}
+    .jss-float-menu__item--dark{background:#343a40}
+    .jss-float-menu__item--error{background:var(--error)}
+    @media(max-width:767px){.jss-float-menu{bottom:90px;right:var(--spacing-md)}}
+    </style>
+    <div class="jss-float-menu" id="floatMenu">
+        <a href="#" class="jss-float-menu__item jss-float-menu__item--success" style="grid-column:1;grid-row:1">📊</a>
+        <a href="#" class="jss-float-menu__item jss-float-menu__item--info" style="grid-column:2;grid-row:1">💬</a>
+        <a href="#" class="jss-float-menu__item jss-float-menu__item--accent" style="grid-column:3;grid-row:1">🤖</a>
+        <a href="#" class="jss-float-menu__item jss-float-menu__item--warning" style="grid-column:1;grid-row:2">📝</a>
+        <button class="jss-float-menu__item jss-float-menu__item--center" style="grid-column:2;grid-row:2" onclick="document.getElementById('floatMenu').classList.toggle('jss-float-menu--open')">+</button>
+        <a href="#" class="jss-float-menu__item jss-float-menu__item--dark" style="grid-column:3;grid-row:2">📅</a>
+        <a href="#" class="jss-float-menu__item jss-float-menu__item--error" style="grid-column:1;grid-row:3">🚨</a>
+        <a href="#" class="jss-float-menu__item jss-float-menu__item--primary" style="grid-column:2;grid-row:3">⚙️</a>
+        <a href="#" class="jss-float-menu__item jss-float-menu__item--success" style="grid-column:3;grid-row:3">❓</a>
+    </div>
+</body>
 </body>
 </html>
