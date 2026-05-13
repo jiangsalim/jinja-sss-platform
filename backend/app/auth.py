@@ -3,13 +3,15 @@ from datetime import datetime, timedelta
 from typing import Optional, Dict, Any
 from app.config import settings
 
+
 class TokenManager:
     @staticmethod
-    def create_access_token(user_id: int, username: str, role: str) -> str:
+    def create_access_token(user_id: int, username: str, role: str, first_login: bool = False) -> str:
         payload = {
             "sub": username,
             "user_id": user_id,
             "role": role,
+            "first_login": first_login,
             "type": "access",
             "exp": datetime.utcnow() + timedelta(minutes=settings.JWT_ACCESS_TOKEN_EXPIRE_MINUTES),
             "iat": datetime.utcnow()
@@ -37,10 +39,11 @@ class TokenManager:
             return None
 
     @staticmethod
-    def create_token_pair(user_id: int, username: str, role: str) -> dict:
+    def create_token_pair(user_id: int, username: str, role: str, first_login: bool = False) -> dict:
         return {
-            "access_token": TokenManager.create_access_token(user_id, username, role),
+            "access_token": TokenManager.create_access_token(user_id, username, role, first_login),
             "refresh_token": TokenManager.create_refresh_token(user_id, username),
             "token_type": "bearer",
-            "expires_in": settings.JWT_ACCESS_TOKEN_EXPIRE_MINUTES * 60
+            "expires_in": settings.JWT_ACCESS_TOKEN_EXPIRE_MINUTES * 60,
+            "first_login": first_login
         }

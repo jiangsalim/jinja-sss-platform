@@ -932,3 +932,12 @@ CREATE TABLE IF NOT EXISTS health_screenings (
     conducted_by INTEGER,
     FOREIGN KEY (student_id) REFERENCES students(id)
 );
+
+-- Password History Table
+CREATE TABLE IF NOT EXISTS password_history (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER NOT NULL,
+    password_hash TEXT NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
