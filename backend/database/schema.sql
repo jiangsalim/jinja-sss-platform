@@ -840,3 +840,95 @@ CREATE INDEX IF NOT EXISTS idx_incidents_student ON incidents(student_id);
 CREATE INDEX IF NOT EXISTS idx_book_loans_student ON book_loans(student_id);
 CREATE INDEX IF NOT EXISTS idx_audit_log_user ON audit_log(user_id);
 CREATE INDEX IF NOT EXISTS idx_audit_log_created ON audit_log(created_at);
+
+-- ============================================
+-- MISSING TABLES (8)
+-- ============================================
+
+CREATE TABLE IF NOT EXISTS roles (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT UNIQUE NOT NULL,
+    description TEXT,
+    level INTEGER DEFAULT 1
+);
+
+CREATE TABLE IF NOT EXISTS permissions (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT UNIQUE NOT NULL,
+    description TEXT,
+    resource TEXT,
+    action TEXT
+);
+
+CREATE TABLE IF NOT EXISTS role_permissions (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    role_id INTEGER NOT NULL,
+    permission_id INTEGER NOT NULL,
+    FOREIGN KEY (role_id) REFERENCES roles(id) ON DELETE CASCADE,
+    FOREIGN KEY (permission_id) REFERENCES permissions(id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS appeals (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    sanction_id INTEGER NOT NULL,
+    student_id INTEGER NOT NULL,
+    reason TEXT,
+    status TEXT DEFAULT 'pending',
+    decision TEXT,
+    decided_by INTEGER,
+    decided_at DATETIME,
+    FOREIGN KEY (sanction_id) REFERENCES sanctions(id),
+    FOREIGN KEY (student_id) REFERENCES students(id)
+);
+
+CREATE TABLE IF NOT EXISTS welfare_cases (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    student_id INTEGER NOT NULL,
+    case_type TEXT NOT NULL,
+    description TEXT,
+    priority TEXT DEFAULT 'medium',
+    status TEXT DEFAULT 'active',
+    social_worker_id INTEGER,
+    opened_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    closed_at DATETIME,
+    FOREIGN KEY (student_id) REFERENCES students(id)
+);
+
+CREATE TABLE IF NOT EXISTS home_visits (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    case_id INTEGER,
+    student_id INTEGER NOT NULL,
+    visit_date DATE DEFAULT CURRENT_DATE,
+    findings TEXT,
+    actions_taken TEXT,
+    next_visit_date DATE,
+    conducted_by INTEGER,
+    FOREIGN KEY (case_id) REFERENCES welfare_cases(id),
+    FOREIGN KEY (student_id) REFERENCES students(id)
+);
+
+CREATE TABLE IF NOT EXISTS parent_complaints (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    parent_id INTEGER NOT NULL,
+    student_id INTEGER,
+    subject TEXT NOT NULL,
+    description TEXT,
+    status TEXT DEFAULT 'pending',
+    response TEXT,
+    resolved_by INTEGER,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    resolved_at DATETIME,
+    FOREIGN KEY (parent_id) REFERENCES parents(id),
+    FOREIGN KEY (student_id) REFERENCES students(id)
+);
+
+CREATE TABLE IF NOT EXISTS health_screenings (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    student_id INTEGER NOT NULL,
+    screening_type TEXT NOT NULL,
+    screening_date DATE DEFAULT CURRENT_DATE,
+    results TEXT,
+    referred BOOLEAN DEFAULT 0,
+    conducted_by INTEGER,
+    FOREIGN KEY (student_id) REFERENCES students(id)
+);
