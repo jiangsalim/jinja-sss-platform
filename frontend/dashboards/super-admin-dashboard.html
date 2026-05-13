@@ -137,115 +137,157 @@
     </div>
 
     <script>
-        const API = 'https://jinja-sss-api.onrender.com';
-        const TOKEN = localStorage.getItem('authToken');
+    const API = 'https://jinja-sss-api.onrender.com';
+    const TOKEN = localStorage.getItem('authToken');
 
-        function showForm(type) {
-            document.getElementById(type + 'Form').style.display = 'block';
-        }
-        function hideForm(type) {
-            document.getElementById(type + 'Form').style.display = 'none';
-        }
+    function showForm(type) {
+        document.getElementById(type + 'Form').style.display = 'block';
+    }
+    function hideForm(type) {
+        document.getElementById(type + 'Form').style.display = 'none';
+    }
 
-        async function loadDashboard() {
-            try {
-                const r = await fetch(API + '/api/super-admin/dashboard', { headers: { 'Authorization': 'Bearer ' + TOKEN } });
-                const d = await r.json();
-                if (d.success) {
-                    document.getElementById('totalUsers').textContent = d.data.total_users || '0';
-                    document.getElementById('totalStudents').textContent = d.data.total_students || '0';
-                    document.getElementById('totalTeachers').textContent = d.data.total_teachers || '0';
-                    document.getElementById('totalParents').textContent = d.data.total_parents || '0';
-                }
-            } catch(e) {}
-        }
+    async function loadDashboard() {
+        try {
+            const r = await fetch(API + '/api/super-admin/dashboard', { headers: { 'Authorization': 'Bearer ' + TOKEN } });
+            const d = await r.json();
+            if (d.success) {
+                document.getElementById('totalUsers').textContent = d.data.total_users || '0';
+                document.getElementById('totalStudents').textContent = d.data.total_students || '0';
+                document.getElementById('totalTeachers').textContent = d.data.total_teachers || '0';
+                document.getElementById('totalParents').textContent = d.data.total_parents || '0';
+            }
+        } catch(e) { console.log('Loading stats...'); }
+    }
 
-        async function createUser() {
-            const r = await fetch(API + '/auth/signup', {
-                method: 'POST', headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ full_name: document.getElementById('fullName').value, username: document.getElementById('username').value, email: document.getElementById('email').value, password: document.getElementById('password').value, role: document.getElementById('role').value })
+    // SUPER ADMIN creates Governing Board Members
+    async function createBoardMember() {
+        const btn = document.querySelector('#createBoardForm .btn-success');
+        btn.textContent = 'Creating...'; btn.disabled = true;
+        try {
+            const r = await fetch(API + '/api/super-admin/users', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + TOKEN },
+                body: JSON.stringify({
+                    full_name: document.getElementById('boardName').value,
+                    email: document.getElementById('boardEmail').value,
+                    role: 'board',
+                    position: document.getElementById('boardPosition').value,
+                    password: 'board123'
+                })
             });
             const d = await r.json();
-            document.getElementById('createMsg').textContent = d.success ? 'User created!' : (d.detail || 'Error');
-        }
+            document.getElementById('boardMsg').textContent = d.success ? '✅ Board Member created! ID: ' + (d.user_id || '') : '❌ ' + (d.detail || 'Error');
+        } catch(e) { document.getElementById('boardMsg').textContent = '❌ Connection error'; }
+        btn.textContent = '✅ Add Board Member'; btn.disabled = false;
+    }
 
-        async function createBoardMember() {
-            const r = await fetch(API + '/auth/signup', {
-                method: 'POST', headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ full_name: document.getElementById('boardName').value, email: document.getElementById('boardEmail').value, username: 'board_' + Date.now(), password: 'board123', role: 'board' })
+    // SUPER ADMIN creates Head Teacher
+    async function createHeadTeacher() {
+        const btn = document.querySelector('#createHeadTeacherForm .btn-success');
+        btn.textContent = 'Creating...'; btn.disabled = true;
+        try {
+            const r = await fetch(API + '/api/super-admin/users', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + TOKEN },
+                body: JSON.stringify({
+                    full_name: document.getElementById('htName').value,
+                    email: document.getElementById('htEmail').value,
+                    role: 'head_teacher',
+                    staff_id: document.getElementById('htId').value,
+                    password: 'changeme123'
+                })
             });
             const d = await r.json();
-            document.getElementById('boardMsg').textContent = d.success ? 'Board member created!' : (d.detail || 'Error');
-        }
+            document.getElementById('htMsg').textContent = d.success ? '✅ Head Teacher created!' : '❌ ' + (d.detail || 'Error');
+        } catch(e) { document.getElementById('htMsg').textContent = '❌ Connection error'; }
+        btn.textContent = '✅ Add Head Teacher'; btn.disabled = false;
+    }
 
-        async function createHeadTeacher() {
-            const r = await fetch(API + '/auth/signup', {
-                method: 'POST', headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ full_name: document.getElementById('htName').value, email: document.getElementById('htEmail').value, username: document.getElementById('htId').value, password: 'changeme123', role: 'head_teacher' })
+    // SUPER ADMIN creates any staff
+    async function createStaff() {
+        const btn = document.querySelector('#createStaffForm .btn-success');
+        btn.textContent = 'Creating...'; btn.disabled = true;
+        try {
+            const r = await fetch(API + '/api/super-admin/users', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + TOKEN },
+                body: JSON.stringify({
+                    full_name: document.getElementById('staffName').value,
+                    email: document.getElementById('staffEmail').value,
+                    role: document.getElementById('staffRole').value,
+                    staff_id: document.getElementById('staffId').value,
+                    password: 'changeme123'
+                })
             });
             const d = await r.json();
-            document.getElementById('htMsg').textContent = d.success ? 'Head Teacher created!' : (d.detail || 'Error');
-        }
+            document.getElementById('staffMsg').textContent = d.success ? '✅ Staff created!' : '❌ ' + (d.detail || 'Error');
+        } catch(e) { document.getElementById('staffMsg').textContent = '❌ Connection error'; }
+        btn.textContent = '✅ Add Staff'; btn.disabled = false;
+    }
 
-        async function createStaff() {
-            const r = await fetch(API + '/auth/signup', {
-                method: 'POST', headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ full_name: document.getElementById('staffName').value, email: document.getElementById('staffEmail').value, username: document.getElementById('staffId').value, password: 'changeme123', role: document.getElementById('staffRole').value })
+    // SUPER ADMIN creates any user (generic)
+    async function createUser() {
+        const btn = document.querySelector('#createUserForm .btn-success');
+        btn.textContent = 'Creating...'; btn.disabled = true;
+        try {
+            const r = await fetch(API + '/api/super-admin/users', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + TOKEN },
+                body: JSON.stringify({
+                    full_name: document.getElementById('fullName').value,
+                    username: document.getElementById('username').value,
+                    email: document.getElementById('email').value,
+                    role: document.getElementById('role').value,
+                    password: document.getElementById('password').value
+                })
             });
             const d = await r.json();
-            document.getElementById('staffMsg').textContent = d.success ? 'Staff created!' : (d.detail || 'Error');
-        }
+            document.getElementById('createMsg').textContent = d.success ? '✅ User created!' : '❌ ' + (d.detail || 'Error');
+        } catch(e) { document.getElementById('createMsg').textContent = '❌ Connection error'; }
+        btn.textContent = '✅ Create User'; btn.disabled = false;
+    }
 
-        async function createBackup() {
-    try {
-        const r = await fetch(API + '/simple-backup', { headers: { 'Authorization': 'Bearer ' + TOKEN } });
-        const d = await r.json();
-        alert(d.success ? '✅ Backup created!\nFile: ' + d.backup_file + '\nSize: ' + (d.size/1024).toFixed(1) + ' KB' : 'Backup failed');
-    } catch(e) { alert('Backup error: ' + e.message); }
-}
+    // System Management Functions
+    async function viewSettings() {
+        const div = document.getElementById('settingsResult');
+        div.style.display = 'block';
+        div.innerHTML = '<strong>System Settings:</strong><br>• School Name: Jinja Senior Secondary School<br>• Motto: Education for Service<br>• Year: 2026<br>• Term: 2<br>• Voting: Enabled<br>• AI Assistant: Enabled<br>• Max Students/Class: 45';
+    }
 
-        function logout() { localStorage.removeItem('authToken'); window.location.href = '../pages/signin.html'; }
-        loadDashboard();
-async function viewAuditLog() {
-    const div = document.getElementById('auditLogResult');
-    div.style.display = 'block';
-    div.innerHTML = 'Loading audit log...';
-    try {
-        const r = await fetch(API + '/api/super-admin/audit-log?limit=10', { headers: { 'Authorization': 'Bearer ' + TOKEN } });
-        const d = await r.json();
-        if (d.success && d.data.length > 0) {
-            div.innerHTML = '<strong>Recent Audit Log:</strong><br>' + d.data.map(l => `• ${l.action} - ${l.full_name || 'User'} - ${l.created_at}`).join('<br>');
-        } else {
-            div.innerHTML = 'No audit log entries yet.';
-        }
-    } catch(e) { div.innerHTML = 'Error loading audit log.'; }
-}
+    async function createBackup() {
+        try {
+            const r = await fetch(API + '/simple-backup', { headers: { 'Authorization': 'Bearer ' + TOKEN } });
+            const d = await r.json();
+            alert(d.success ? '✅ Backup created!\nFile: ' + d.backup_file + '\nSize: ' + (d.size/1024).toFixed(1) + ' KB' : 'Backup failed');
+        } catch(e) { alert('Backup error: ' + e.message); }
+    }
 
-async function viewSettings() {
-    const div = document.getElementById('settingsResult');
-    div.style.display = 'block';
-    div.innerHTML = 'Loading settings...';
-    div.innerHTML = '<strong>System Settings:</strong><br>• School Name: Jinja Senior Secondary School<br>• Motto: Education for Service<br>• Year: 2026<br>• Term: 2<br>• Voting: Enabled<br>• AI Assistant: Enabled<br>• Max Students/Class: 45';
-}
+    async function viewAuditLog() {
+        const div = document.getElementById('auditLogResult');
+        div.style.display = 'block';
+        div.innerHTML = 'Loading audit log...';
+        try {
+            const r = await fetch(API + '/api/super-admin/audit-log?limit=10', { headers: { 'Authorization': 'Bearer ' + TOKEN } });
+            const d = await r.json();
+            if (d.success && d.data && d.data.length > 0) {
+                div.innerHTML = '<strong>Recent Audit Log:</strong><br>' + d.data.map(l => `• ${l.action} - ${l.full_name || 'User'} - ${l.created_at}`).join('<br>');
+            } else {
+                div.innerHTML = 'No audit entries yet. Create a user to generate logs.';
+            }
+        } catch(e) { div.innerHTML = 'Error loading audit log.'; }
+    }
 
-async function viewAuditLog() {
-    const div = document.getElementById('auditLogResult');
-    div.style.display = 'block';
-    div.innerHTML = 'Loading audit log...';
-    try {
-        const r = await fetch(API + '/api/super-admin/audit-log?limit=10', { headers: { 'Authorization': 'Bearer ' + TOKEN } });
-        const d = await r.json();
-        if (d.success && d.data && d.data.length > 0) {
-            div.innerHTML = '<strong>Recent Audit Log:</strong><br>' + d.data.map(l => `• ${l.action} - ${l.full_name || 'User'} - ${l.created_at}`).join('<br>');
-        } else {
-            div.innerHTML = 'No audit entries yet. Create a user to generate logs.';
-        }
-    } catch(e) { div.innerHTML = 'Error loading audit log.'; }
-}
+    function viewElections() {
+        alert('Election management will be available when voting system is deployed.');
+    }
 
-async function viewElections() {
-    alert('Election management will be available when voting system is deployed.');
-}
-    </script>
+    function logout() { 
+        localStorage.removeItem('authToken'); 
+        window.location.href = '../pages/signin.html'; 
+    }
+    
+    loadDashboard();
+</script>
 </body>
 </html>
