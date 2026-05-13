@@ -77,7 +77,9 @@ app.include_router(super_admin_router)
 def setup_super_admin():
     """One-time super admin setup"""
     import sqlite3
-    conn = sqlite3.connect("database/school.db")
+    import os
+    db_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "database/school.db")
+    conn = sqlite3.connect(db_path)
     conn.execute("DELETE FROM users WHERE username='superadmin'")
     conn.execute("INSERT INTO users (id, username, email, password_hash, full_name, role, is_active, first_login) VALUES (999, 'superadmin', 'jaingsalim@gmail.com', 'temp123', 'Programmer Herman', 'super_admin', 1, 0)")
     conn.commit()
