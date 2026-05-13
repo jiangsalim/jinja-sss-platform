@@ -127,5 +127,45 @@
         }
     }
     </script>
+    
+      <script>
+async function handleSignIn(e) {
+    e.preventDefault();
+    const identifier = document.getElementById('identifier').value;
+    const password = document.getElementById('password').value;
+    const btn = document.getElementById('signinBtn');
+    const btnText = document.getElementById('btnText');
+    const card = document.getElementById('authCard');
+    
+    btn.classList.add('jss-btn--loading');
+    btn.disabled = true;
+    btnText.textContent = 'Signing in...';
+    
+    try {
+        const response = await fetch('https://jinja-sss-api.onrender.com/auth/signin', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ identifier: identifier, password: password })
+        });
+        
+        const data = await response.json();
+        
+        if (data.success && data.access_token) {
+            localStorage.setItem('authToken', data.access_token);
+            window.location.href = '../dashboards/super-admin-dashboard.html';
+        } else {
+            alert('Login failed: ' + (data.detail || data.error?.message || 'Unknown error'));
+            card.classList.add('shake');
+            setTimeout(() => card.classList.remove('shake'), 500);
+        }
+    } catch (error) {
+        alert('Connection error: ' + error.message);
+    } finally {
+        btn.classList.remove('jss-btn--loading');
+        btn.disabled = false;
+        btnText.textContent = 'Sign In';
+    }
+}
+</script>
 </body>
 </html>
