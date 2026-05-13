@@ -144,6 +144,9 @@ def simple_backup():
     return {"success": True, "backup_file": f"backup_{timestamp}.db", "size": os.path.getsize(backup_file)}
 
 
+from app.routes.v1.super_admin import router as super_admin_router
+app.include_router(super_admin_router)
+
 @app.get("/debug")
 def debug():
     files = []
