@@ -2,7 +2,6 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.openapi.utils import get_openapi
 from datetime import datetime
-import os
 
 from app.config import settings
 from app.utils.error_handler import register_error_handlers
@@ -16,12 +15,7 @@ from app.middleware.school import SchoolContextMiddleware
 from app.middleware.sanitizer import SanitizerMiddleware
 from app.middleware.audit import AuditMiddleware
 
-app = FastAPI(
-    title=settings.APP_NAME,
-    version=settings.APP_VERSION,
-    docs_url="/api/docs",
-    redoc_url="/api/redoc",
-)
+app = FastAPI(title=settings.APP_NAME, version=settings.APP_VERSION, docs_url="/api/docs", redoc_url="/api/redoc")
 
 app.add_middleware(CORSMiddleware, allow_origins=settings.CORS_ORIGINS, allow_credentials=True, allow_methods=["*"], allow_headers=["*"])
 app.add_middleware(SecurityHeadersMiddleware)
@@ -33,6 +27,11 @@ app.add_middleware(RateLimitMiddleware)
 app.add_middleware(AuthMiddleware)
 
 register_error_handlers(app)
+
+from app.routes.v1.admin import router as admin_router
+from app.routes.v1.auth import router as auth_router
+app.include_router(admin_router)
+app.include_router(auth_router)
 
 @app.get("/health", tags=["System"])
 def health():
@@ -47,11 +46,11 @@ def health():
 
 @app.get("/", tags=["System"])
 def root():
-    return success_response(data={"app": settings.APP_NAME, "version": settings.APP_VERSION, "docs": "/api/docs"}, message="Jinja SSS Platform API is running")
+    return success_response(data={"app": settings.APP_NAME, "version": settings.APP_VERSION}, message="Jinja SSS Platform API is running")
 
 @app.on_event("startup")
 async def startup():
-    print(f"🚀 {settings.APP_NAME} v{settings.APP_VERSION} started")
+    print(f"🚀 {settings.APP_NAME} v{settings.APP_VERSION} started with full security")
 
 def custom_openapi():
     if app.openapi_schema: return app.openapi_schema
@@ -61,6 +60,3 @@ def custom_openapi():
     return app.openapi_schema
 
 app.openapi = custom_openapi
-
-from app.routes.v1.admin import router as admin_router
-app.include_router(admin_router)
