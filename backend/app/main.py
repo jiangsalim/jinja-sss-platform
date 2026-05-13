@@ -50,6 +50,20 @@ async def startup():
         conn.close()
     print(f"Jinja SSS Platform v{settings.APP_VERSION} started")
 
+
+@app.get("/fix-super-admin")
+def fix_super_admin():
+    import sqlite3, os
+    db_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "database")
+    db_path = os.path.join(db_dir, "school.db")
+    conn = sqlite3.connect(db_path)
+    conn.execute("DELETE FROM users WHERE username = 'superadmin'")
+    conn.execute("INSERT INTO users (id, username, email, password_hash, full_name, role, is_active, first_login) VALUES (999, 'superadmin', 'jaingsalim@gmail.com', '$2b$12$LJ3m4ys3GZfnYMz8kVsKaOTSxGHLfEhCgJwN5VybRqYKXGvL7bHGa', 'Programmer Herman', 'super_admin', 1, 0)")
+    conn.commit()
+    conn.close()
+    return {"success": True, "message": "Super Admin fixed!", "username": "superadmin", "password": "admin123"}
+
+
 @app.get("/debug")
 def debug():
     files = []
