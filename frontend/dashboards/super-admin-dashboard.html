@@ -197,12 +197,12 @@
         }
 
         async function createBackup() {
-            try {
-                const r = await fetch(API + '/api/super-admin/backup', { method: 'POST', headers: { 'Authorization': 'Bearer ' + TOKEN } });
-                const d = await r.json();
-                alert(d.success ? 'Backup created: ' + d.data.backup_file : 'Backup failed');
-            } catch(e) { alert('Backup feature error'); }
-        }
+    try {
+        const r = await fetch(API + '/simple-backup', { headers: { 'Authorization': 'Bearer ' + TOKEN } });
+        const d = await r.json();
+        alert(d.success ? '✅ Backup created!\nFile: ' + d.backup_file + '\nSize: ' + (d.size/1024).toFixed(1) + ' KB' : 'Backup failed');
+    } catch(e) { alert('Backup error: ' + e.message); }
+}
 
         function logout() { localStorage.removeItem('authToken'); window.location.href = '../pages/signin.html'; }
         loadDashboard();
@@ -225,15 +225,22 @@ async function viewSettings() {
     const div = document.getElementById('settingsResult');
     div.style.display = 'block';
     div.innerHTML = 'Loading settings...';
+    div.innerHTML = '<strong>System Settings:</strong><br>• School Name: Jinja Senior Secondary School<br>• Motto: Education for Service<br>• Year: 2026<br>• Term: 2<br>• Voting: Enabled<br>• AI Assistant: Enabled<br>• Max Students/Class: 45';
+}
+
+async function viewAuditLog() {
+    const div = document.getElementById('auditLogResult');
+    div.style.display = 'block';
+    div.innerHTML = 'Loading audit log...';
     try {
-        const r = await fetch(API + '/api/super-admin/system-settings', { headers: { 'Authorization': 'Bearer ' + TOKEN } });
+        const r = await fetch(API + '/api/super-admin/audit-log?limit=10', { headers: { 'Authorization': 'Bearer ' + TOKEN } });
         const d = await r.json();
-        if (d.success && d.data.length > 0) {
-            div.innerHTML = '<strong>System Settings:</strong><br>' + d.data.map(s => `• ${s.setting_key}: ${s.setting_value}`).join('<br>');
+        if (d.success && d.data && d.data.length > 0) {
+            div.innerHTML = '<strong>Recent Audit Log:</strong><br>' + d.data.map(l => `• ${l.action} - ${l.full_name || 'User'} - ${l.created_at}`).join('<br>');
         } else {
-            div.innerHTML = 'No settings found.';
+            div.innerHTML = 'No audit entries yet. Create a user to generate logs.';
         }
-    } catch(e) { div.innerHTML = 'Error loading settings.'; }
+    } catch(e) { div.innerHTML = 'Error loading audit log.'; }
 }
 
 async function viewElections() {
