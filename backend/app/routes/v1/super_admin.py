@@ -23,6 +23,10 @@ class CreateUserRequest(BaseModel):
     position: Optional[str] = None
 
 
+class UpdateSettingsRequest(BaseModel):
+    settings: dict
+
+
 @router.get("/dashboard")
 def dashboard():
     db = get_db()
@@ -37,15 +41,12 @@ def dashboard():
 @router.post("/users")
 def create_user(data: CreateUserRequest, request: Request):
     db = get_db()
-    
     username = data.username or data.role + '_' + str(int(datetime.utcnow().timestamp()))
     password_hash = PasswordManager.hash_password(data.password)
-    
     try:
         db.execute("INSERT INTO users (username, email, password_hash, full_name, role, is_active, first_login) VALUES (?, ?, ?, ?, ?, 1, 0)",
                    (username, data.email, password_hash, data.full_name, data.role))
         user_id = db.fetch_one("SELECT last_insert_rowid() as id")['id']
-        
         if data.role == 'student':
             admission = IDGenerator.generate_entity_id('JSSS', 0)
             db.execute("INSERT INTO students (user_id, admission_number) VALUES (?, ?)", (user_id, admission))
@@ -54,7 +55,6 @@ def create_user(data: CreateUserRequest, request: Request):
             db.execute("INSERT INTO teachers (user_id, staff_id, teacher_type) VALUES (?, ?, ?)", (user_id, sid, 'subject'))
         elif data.role == 'parent':
             db.execute("INSERT INTO parents (user_id) VALUES (?)", (user_id,))
-        
         AuditLogger.log(999, "USER_CREATE", "users", user_id)
         return {"success": True, "message": "User created", "user_id": user_id, "username": username}
     except Exception as e:
@@ -103,4 +103,16 @@ def audit_log(user_id: int = None, action: str = None, page: int = Query(1, ge=1
 def get_settings():
     db = get_db()
     rows = db.fetch_all("SELECT * FROM system_settings")
-    return {"success": True, "data": [dict(r) for r in rows] if rows else []}
+    settings = {}
+    for r in rows:
+        settings[r['setting_key']] = r['setting_value']
+    return {"success": True, "data": settings}
+
+
+@router.put("/system-settings")
+def update_settings(data: UpdateSettingsRequest):
+    db = get_db()
+    for key, value in data.settings.items():
+        db.execute("INSERT OR REPLACE INTO system_settings (setting_key, setting_value) VALUES (?, ?)", (key, str(value)))
+    AuditLogger.log(999, "SETTINGS_UPDATE", "system_settings", 0)
+    return {"success": True, "message": "Settings updated successfully!"}
